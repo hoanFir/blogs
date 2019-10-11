@@ -351,15 +351,17 @@ var Son = function(_Father) {
   _inherits(Son, _Father);
   
   function Son(name, age, price) {    
+    var _this; //子类即将进行修饰并返回的this
+    
     _classCallCheck(this, Son);
     
-    var _this;
-    //执行Father()
     //如果没有执行super()，this参数就不存在，会报错
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Son).call(this, name, age));
     
     //after super();
+    
     _this.price = price;
+    
     return _this;
   }
  
@@ -431,5 +433,4 @@ function __assertThisInitialized (self) {
 
 2、 ES2016 class extends
 
-- 和组合式继承实现的子类结构是一样的，根本上的区别在于es5中子类继承父类原型上的属性和方法是先实例化父类，而es6中是在实例化子类时继承父类原型
-
+- 和组合式继承实现的子类结构是一样的，根本上的区别在...ES5的继承是先创造子类的实例对象this，然后再将父类的属性和方法添加到this上面，而ES6的继承是先创造父类的实例对象this（所以必须先调用super方法），然后再用子类的构造函数修改this（`return _this;`）。
