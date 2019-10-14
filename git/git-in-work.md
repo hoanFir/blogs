@@ -160,7 +160,7 @@ git push origin dev
 ```
 
 
-- reset
+- *reset*
 
 ```bash
 
@@ -184,7 +184,7 @@ git reset --hard commit_id
 ```
 
 
-- 合并分支
+- *合并分支*
 
 ```bash
 
