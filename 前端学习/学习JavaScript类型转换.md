@@ -22,21 +22,68 @@ Infinity|"Infinity"|-|true|new Number(Infinity)|
 -Infinity|"-Infinity"|-|true|new Number(-Infinity)|
 1|"1"|-|true|new Number(1)|
 {}(任意对象)|参考下一节|参考下一节|true|-|
-[]|""|0|true|-|
-[9](1个数字元素的数组)|“9”|9|true|-
-[‘a’](1个字符元素的数组)|使用join()|NaN|true|-
+\[\](空数组)|""|0|true|-|
+\[9\](1个数字元素的数组)|“9”|9|true|-
+\[‘a’\](其他数组)|使用join()|NaN|true|-
 function(){}(任意函数)|参考下一节|NaN|true|-
 
-- null和undefeated用在期望是一个对象的地方会造成一个类型错误异常
 
-- 字符串中如果含有数字，且在开始和结尾处的任意非空字符，会转换成NaN
-
+- null和undefined用在期望是一个对象的地方会造成一个类型错误异常
+- 字符串中含有数字，但在开始和结尾处的任意非空字符，会转换成NaN
 - true转换为1，false转换为0
-
-- 原始值到对象的转换非常简单，通过调用String() Number() Boolean()构造函数转化成各自的包装对象
-
-- 对象到原始值到转换（重点）
+- 转换为false：undefined、null、0、-0、NaN、“”
+- 原始值到对象的转换非常简单，通过调用String()、Number()、Boolean()构造函数转化成各自的包装对象
+- **对象到原始值到转换**（重点）
 
 
 ### 对象到原始值到转换
+
+
+
+### ==运算符的类型转换
+
+
+
+### +双目运算符、+单目运算符的类型转换
+
+1、+双目运算符
+
+
+
+2、+单目运算符
+
+将操作数转换为数字。
+
++x => Number(x)
+
+### !单目运算符的类型转换
+
+将操作数转换为布尔值并取反。
+
+!!x => Boolean(x)
+
+### 显示类型转换
+
+1、使用Boolean()、Number()、String()
+
+当不通过new运算符调用这些函数时，它们会作为类型转换函数。
+
+如：Number("3")=>3、String(false)=>"false"、Boolean(\[\])=>true
+
+2、Object()
+
+Object(3)=>new Number(3)；
+
+注意，null和undefined用在期望是一个对象的地方会造成一个类型错误异常，但是使用Object(undefined)或Object(null)得到的是一个新对象，不会抛出异常。
+
+3、使用toString()
+
+除了null或undefined之外的任何值，都具有toString()方法;
+
+toString()执行结果和String()一样；
+
+
+
+
+
 
