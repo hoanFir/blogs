@@ -2,6 +2,11 @@
 
 🕘 2019.10.28 由 hoanfirst 编辑
 
+### 概述
+
+1. webpack.config.base.js
+2. webpack.config.dev.js 开发环境
+3. webpack.config.pro.js 生产环境
 
 ### webpack.config.base.js
 
@@ -396,6 +401,24 @@ module.exports = merge(webpackBaseconfig, {
 
 ```
 
+- plugins:copy-webpack-plugin
+
+```javascript
+
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+module.exports = merge(webpackBaseconfig, {
+  plugins: [
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, '../src/editor'),
+      //发布时editor不随版本升级，放到resource目录下
+      to: path.resolve(path.resolve(path.resolve(__dirname ,'../'), '../src/main/webapp/WEB-INF/resources/'), '/editor')
+    }]),
+  ]
+}
+
+```
+
 - plugins:Webpack.DefinePlugin
 
 The DefinePlugin allows you to create global constants which can be configured at compile time. This can be useful for allowing different behavior between development builds and production builds. Such as determine whether `logging` takes place(development build or production build).
@@ -407,6 +430,101 @@ module.exports = merge(webpackBaseconfig, {
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("production")
     }),
+  ]
+}
+
+```
+
+- plugins:webpack-parallel-uglify-plugin
+
+并行压缩/丑化js代码。
+
+```javascript
+
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+
+module.exports = merge(webpackBaseconfig, {
+  plugins: [
+    new ParallelUglifyPlugin({
+      uglifyJS: {
+        output: {
+          //是否保留空格和制表符。设置false达到更好的压缩效果。
+          beautify: false,
+          //是否保留代码中的注释。设置false达到更好的压缩效果。
+          comments: false,
+        }
+        compress: {
+          warning: false,
+          //是否删除代码中的console语句。设置true达到更好的压缩效果
+          drop_console: true,
+          //是否转换虽然已经定义但只用到一次的变量。如var x=1; y=x;会转换成y=5.
+          collapse_vars: true,
+          //是否提取出出现多次但没有定义成变量去引用的静态值。如x = 'x'; y = 'x';会转换成var a = 'x';x=a, y=a;
+          reduce_vars: true,
+        }
+      }
+    })
+  ]
+}
+
+```
+
+- plugins:optimize-css-assets-webpack-plugin
+
+优化/压缩css代码。
+
+tips：要考虑和`extract-text-webpack-plugin`一起使用时产生的重复问题。
+
+```javascript
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+
+module.exports = merge(webpackBaseconfig, {
+  module: {
+    rules: [{
+      test: /\.(css|less)$/,
+      use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [{
+              loader: 'css-loader'
+          }, {
+              loader: 'less-loader'
+          }]
+      })
+    }]
+  }
+  plugins: [
+    new ExtractTextPlugin({
+      filename: "css/app.min.css"
+    })
+    new OptimizeCSSPlugin({
+      //cssProcessorOptions: The options passed to the cssProcessor, defaults to {}
+      //cssProcessor: The css processor used to optimize/minimize the css, defaults to cssnano.
+      cssProcessorOptions: {
+        safe: true
+      }
+    }),
+  ]
+}
+
+```
+
+- plugins:compression-webpack-plugin
+
+```javascript
+
+const CompressionPlugin = require('compression-webpack-plugin');
+
+module.exports = merge(webpackBaseconfig, {
+  plugins: [
+    new CompressionPlugin({
+      assert: '[path].gz[query]', //app.js.gz or commons.js.gz
+      algorithm: 'gzip',
+      test: /\.js$|\.css$/,
+      threshold: 10240,
+      minRatio: 0.8,
+    })
   ]
 }
 
