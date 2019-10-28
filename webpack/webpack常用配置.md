@@ -228,6 +228,9 @@ tips：webpack处理模板文件（如.ejs）有两种方式，一种是将模�
 
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
+
 module.exports = merge(webpackBaseConfig, {
     devtool: '#cheap-module-eval-source-map',
 })
@@ -237,6 +240,8 @@ module.exports = merge(webpackBaseConfig, {
 
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(webpackBaseconfig, {
@@ -255,6 +260,10 @@ Enabling HMR is easy and in most cases no options are necessary.
 
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
+const webpack = require('webpack');
+
 module.exports = merge(webpackBaseconfig, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -268,6 +277,10 @@ module.exports = merge(webpackBaseconfig, {
 跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误。
 
 ```javascript
+
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
+const webpack = require('webpack');
 
 module.exports = merge(webpackBaseconfig, {
   plugins: [
@@ -283,6 +296,8 @@ recognizes certain classes（识别特定类别） of webpack errors and cleans�
  
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = merge(webpackBaseconfig, {
@@ -301,6 +316,9 @@ tips：webpack-copy-plugin is not designed to copy files generated from the buil
 
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
+const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = merge(webpackBaseconfig, {
@@ -324,6 +342,10 @@ The DefinePlugin allows you to create global constants which can be configured a
 
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
+const webpack = require('webpack');
+
 module.exports = merge(webpackBaseconfig, {
   plugins: [
     new webpack.DefinePlugin({
@@ -339,6 +361,11 @@ module.exports = merge(webpackBaseconfig, {
 - output
 
 ```javascript
+
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
+const webpack = require('webpack');
+const path = require("path");
 
 const version_current = moment(new Date()).format('YYYYMMDD');
 
@@ -378,16 +405,21 @@ module.exports = merge(webpackBaseConfig, {
 
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
+
 module.exports = merge(webpackBaseConfig, {
     devtool: false,
 })
 
 ```
 
-- plugins:HtmlWebpackPlugin
+- plugins:html-webpack-plugin
 
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(webpackBaseconfig, {
@@ -405,7 +437,10 @@ module.exports = merge(webpackBaseconfig, {
 
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 module.exports = merge(webpackBaseconfig, {
   plugins: [
@@ -425,6 +460,10 @@ The DefinePlugin allows you to create global constants which can be configured a
 
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
+const webpack = require('webpack');
+
 module.exports = merge(webpackBaseconfig, {
   plugins: [
     new webpack.DefinePlugin({
@@ -441,6 +480,8 @@ module.exports = merge(webpackBaseconfig, {
 
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 module.exports = merge(webpackBaseconfig, {
@@ -477,6 +518,8 @@ tips：要考虑和`extract-text-webpack-plugin`一起使用时产生的重复�
 
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 
@@ -514,6 +557,8 @@ module.exports = merge(webpackBaseconfig, {
 
 ```javascript
 
+const merge = require('webpack-merge');
+const webpackBaseConfig = require('./webpack.config.base');
 const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = merge(webpackBaseconfig, {
