@@ -63,7 +63,7 @@ module.exports = {
 
 ```
 
-- plugins:HtmlWebpackPlugin
+- plugins:html-webpack-plugin
 
 The plugin will generate an HTML5 file for you that includes all your webpack bundles in the body using script tags.
 
@@ -113,7 +113,7 @@ module.exports = {
 }
 ```
 
-- plugins:ExtractTextWebpackPlugin
+- plugins:extract-text-webpack-plugin
 
 This plugin extracts CSS into separate files. It creates a CSS file per JS file which contains CSS. 当输出的app.js过大，可以将里面的css内容打包成一个单独的文件。
 
@@ -228,7 +228,7 @@ module.exports = merge(webpackBaseConfig, {
 })
 
 ```
-- plugins:HtmlWebpackPlugin
+- plugins:html-webpack-plugin
 
 ```javascript
 
@@ -246,13 +246,88 @@ module.exports = merge(webpackBaseconfig, {
 
 - plugins:webpack.HotModuleReplacementPlugin
 
+Enabling HMR is easy and in most cases no options are necessary.
+
+```javascript
+
+module.exports = merge(webpackBaseconfig, {
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+  ]
+}
+
+```
+
 - plugins:webpack.NoErrorsPlugin
 
-- plugins:FriendlyErrorsPlugin
+跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误。
 
-- plugins:CopyWebpackPlugin
+```javascript
+
+module.exports = merge(webpackBaseconfig, {
+  plugins: [
+    new webpack.NoErrorPlugin(),
+  ]
+}
+
+```
+
+- plugins:friendly-errors-webpack-plugin
+
+recognizes certain classes（识别特定类别） of webpack errors and cleans（清理）, aggregates（聚合） and prioritizes（按优先顺序） them to provide a better Developer Experience.
+ 
+```javascript
+
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+
+module.exports = merge(webpackBaseconfig, {
+  plugins: [
+    new FriendlyErrorsPlugin(),
+  ]
+}
+
+```
+
+- plugins:copy-webpack-plugin
+
+将已经存在的单个文件或整个目录复制到build directory。一般应用于静态资源文件。
+
+tips：webpack-copy-plugin is not designed to copy files generated from the build process; rather, it is to copy files that already exist in the source tree, as part of the build process.
+
+```javascript
+
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+module.exports = merge(webpackBaseconfig, {
+  plugins: [
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, '../src/editor'),
+      to: path.resolve(path.resolve(__dirname, '../'), 'dist')
+    }]),
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, '../src/iconfonts'),
+      to: path.resolve(path.resolve(__dirname, '../'), 'dist')
+    }]),
+  ]
+}
+
+```
 
 - plugins:Webpack.DefinePlugin
+
+The DefinePlugin allows you to create global constants which can be configured at compile time. This can be useful for allowing different behavior between development builds and production builds. Such as determine whether `logging` takes place(development build or production build).
+
+```javascript
+
+module.exports = merge(webpackBaseconfig, {
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify("development")
+    }),
+  ]
+}
+
+```
 
 ### webpack.config.pro.js
 
@@ -316,6 +391,22 @@ module.exports = merge(webpackBaseconfig, {
       filename: '../../index.html',
       template: 'src/index.ejs',
     })
+  ]
+}
+
+```
+
+- plugins:Webpack.DefinePlugin
+
+The DefinePlugin allows you to create global constants which can be configured at compile time. This can be useful for allowing different behavior between development builds and production builds. Such as determine whether `logging` takes place(development build or production build).
+
+```javascript
+
+module.exports = merge(webpackBaseconfig, {
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify("production")
+    }),
   ]
 }
 
