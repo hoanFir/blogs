@@ -114,6 +114,6 @@ body,html {margin:0; height:100%;}
 .right-item {
     background-color: aqua;
     height: 100%;
-     margin-left: 200px;
+    margin-left: 200px;
 }
 ```
