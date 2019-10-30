@@ -31,6 +31,7 @@ module.exports = {
   output: {
       path: path.resolve(__dirname, '../dist/'),
       filename: '[name].js',
+      chunkFilename: 'chunk/[name].js',
   },
 }
 ```
@@ -107,7 +108,6 @@ module.exports = {
   output: {
       path: path.resolve(__dirname, '../dist/'),
       filename: '[name].js',
-      chunkFilename: 'chunk/[name].js'
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
