@@ -108,10 +108,92 @@ module.exports = combineReducers({
 ```javascript
 
 import createReducer from '../utils/createReducer';
+
 import HomeActionTypes from '../constants/HomeActionTypes';
+
+let initialState = {
+    fetchState: 'ING',
+    homeData: null,
+};
+
+module.exports = createReducer(initialState, {
+
+    [HomeActionTypes.FETCH_STATE](state) {
+        return {
+            ...state,
+            fetchState: 'ING'
+        }
+    },
+    [HomeActionTypes.FETCH_HOME_DATA_SUCCESS](state, action) {
+        return {
+            ...state,
+            homeData: action.data,
+            fetchState: 'END'
+        }
+    },
+    [HomeActionTypes.FETCH_HOME_DATA_FAILED](state) {
+        return {
+            ...state,
+            homeData: null,
+            fetchState: 'END'
+        }
+    },
+})
+
+```
+
+### ../utils/createReducer
+
+
+```javascript
+
+module.exports = function (initialState, actionHandlerMap) {
+    return (state = initialState, action) => {
+        let handler = null;
+        let type = action.type;
+        if (type) {
+            handler = actionHandlerMap[type];
+        }
+        if (handler) {
+            return handler(state, action);
+        }
+        return state;
+    };
+};
+
 
 ```
 
 
+### ../constants/HomeActionTypes
+
+```javascript
+
+import createActionTypes from '../utils/createActionTypes';
+
+module.exports = createActionTypes([
+    
+    'FETCH_STATE',
+    
+    'FETCH_HOME_DATA_SUCCESS', //首页数据获取成功
+    'FETCH_HOME_DATA_FAILED', //首页数据获取失败
+    
+], 'home_');
 
 
+```
+
+### ../utils/createActionTypes
+
+```javascript
+
+module.exports = function (actionTypes, prefix = '') {
+    let result = {};
+    (actionTypes || []).forEach(actionType => {
+        result[actionType] = prefix + actionType;
+    });
+    return result;
+};
+
+
+```
