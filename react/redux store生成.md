@@ -143,6 +143,7 @@ store.dispatch(withdrawMoneyByUsername(123));
 
 ```
 
+在这里只是简单了解一下redux action的基本使用。具体可前往xxx。
 
 ### ../reducers/index.js
 
@@ -161,6 +162,11 @@ module.exports = combineReducers({
 })
 
 ```
+
+- 1)combineReducers
+
+
+
 
 ### ../reducers/home.js
 
@@ -200,7 +206,7 @@ module.exports = createReducer(initialState, {
 
 ```
 
-### ../utils/createReducer
+### ../utils/createReducer.js
 
 
 ```javascript
@@ -219,11 +225,10 @@ module.exports = function (initialState, actionHandlerMap) {
     };
 };
 
-
 ```
 
 
-### ../constants/HomeActionTypes
+### ../constants/HomeActionTypes.js
 
 ```javascript
 
@@ -237,7 +242,7 @@ module.exports = createActionTypes([
 
 ```
 
-### ../utils/createActionTypes
+### ../utils/createActionTypes.js
 
 ```javascript
 
@@ -250,3 +255,8 @@ module.exports = function (actionTypes, prefix = '') {
 };
 
 ```
+
+
+### 总结
+
+到这里，已经为app添加一个store了。
