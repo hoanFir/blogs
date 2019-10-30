@@ -28,7 +28,7 @@ ReactDOM.render(
 
 - 1)`react-redux`的`Provider`
 
-makes the Redux store available to any nested components.
+makes the Redux store available to any nested components. these nested component that have been wrapped in the `connect()` function.
 
 ***Props***:
 
