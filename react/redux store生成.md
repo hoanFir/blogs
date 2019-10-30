@@ -73,7 +73,7 @@ module.exports = configureStore;
 
 create a redux store that holds the complete `state tree` of your app.
 
-createStore(reducer, \[preloadedState\], enhancer)
+`createStore(reducer, \[preloadedState\], enhancer)`
 
 ***Props***:
 
@@ -92,13 +92,56 @@ Middleware is the suggested way to extend Redux with custom functionality. Middl
 
 the feature of middleware is that it is composable, multiple middleware can be combined together.
 
-applyMiddleware(...middleware)
+`applyMiddleware(...middleware)`
 
 - 3)redux-thunk
 
-the most common use case for middleware is to support `asynchronous actions`. we can `dispatch` async actions in addition to normal actions.
+the most common use case for middleware is to support `asynchronous actions`. we can `dispatch` async actions in addition to normal actions. **With a plain basic Redux store, you can only do simple synchronous updates by dispatching an action**.
 
-redux-thunk lets the action creators invert control by dispatching
+redux-thunk lets the `action creators` invert control by `dispatching functions`, they would receive dispatch as an argument and may call it asynchronously. Such functions are called `thunks`, **a thunk is a function that wraps an expression to delay its evaluation**.
+
+eg:
+
+```javasctipt
+
+// 1. normal action creators
+
+function withdrawMoney(amount) {
+    return {
+        type: 'WITHDRAW',
+        amount,
+    }
+}
+store.dispatch(withdrawMoney(100));
+
+
+// 2. extend normal action creators' ability with redux-thunk
+
+function withdrawMoneySuccess(userInfo) {
+    return {
+        type: 'WITHDRAW_SUCCESS',
+        userInfo,
+    }
+}
+
+function withdrawMoneyFailed(id, userInfo) {
+    return {
+        type: 'WITHDRAW_FAILED',
+    }
+}
+
+function withdrawMoneyByUsername(id) {
+    return function(dispatch) {
+        return fetchUsername(id).then(
+            (userInfo) => dispatch(withdrawMoneySuccess(userInfo)),
+            (error) => dispatch(withdrawMoneyFailed())
+        )
+    }
+}
+
+store.dispatch(withdrawMoneyByUsername(123));
+
+```
 
 
 ### ../reducers/index.js
