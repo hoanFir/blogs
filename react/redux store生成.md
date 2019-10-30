@@ -20,7 +20,7 @@ let store = configureStore();
 ReactDOM.render(
     <Provider store={store}>
         <App />
-    </Provider>
+    </Provider>,
     CONTENT_NODE_WRAP
 );
 
@@ -86,6 +86,19 @@ enhancer - the store enhancer. we may to enhance the store with third-party capa
 
 - 2)applyMiddleware
 
+to enhance the store. 
+
+Middleware is the suggested way to extend Redux with custom functionality. Middleware lets you wrap the store's `dispatch` method for fun and profit.
+
+the feature of middleware is that it is composable, multiple middleware can be combined together.
+
+applyMiddleware(...middleware)
+
+- 3)redux-thunk
+
+the most common use case for middleware is to support `asynchronous actions`. we can `dispatch` async actions in addition to normal actions.
+
+redux-thunk lets the action creators invert control by dispatching
 
 
 ### ../reducers/index.js
