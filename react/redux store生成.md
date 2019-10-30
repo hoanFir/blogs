@@ -143,7 +143,7 @@ store.dispatch(withdrawMoneyByUsername(123));
 
 ```
 
-在这里只是简单了解一下redux action的基本使用。具体可前往xxx。
+tips：在这里只是简单了解一下redux action的基本使用。具体可前往xxx。
 
 ### ../reducers/index.js
 
@@ -165,7 +165,77 @@ module.exports = combineReducers({
 
 - 1)combineReducers
 
+我们知道，reducers是用来handle actions。
 
+When the app is larger, we can split the reducers into separate files and keep them completely independent and managing different data domains.
+
+那么，在没有使用`combineReducers`之前，是如何将这些单独的reducer整合的：
+
+```javascript
+
+const initialState = {
+  visibilityFilter: 'SHOW_ALL',
+  todos: []
+}
+
+function todos(state = initialState.todos, action) {
+  switch (action.type) {
+    case ADD_TODO:
+      return [
+        ...state,
+        {
+          text: action.text,
+          completed: false
+        }
+      ]
+    case TOGGLE_TODO:
+      return state.map((todo, index) => {
+        if (index === action.index) {
+          return Object.assign({}, todo, {
+            completed: !todo.completed
+          })
+        }
+        return todo
+      })
+    default:
+      return state
+  }
+}
+
+function visibilityFilter(state = initialState.visibilityFilter, action) {
+  switch (action.type) {
+    case SET_VISIBILITY_FILTER:
+      return action.filter
+    default:
+      return state
+  }
+}
+
+function todoApp(state = {}, action) {
+  return {
+    visibilityFilter: visibilityFilter(state.visibilityFilter, action),
+    todos: todos(state.todos, action)
+  }
+}
+
+```
+
+tips：在这里只是简单了解一下redux reducer的基本使用。具体可前往yyy。
+
+使用`combineReducer`之后：
+
+```javascript
+
+import { combineReducers } from 'redux'
+
+const todoApp = combineReducers({
+  visibilityFilter,
+  todos,
+})
+
+export default todoApp
+
+``
 
 
 ### ../reducers/home.js
