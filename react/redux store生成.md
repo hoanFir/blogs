@@ -9,6 +9,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+
 import configureStore from './store';
 import App from './app';
 
@@ -29,7 +30,7 @@ ReactDOM.render(
 
 makes the Redux store available to any nested components.
 
-Props:
+***Props***:
 
 store - the single redux store in your application.
 
@@ -47,6 +48,7 @@ root-level component.
 ```javascript
 
 import { createStore, applyMiddleware } from 'redux';
+
 import rootReducer from '../reducers';
 
 const thunkMiddleWare = require('redux-thunk').default;
@@ -73,7 +75,7 @@ create a redux store that holds the complete `state tree` of your app.
 
 createStore(reducer, \[preloadedState\], enhancer)
 
-Props:
+***Props***:
 
 reducer - a reducing function that return the next state tree, given the current state tree and an action to handle.
 
@@ -83,6 +85,7 @@ enhancer - the store enhancer. we may to enhance the store with third-party capa
 
 
 - 2)applyMiddleware
+
 
 
 ### ../reducers/index.js
@@ -117,7 +120,6 @@ let initialState = {
 };
 
 module.exports = createReducer(initialState, {
-
     [HomeActionTypes.FETCH_STATE](state) {
         return {
             ...state,
@@ -172,14 +174,10 @@ module.exports = function (initialState, actionHandlerMap) {
 import createActionTypes from '../utils/createActionTypes';
 
 module.exports = createActionTypes([
-    
     'FETCH_STATE',
-    
     'FETCH_HOME_DATA_SUCCESS', //首页数据获取成功
     'FETCH_HOME_DATA_FAILED', //首页数据获取失败
-    
 ], 'home_');
-
 
 ```
 
@@ -194,6 +192,5 @@ module.exports = function (actionTypes, prefix = '') {
     });
     return result;
 };
-
 
 ```
