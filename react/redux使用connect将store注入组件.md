@@ -40,6 +40,8 @@ export default MyPlatform;
 
 ```
 
+---
+
 ### ./router/index.js
 
 我们知道，`store`已经通过redux的`Provider`注入到最顶层组件里了。而在子组件中，我们需要通过connect()来获取store提供的状态数据和dispatch操作（当前组件所需要的）。
@@ -124,10 +126,19 @@ connect()返回的是一个函数，该函数会接收component从而返回一�
 
 - 2)bindActionCreators
 
-通过使用bindActionCreators，可以
+Normally, we call dispatch directly on our Store instance.
+
+通过使用bindActionCreators，可以实现将action creators传入component中，但component并不会aware of redux，也就是说不会把dispatch或者redux store传给component。**因此通过mapDispatchToProps()结合bindActionCreators()，就可以简单地把actions添加到component.props上，component不会感知到dispatch等redux内容**。
 
 bindActionCreators(actionsCreators, dispatch)
 
+***Props***:
+
+actionsCreators - an `action creator`, or `an object` whose values are action creators. Tips: an action is a payload of information, and an action creator is a factory that creates an action
+
+dispatch - a dispatch function available on the store instance
+
+---
 
 ### ./actions/LeftMenuActions.js
 
@@ -163,6 +174,8 @@ let getMenuTree = (dispatch, getState, typeSuccess, typeFaild, params) => {
 
 module.exports = {
     getMenuTree: (params) => {
+    
+        //action creator(async)
         return (dispatch, getState) => {
             getMenuTree(dispatch,
                 getState,
@@ -170,6 +183,7 @@ module.exports = {
                 MenuActionTypes.FETCH_MENU_DATA_FAILED,
                 params);
         };
+        
     },
 }
 
