@@ -42,6 +42,7 @@ context - provider a context instance.
 
 root-level component.
 
+---
 
 ### ./store/index.js
 
@@ -145,6 +146,8 @@ store.dispatch(withdrawMoneyByUsername(123));
 
 tips：在这里只是简单了解一下redux action的基本使用。具体可前往xxx。
 
+---
+
 ### ../reducers/index.js
 
 ```javascript
@@ -235,8 +238,9 @@ const todoApp = combineReducers({
 
 export default todoApp
 
-``
+```
 
+---
 
 ### ../reducers/home.js
 
@@ -276,6 +280,8 @@ module.exports = createReducer(initialState, {
 
 ```
 
+---
+
 ### ../utils/createReducer.js
 
 
@@ -297,6 +303,7 @@ module.exports = function (initialState, actionHandlerMap) {
 
 ```
 
+---
 
 ### ../constants/HomeActionTypes.js
 
@@ -312,6 +319,8 @@ module.exports = createActionTypes([
 
 ```
 
+---
+
 ### ../utils/createActionTypes.js
 
 ```javascript
@@ -326,6 +335,7 @@ module.exports = function (actionTypes, prefix = '') {
 
 ```
 
+---
 
 ### 总结
 
