@@ -26,7 +26,35 @@ Promise based HTTP client for the browser and node.js
 
 const axios = require('axios');
 
-//basic use
+//basic use - axios(config)
+
+axios({
+  method:'get',
+  url:'//xxx.png',
+  responseType:'stream'
+})
+  .then(function (response) {
+    /* handle success */
+  });
+
+axios({
+  method: 'post',
+  url: '/user/12345',
+  data: {
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+  }
+})
+  .then(function (res) {
+    /* handle success */
+  });
+
+
+//basic use - axios(url[, config])
+
+axios('/user/123'); //send a default get request
+
+//basic use - axios.get(url[, config]) and axios.post(url[, data[, config]])
 
 axios.get('/user?id=123') or
 axios.get('/user', { params: { id: 123 } }) or
@@ -34,6 +62,7 @@ axios.post('/user', { id: 123 })
   .then(function (res) { /* handle success */ }
   .catch(funciton (err) { /* handle error */ })
   .then(function() { /* always executed */ })
+
 
 //use async
 
@@ -52,6 +81,8 @@ async function getUser() {
 
 基于Promise.all()。
 
+axios.all(iterable) and axios.spread(callback).
+
 ```javascript
 
 function getUserAccount() { return axios.get('/user/123') }
@@ -64,3 +95,11 @@ axios.all([getUserAccount()， getUserPermissions()])
   }))
 
 ```
+
+### request config
+
+### response schema
+
+key|desc|
+--|--|
+xx|xx|
