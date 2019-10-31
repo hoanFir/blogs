@@ -108,19 +108,29 @@ params|url parameters, must be a `plain object` or a `URLSearchParams object`|
 data|request body, only applicable for request methods 'PUT', 'POST', and 'PATCH', and it must be a one of the following types: `string`, `plain object`, `ArrayBuffer`, `ArrayBufferView`, `URLSearchParams`, `FormData(Browser only)`, `File(Browser only)`, `Blob(Browser only)`|
 timeout|if the request takes longer than `timeout`, the request will be aborted|
 withCredentials|indicates whether or not cross-site Access-Control requests should be made using credentials|
+responseType|indicates encoding to use for decoding response, default utf8|
+maxContentLength|defines the max size of the http response content in bytes allowed|
+proxy|defines the hostname and port of the proxy server. this will set ad `Proxy-Authorization` header, overwriting any existing `Proxy-Authorization` custom headers you have set using `headers`|
+onUploadProgress|function(progressEvent) {}, allows handling of progress events for uploads|
+onDownloadProgress|function(progressEvent) {}, allows handling of progress events for downloads|
+validateStatus|function(status){ return status>=200&&status<300; }, defines whether to resolve or reject the promise for a given http response status code.|
 paramsSerializer|an optional function in charge of serializing `params`|
 transformRequest|\[function (data, headers) { transform and return data }\], this is only applicable for put, post and patch method. last function in the array must return a `string` or an instance of `ArrayBuffer`, `FormData`. tips: we may modify the headers object|
 transformResponse|\[function (data) { transform and return data }\], the return data will be passed to then/catch|
+adapter|--|
+auth|--|
+xsrfCookieName|--|
+cancelToken|--|
 
 ### response schema
 
 key|description|
 --|--|
-data|{}|
-status|200, http status code|
-statusText|'OK', http status message|
-headers|{}|
-config|{}, the config that was provided to request|
+response.data|{}|
+response.status|200, http status code|
+response.statusText|'OK', http status message|
+response.headers|{}|
+response.config|{}, the config that was provided to request|
 request|{}, the request that generated this response, it is an XMLHttpRequest instance the browser|
 
 
