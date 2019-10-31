@@ -4,6 +4,8 @@
 
 **HTTP headers let the client and the server pass additional information with an HTTP request or response**.
 
+---
+
 Headers can be grouped according to their contexts: General headers, Request headers, Response headers, Entity headers.
 
 - **General headers**: a general header is an http header that can be used in *both request and response message but doesn't apply to the content itself*. Depending on the context they are used in, general headers are either request or response headers. However, they are not entity headers.
@@ -81,13 +83,31 @@ tips：客户端想要在跨域时发送cookie等信息需要设置withCredentia
 
 key|value|description|
 --|--|--|
+Access-Control-Allow-Origin|\*|...|
+Access-Control-Allow-Methods|'OPTIONS, PUT, DELETE, TRACE, PATCH'|...|
+Access-Control-Allow-Credentials|true||
+Etag|"c561c68d0ba92bbeb8b0f612a9199f722e3a621a"|...|
+Keep-Alive|timeout=5, max=997|...|
+Last-Modified|Mon, 18 Jul 2016 02:36:04 GMT|...|
+Server|Apache|...|
+Set-Cookie|...|...|
+Transfer-Encoding|chunked|...|
+Vary|Cookie, Accept-Encoding|...|
+X-Backend-Server|developer2.webapp.scl3.mozilla.com|...|
+X-Cache-Info|not cacheable; meta data too large|...|
+X-kuma-revision|1085259||
+x-frame-options|DENY|...|
 
-
-- **Entity headers**：an entity header is an http header that describing the content of the body of the message. Entity headers are used in *both request and response message*. Entity headers like Content-Length, Content-language, Content-Encoding or MIME type.
+- **Entity headers**：an entity header is an http header that describing the content of the body of the message. Entity headers are used in *both request and response message*. Entity headers like Content-Length, Content-language, Content-Encoding, Content-Type.
 
 key|value|description|
 --|--|--|
+Content-Length|...|...|
+Content-language|...|...|
+Content-Encoding|gzip|...|
+Content-Type|application/json;charset=UTF-8|...|
 
+---
 
 ### Request Headers示例
 
@@ -107,6 +127,7 @@ Cookie: ...
 
 ```
 
+---
 
 ### Response Headers示例
 
