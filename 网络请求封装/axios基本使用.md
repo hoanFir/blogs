@@ -20,7 +20,7 @@ Promise based HTTP client for the browser and node.js
 - 客户端支持预防csrf
 
 
-### get/post request test
+### basic use of get/post request
 
 ```javascript
 
@@ -59,8 +59,9 @@ axios('/user/123'); //send a default get request
 axios.get('/user?id=123') or
 axios.get('/user', { params: { id: 123 } }) or
 axios.post('/user', { id: 123 })
-  .then(function (res) { /* handle success */ }
-  .catch(funciton (err) { /* handle error */ })
+  .then(function (res) { /* handle success */ })
+  .catch(funciton (err) { /* handle error */ }) or
+  .then(function (res) { /* handle success */ }, function(err) { /* handle error */ })
   .then(function() { /* always executed */ })
 
 
@@ -77,7 +78,67 @@ async function getUser() {
 
 ```
 
-### multiple concurrent requests 
+### use of intercept requests or response
+
+before then or catch.
+
+```javascript
+
+import axios from 'axios';
+
+axios.interceptor.request.use(function(config) {
+  /* do something before request is sent. */
+  config.headers['Content-Type'] = 'application/json;charset=UTF-8';
+  config.headers['X-Request-With'] = 'XMLHttpRequest';
+  
+  return config;
+}, function(error) {
+  /* do something with request error. */
+
+  return Promise.reject(error);
+});
+
+axios.interceptors.response.use(function(res) {
+  /* do something with response data. */
+  console.log(res);
+  
+  return res;
+}, function(error) {
+  /* do something with response error. */
+
+  rerturn Promise.reject(error);
+})
+
+const Axios = {
+  get: (url, option) => {
+    return new Promise(function(resolve, reject) {
+      axios.get(url, { params: option }).then(function(res) {
+        resolve.apply(undefined, arguments);
+      }).catch(function() {
+        resolve.apply(undefined, arguments);
+      })
+    })
+  },
+  post: (url, option) => {
+    return new Promise(function (resolve, reject) {
+        axios.post(url, option).then(function (res) {
+        
+            //after response interceptor
+            resolve.apply(undefined, arguments);
+        }).catch(function () {
+        
+            //after response interceptor
+            resolve.apply(undefined, arguments);
+        });
+    });
+  },
+}
+
+export default Axios;
+
+```
+
+### use of multiple concurrent requests
 
 基于Promise.all()。
 
@@ -93,6 +154,77 @@ axios.all([getUserAccount()， getUserPermissions()])
   .then(axios.spread(funciton (acct, perms) {
     //all requests are now complete
   }))
+
+```
+
+### 设置application/x-www-form-urlencoded格式
+
+在axios中，默认会将js对象序列化成json格式，如果要发送application/x-www-form-urlencoded格式，如下：
+
+```javascript
+
+//方法1
+
+const params = new URLSearchParams();
+params.append('param1', 'value1');
+params.append('param2', 'value2');
+axios.post('/foo', params);
+
+tips：URLSearchParams is not supported by all browsers, but there is a polyfill available.
+
+//方法2
+
+import qs from 'qs';
+const options = {
+  method: 'POST',
+  headers: { 'content-type': 'application/x-www-form-urlencoded' },
+  data: qs.stringify({ 'bar': 123 }),
+  url,
+};
+axios(options);
+
+```
+
+### 捕获axios的errors
+
+在axios中，只要返回的http status code不是2xx，就会执行catch()或reject()。
+
+```javascript
+
+axios.post('/user', { id: 123 })
+  .then(function (res) { /* handle success */ })
+  .catch(funciton (err) {
+    /* handle error */ 
+    
+    if(err.response) {
+      /* the request was made and the server responded with a status code that falls out of the range of 2xx */
+      console.log(err.response.data);
+      console.log(err.response.status);
+      console.log(err.response.headers);      
+    } else if (err.request) {
+      /* the request was made but no response was received */
+      console.log(err.request);
+      
+      /* err.request is an XMLHttpRequest instance in the browser */
+    } else {
+      /* something happend(that triggered an Error) in setting up the request  */
+      console.log(err.message);
+    }
+  })
+
+```
+
+在axios中，通过设置request中validateStatus来自定义http status code会报错的范围。
+
+
+```javascript
+
+axios.get('/user/123', {
+  validateStatus: function (status) {
+    // Reject only if the status code is greater than or equal to 500
+    return status < 500;
+  }
+})
 
 ```
 
@@ -122,6 +254,18 @@ auth|--|
 xsrfCookieName|--|
 cancelToken|--|
 
+使用`axios.defaults`设置默认request config：
+
+```javascript
+
+axios.defaults.baseURL = 'https://api.example.com';
+
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+
+```
+
 ### response schema
 
 key|description|
@@ -131,6 +275,6 @@ response.status|200, http status code|
 response.statusText|'OK', http status message|
 response.headers|{}|
 response.config|{}, the config that was provided to request|
-request|{}, the request that generated this response, it is an XMLHttpRequest instance the browser|
+request|{}, the request that generated this response, it is an XMLHttpRequest instance in the browser|
 
 
