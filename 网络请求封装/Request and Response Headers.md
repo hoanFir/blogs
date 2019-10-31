@@ -105,7 +105,7 @@ key|value|description|
 Content-Length|...|...|
 Content-language|...|...|
 Content-Encoding|gzip|...|
-Content-Type|application/json;charset=UTF-8|...|
+Content-Type|application/json;charset=UTF-8|this entity header is used to indicate the media type of the resource or the data. [Imoportant MIME types for web developers](https://github.com/hoanFir/blogs/blob/master/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%B0%81%E8%A3%85/Important%20MIME%20types%20for%20Web%20developers.md) |
 
 ---
 
