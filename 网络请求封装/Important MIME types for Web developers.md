@@ -27,6 +27,12 @@ For example, for any MIME type whose type is `text`, the optional charset parame
 
 ---
 
+type分为两类：discrete type(单独类型)和multipart type。
+
+discrete type: represents a single file or medium, **such as a single text or music file, or a single video**.
+
+multipart type: represents a document that's comprised of multiple component parts, each of which may have its own MIME type, or a multipart type may encapsulate multiple files being sent together in one transaction. **For example, multipart MIME types are used when attaching multiple files to an email**.
+
 discrete type|multipart type|
 --|--|
 application, video, audio, font, image, text... |multipart...|
