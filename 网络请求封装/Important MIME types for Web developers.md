@@ -29,22 +29,44 @@ For example, for any MIME type whose type is `text`, the optional charset parame
 
 type分为两类：discrete type(单独类型)和multipart type。
 
-discrete type: represents a single file or medium, **such as a single text or music file, or a single video**.
+1. discrete type
 
-multipart type: represents a document that's comprised of multiple component parts, each of which may have its own MIME type, or a multipart type may encapsulate multiple files being sent together in one transaction. **For example, multipart MIME types are used when attaching multiple files to an email**.
+represents a single file or medium, **such as a single text or music file, or a single video**.
+
+2. multipart type
+
+represents a document that's comprised of multiple component parts, each of which may have its own MIME type, or a multipart type may encapsulate multiple files being sent together in one transaction. **For example, multipart MIME types are used when attaching multiple files to an email**.
+
+there are only two multipart type, `multipart/form-data`, used in the post method of html froms; `multipart/byteranges`, used with 206(http status code) - Partial Content to send part of document，即支持一次请求多个部分内容，request设置`Range: bytes=0-50, 100-150`，要求返回多个部分bytes，再通过response的`Accept-Rages: bytes`判断是否支持，如果支持就会返回：
+
+```
+
+HTTP/1.1 206 Partial Content
+Content-Type: multipart/byteranges; boundary=3d6b6a416f9b5
+...
+
+```
+
 
 discrete type|multipart type|
 --|--|
-application, video, audio, font, image, text... |multipart...|
+font, application, video, audio, , image, text... |multipart/form-data, multipart/byteranges|
 
-text	表明文件是普通文本，理论上是人类可读
-image	表明是某种图像。不包括视频，但是动态图（比如动态gif）也使用image类型
-audio	表明是某种音频文件
-video	表明是某种视频文件
-application	表明是某种二进制数据
+text	表明是普通文本文件。Text-only data including any human-readable content, source code, or textual data. `text/plain`, `text/html`
 
-multipart/form-data
-multipart/byteranges
+image	表明是某种图像。图像或图形数据，包括位图和矢量静态图像，以及静态图像格式的动画版本，如GIF。`image/jpeg`, `image/png`
+
+audio	表明是某种音频文件。`audio/mpeg`
+
+video	表明是某种视频文件。`video/mp4`
+
+application	表明是某种二进制数据。`application/octet-stream`, `application/pdf`, `application/zip`
+
+font 表明是某种文字。`font/woff`, `font/tff`, `font/otf`
+
+---
+
+Important MIME types for Web developers:
 
 ### text/plain
 
@@ -62,16 +84,16 @@ multipart/byteranges
 
 用于二进制流数据
 
-### multipart/form-data
+### application/pdf
 
-用于在表单中上传文件时
-
-### multipart/byteranges
+### application/zip
 
 ### 'Image types'
 
 ### 'Audio and video types'
 
+### multipart/form-data
 
-application/json
-application/pdf
+用于在表单中上传文件时
+
+### multipart/byteranges
