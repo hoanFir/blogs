@@ -98,8 +98,29 @@ axios.all([getUserAccount()， getUserPermissions()])
 
 ### request config
 
+key|description|
+--|--|
+url|only required|
+method|request method|
+baseURL|will be prepended to url unless url is absolute|
+headers|{''X-Requested-With': 'XMLHttpRequest'}|
+params|url parameters, must be a `plain object` or a `URLSearchParams object`|
+data|request body, only applicable for request methods 'PUT', 'POST', and 'PATCH', and it must be a one of the following types: `string`, `plain object`, `ArrayBuffer`, `ArrayBufferView`, `URLSearchParams`, `FormData(Browser only)`, `File(Browser only)`, `Blob(Browser only)`|
+timeout|if the request takes longer than `timeout`, the request will be aborted|
+withCredentials|indicates whether or not cross-site Access-Control requests should be made using credentials|
+paramsSerializer|an optional function in charge of serializing `params`|
+transformRequest|\[function (data, headers) { transform and return data }\], this is only applicable for put, post and patch method. last function in the array must return a `string` or an instance of `ArrayBuffer`, `FormData`. tips: we may modify the headers object|
+transformResponse|\[function (data) { transform and return data }\], the return data will be passed to then/catch|
+
 ### response schema
 
-key|desc|
+key|description|
 --|--|
-xx|xx|
+data|{}|
+status|200, http status code|
+statusText|'OK', http status message|
+headers|{}|
+config|{}, the config that was provided to request|
+request|{}, the request that generated this response, it is an XMLHttpRequest instance the browser|
+
+
