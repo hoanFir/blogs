@@ -117,3 +117,39 @@ body,html {margin:0; height:100%;}
     margin-left: 200px;
 }
 ```
+
+### 方式五：document.body.clientWidth + float
+
+```html
+
+<script>
+    
+    const CW = document.body.clientWidth;
+    const rightWidth = CW - 200;
+</script>
+<body>
+    <div class="container">
+        <div class="left-item"></div>
+        <div class="right-item" style={{width: rightWidth}}></div>
+    </div>
+</body>
+```
+
+```css
+body,html {margin:0; height:100%;}
+.container {
+    height: 100%;
+}
+.left-item {
+    background-color: antiquewhite;
+    height: 100%;
+    width: 200px;
+    float: left;
+}
+.right-item {
+    background-color: aqua;
+    height: 100%;
+    float: left;
+}
+```
+
