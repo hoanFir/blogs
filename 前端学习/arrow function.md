@@ -62,3 +62,36 @@ var handler = { //this固定化+封装回调函数
 4. 箭头函数体内使用arguments对象时获取到的是外部函数的arguments，因为箭头函数不存在arguments对象。如果要获取箭头函数传入的参数可以结合rest使用。
 
 5. 箭头函数不可以用作Generator函数，也就不可以在函数体内使用yield。
+
+
+### 箭头函数this的固定是什么含义？
+
+固定**①从自己的作用域链的上一层继承this 或者 ②this指向定义时所处的作用域**。注意不是声明时就固定this对象的值。
+
+如下例子中，箭头函数外层普通函数this发生了变化，它也会跟着变化。但它是固定指向上一层作用域链的this的。
+
+```javascript
+
+var obj = {
+    a: 1,
+    getA: function(){
+        //普通函数，即不作为对象的属性时，this会指向window
+        var innerGet = function(){
+            console.log("1", this);
+            
+          	(() => {
+            	console.log("2", this)
+            })()
+            
+        };
+      
+        innerGet();
+      
+        return innerGet;
+    }
+};
+
+//obj.getA()()
+obj.getA().apply(obj)
+
+```
