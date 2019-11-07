@@ -60,7 +60,7 @@ body,html {margin:0; height:100%;}
 }
 ```
 
-### 方式三：float+BFC
+### 方式三：float+BFC(只支持左定宽右自适应)
 
 ```html
 <body>
