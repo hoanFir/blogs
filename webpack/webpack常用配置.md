@@ -4,6 +4,102 @@
 
 ### 概述
 
+基于`node`+`webpack`。
+
+package.json
+
+```json
+  
+  "scripts": {
+    "start": "node build/dev-server.js",
+    "build-prod": "node build/build-pro.js"
+  },
+  
+```
+
+node build/dev-server.js
+
+```javascript
+
+const opn = require('opn');
+const path = require('path');
+const webpack = require('webpack');
+const express = require('express');
+const proxyMiddleware = require('http-proxy-middleware');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+
+const webpackConfig = require('./webpack.config.dev');
+
+const port = 8005;
+const proxys = {
+            '/api': {
+                target: 'http://uat.product.company.com',
+                changeOrigin: true
+            },
+            '/auth': {
+                target: 'http://uat.product.company.com/',
+                changeOrigin: true
+            },
+            '/other/api': {
+                target: 'http://localhost:3000/',
+                changeOrigin: true
+            },
+        };
+
+const uri = 'http://local.company.com:' + port;
+
+const app = express();
+
+const compiler = webpack(webpackConfig);
+
+const devMiddleware = webpackDevMiddleware(compiler, {
+    publicPath: '/',
+    stats: {
+        colors: true
+    }
+});
+
+Object.keys(proxys).forEach(function (context) {
+    let options = proxys[context];
+    if (typeof options === 'string') {
+        options = {target: options}
+    }
+    app.use(proxyMiddleware(options.filter || context, options))
+});
+
+const hotMiddleware = webpackHotMiddleware(compiler);
+
+app.use(devMiddleware);
+app.use(hotMiddleware);
+
+// serve pure static assets
+let staticPath = path.posix.join('/', 'src');
+app.use(staticPath, express.static('./src'));
+
+devMiddleware.waitUntilValid(() => {
+    opn(uri);
+});
+
+app.listen(port);
+
+```
+
+node build/build-pro.js
+
+```javascript
+
+const webpack = require('webpack');
+const webpackProductionConfig = require('./webpack.config.pro');
+
+webpack(webpackProductionConfig, (error) => {
+  console.log(error);
+})
+
+```
+
+---
+
 1. webpack.config.base.js
 2. webpack.config.dev.js 开发环境
 3. webpack.config.pro.js 生产环境
