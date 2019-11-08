@@ -339,7 +339,16 @@ When webpack bundles source code, for example, bundle some files into one bundle
 
 **In order to track down errors and warnings**, javascript offers `source maps`.
 
-Source maps: map complied code back to original source code.
+Source maps: map complied code back to original source code. 
+
+tips: 常用的devtool值有
+
+none - build fastest, rebuild fastest, with bundled code
+
+cheap-module-eval-source-map - build slow, rebuild faster, with original source(lines only)
+
+inline-cheap-module-source-map - buld slow, rebuild slower, with original source(lines only)
+
 
 - plugins:html-webpack-plugin
 
