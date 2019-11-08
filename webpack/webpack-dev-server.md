@@ -183,6 +183,68 @@ const basePath = path.resolve(__dirname, '../');
 const devDomain = 'local.jd.com';
 const devPort = 8006;
 
+module.exports = merge({}, baseConfig, {
+
+  output: {
+    publicPath: `//${devDomain}:${devPort}/`,
+  },
+  
+  module: {
+    rules: [
+      {
+        test: /\.ejs$/,
+        use: [
+          'ejs-loader',
+          {
+            loader: 'ejs-html-loader',
+            options: {
+              webTitle: 'dev page',
+              contextPath: `//${devDomain}:${devPort}/`,
+              language: 'zh_CN',
+              resourcePath: '',
+              resourceVersion: '',
+              userPin: '',
+              requestURI: '',
+            }
+          }
+        ]
+      }
+    ]
+  },
+  
+  plugins: [
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'src/index.ejs',
+    }),
+  ],
+  
+  devtool: 'inline-cheap-module-source-map',
+  
+  devServer: {
+    contentBase: path.join(basePath, 'dist'),
+    compress: false,
+    port: devPort,
+    host: '127.0.0.1',
+    hot: true,
+    historyApiFallback: true,
+    allowedHosts: [devDomain],
+    watchOptions: {
+      poll: 1000,
+      aggregateTimeout: 300
+    },
+    proxy: {
+      '/api': 'http://dev.company.com/',
+      '/auth': {
+          target: 'http://dev.company.com/',
+          changeOrigin: true,
+      },
+    }
+  }
+})
+
 ```
 
 ### webpack.config.pro.js
