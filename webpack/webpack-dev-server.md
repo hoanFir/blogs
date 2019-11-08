@@ -16,6 +16,8 @@
 
 1. cross-env
 
+配置环境变量。在webpack赋给应用的全局变量，在js业务逻辑中使用。
+
 cross-env: run scripts that set and use environment variables across platforms. 
 
 ```json
@@ -138,11 +140,29 @@ module.exports = {
         loader: 'url-loader'
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)\.??.*$/,
+        test: /\.(eot|svg|ttf|woff)\.??.*$/,
         loader: 'url-loader?name=fonts/[name].[md5:hash:hex:7].[ext]'
       }, 
     ] 
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      finename: '../index.html',
+      template: 'src/index.ejs'
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'commons',
+      filename: 'commons.js
+    }),
+    new ExtractTextPlugin({
+      filename: 'css/app.min.css'
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
+    })
+  ]
 }
 
 ```
