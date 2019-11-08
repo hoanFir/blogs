@@ -88,7 +88,73 @@ module.exports = {
 
 ### webpack.config.base.js
 
+```javascript
+
+const webpack = require("webpack");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const autoprefixer = require("autoprefixer");
+
+const basePath = path.resolve(__dirname, '../');
+
+module.exports = {
+  target: 'web',
+  entry: {
+    index: path.resolve(basePath, 'src', 'index.js'),
+    commons: ['antd', 'react', 'react-dom', 'react-router-dom', 'monent', 'redux']
+  },
+  output: {
+    filename: 'app.min.js',
+    chunkFilename: 'chunk/[name].min.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.(css|less)$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'less-loader',
+            options: {
+               plugins: ()=>[autoprefixer({
+                browsers: ['last 5 versions']
+               })]
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(ico|png|gif|jpg|jpeg)$/,
+        loader: 'url-loader'
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)\.??.*$/,
+        loader: 'url-loader?name=fonts/[name].[md5:hash:hex:7].[ext]'
+      }, 
+    ] 
+  }
+}
+
+```
+
 ### webpack.config.dev.js
+
+```javascript
+
+```
 
 ### webpack.config.pro.js
 
+```javascript
+
+```
