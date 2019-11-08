@@ -171,10 +171,43 @@ module.exports = {
 
 ```javascript
 
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const baseConfig = require('./webpack.config.base');
+
+const basePath = path.resolve(__dirname, '../');
+
+const devDomain = 'local.jd.com';
+const devPort = 8006;
+
 ```
 
 ### webpack.config.pro.js
 
 ```javascript
+
+const path = require('path');
+const baseConfig = require('./webpack.config.base');
+const merge = require('webpack-merge');
+
+const basePath = path.resolve(__dirname, '../');
+
+module.exports = merge({}, baseConfig, {
+
+  output: {
+    path: path.resolve(basepath, '../src/main/webapp/WEB-INF/resources/'),
+    // publicPath: '/resource/',
+    publicPath: '/static-product.enterprise.com/resource/',
+  },
+  module: {
+    rules: [{
+      test: /\.ejs$/,
+      loader: 'html-loader'
+    }]
+  },
+})
 
 ```
