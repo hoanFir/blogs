@@ -341,7 +341,7 @@ When webpack bundles source code, for example, bundle some files into one bundle
 
 Source maps: map complied code back to original source code. 
 
-devtool: none - build fastest, rebuild fastest, with bundled code
+devtool: false - build fastest, rebuild fastest, with bundled code
 
 devtool: cheap-module-eval-source-map - build slow, rebuild faster, with original source(lines only)
 
