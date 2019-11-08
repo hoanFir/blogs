@@ -320,7 +320,7 @@ module.exports = merge(webpackBaseConfig, {
 
 ```
 
-tips：webpack处理模板文件（如.ejs）有两种方式，一种是将模板文件当作一个字符串（html-loader），另一种是将模板文件当作一个已经编译好的模板函数（ejs-loader）。
+tips：webpack can process template files(such as .ejs) in two ways. one is to use `html-loader` and treat the ejs file as a string; the other is to use `ejs-loader` and treat the ejs file as a template.
 
 - devtool
 
@@ -341,13 +341,11 @@ When webpack bundles source code, for example, bundle some files into one bundle
 
 Source maps: map complied code back to original source code. 
 
-tips: 常用的devtool值有
+devtool: none - build fastest, rebuild fastest, with bundled code
 
-none - build fastest, rebuild fastest, with bundled code
+devtool: cheap-module-eval-source-map - build slow, rebuild faster, with original source(lines only)
 
-cheap-module-eval-source-map - build slow, rebuild faster, with original source(lines only)
-
-inline-cheap-module-source-map - buld slow, rebuild slower, with original source(lines only)
+devtool: inline-cheap-module-source-map - buld slow, rebuild slower, with original source(lines only)
 
 
 - plugins:html-webpack-plugin
@@ -388,8 +386,6 @@ module.exports = merge(webpackBaseconfig, {
 
 - plugins:webpack.NoErrorsPlugin
 
-跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误。
-
 ```javascript
 
 const merge = require('webpack-merge');
@@ -403,6 +399,11 @@ module.exports = merge(webpackBaseconfig, {
 }
 
 ```
+
+webpack.NoErrorsPlugin(), an optional plugin that tells the reloader to not reload if there is an error. The error is simply printed in the console, and the page does not reload. 
+
+If you do not have this plugin enabled and you have an error, a red screen of death is thrown. 即先处理完报错才会重载页面，不至于在频繁处理报错的过程中频繁渲染页面。
+
 
 - plugins:friendly-errors-webpack-plugin
 
