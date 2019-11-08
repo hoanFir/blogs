@@ -9,7 +9,7 @@
   
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --env production --config ./build/webpack.config.js -p",
+    "build": "cross-env NODE_ENV=production webpack --env production --config ./build/webpack.config.pro.js -p",
   },
 
 ```
@@ -43,6 +43,8 @@ compress scripts...
 
 webpack-dev-server can be used to quickly develop an application, privides a simple web server and the abilitiy to use live reloading.
 
+官方示例：
+
 ```javascript
 
 const path = require('path');
@@ -74,4 +76,19 @@ module.exports = {
 }
 
 ```
+
+---
+
+1. webpack.config.base.js
+
+2. webpack.config.dev.js 开发环境
+
+3. webpacl.config.js 生产环境
+
+
+### webpack.config.base.js
+
+### webpack.config.dev.js
+
+### webpack.config.pro.js
 
