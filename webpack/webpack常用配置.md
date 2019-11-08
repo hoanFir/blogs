@@ -19,6 +19,8 @@ package.json
 
 node build/dev-server.js
 
+tips：基于express构建本地服务器。
+
 ```javascript
 
 const opn = require('opn');
