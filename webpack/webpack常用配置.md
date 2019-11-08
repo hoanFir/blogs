@@ -4,7 +4,7 @@
 
 ### 概述
 
-基于`node`+`webpack`。
+基于`node+express`+`webpack`。
 
 package.json
 
@@ -334,6 +334,13 @@ module.exports = merge(webpackBaseConfig, {
 })
 
 ```
+
+When webpack bundles source code, for example, bundle some files into one bundle.js, if one of the source files contains an error, the stack trace will simply point to bundle.js, this isn't helpful as we probably want to know exactly which source file the error came from.
+
+**In order to track down errors and warnings**, javascript offers `source maps`.
+
+Source maps: map complied code back to original source code.
+
 - plugins:html-webpack-plugin
 
 ```javascript
