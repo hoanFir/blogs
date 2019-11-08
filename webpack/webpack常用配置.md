@@ -4,7 +4,7 @@
 
 ### 概述
 
-基于`node+express`+`webpack`。
+基于`node+express`+`webpack-dev-middleware`+`webpack`。
 
 package.json
 
