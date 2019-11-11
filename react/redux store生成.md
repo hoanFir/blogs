@@ -11,6 +11,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import configureStore from './store';
+
 import App from './app';
 
 let CONTENT_NODE_WRAP = document.querySelector('#root');
@@ -52,17 +53,14 @@ import { createStore, applyMiddleware } from 'redux';
 
 import rootReducer from '../reducers';
 
-const thunkMiddleWare = require('redux-thunk').default;
+import thunkMiddleWare from 'redux-thunk';
 
 let middlewares = [
     thunkMiddleWare
 ];
 
 function configureStore(initialState) {
-    let store = applyMiddleware(
-        ...middlewares
-    )(createStore)(rootReducer, initialState);
-    
+    let store = applyMiddleware(...middlewares)(createStore)(rootReducer);
     return store;
 }
 
@@ -72,22 +70,21 @@ module.exports = configureStore;
 
 - 1)createStore
 
-create a redux store that holds the complete `state tree` of your app.
+Create a redux store that holds the complete `state tree` of your app. The only way to change the data in the store is to call dispatch() on it. There should only be a single store in your app. To specify how different parts of the state tree respond to actions, you may combine several reducers into a single reducer function by using combineReducers.
 
 `createStore(reducer, \[preloadedState\], enhancer)`
 
 ***Props***:
 
-reducer - a reducing function that return the next state tree, given the current state tree and an action to handle.
+reducer - A function that returns the next state tree, given the current state tree and the action to handle. Such as by using createStore(combineReducers(ReducersMapObject)) 中 combineReducers(reducersMapObject) will return a reducer function that invokes every reducer inside the passed reducersMapObject, and builds a state object with the same shape.
 
 preloadedState - the initial state.
 
 enhancer - the store enhancer. we may to enhance the store with third-party capabilities such as `middleware`, `time travel`, `persistence`, etc. And `middleware` can use with applyMiddleware().
 
-
 - 2)applyMiddleware
 
-to enhance the store. 
+to enhance the store.
 
 Middleware is the suggested way to extend Redux with custom functionality. Middleware lets you wrap the store's `dispatch` method for fun and profit.
 
@@ -168,7 +165,9 @@ module.exports = combineReducers({
 
 - 1)combineReducers
 
-我们知道，reducers是用来handle actions。
+Turns an object whose values are different reducer functions, into a single reducer function. It will call every child reducer, and gather their results into a single state object, whose keys correspond to the keys of the passed reducer functions.
+
+我们知道，reducers是用来handle actions的。
 
 When the app is larger, we can split the reducers into separate files and keep them completely independent and managing different data domains.
 
@@ -214,6 +213,7 @@ function visibilityFilter(state = initialState.visibilityFilter, action) {
   }
 }
 
+//整合
 function todoApp(state = {}, action) {
   return {
     visibilityFilter: visibilityFilter(state.visibilityFilter, action),
@@ -229,7 +229,10 @@ tips：在这里只是简单了解一下redux reducer的基本使用。具体可
 
 ```javascript
 
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
+
+import visibilityFilter from './visibilityFilter/reducers';
+import todos from './todos/reducers';
 
 const todoApp = combineReducers({
   visibilityFilter,
@@ -239,6 +242,12 @@ const todoApp = combineReducers({
 export default todoApp
 
 ```
+
+function combineReducers<S>(reducers: ReducersMapObject): Reducer<S>
+
+Turns an object whose values are different reducer functions, into a single reducer function. It will call every child reducer, and gather their results into a single state object, whose keys correspond to the keys of the passed reducer functions.
+
+
 
 ---
 
