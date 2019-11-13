@@ -46,6 +46,8 @@ let webSocket = null;
 let socketRetry = 0;
 let connectedSuccess = false;
 let calledClose = false;
+let heartbeatInterval = null;
+let heartbeatType = 'client_heartbeat';
 
 const sayHelloBase = {
   type: 'event_message',
@@ -99,19 +101,22 @@ function messageWrapper(msg, type, to) => {
 }
 
 function heartbeat = () => {
+  window.clearInterval(heartbeatInterval);
   
-}
-
-function onReady = () => {
-  
-}
-
-function onError = (msg) => {
-  console.log('Err: ', msg);
+  heartbeatInterval = setInterval(() => {
+    if(webSocket && webSocket.readyState === WebSocket.OPEN) {
+      webSocket.send(JSON.stringify(messageWrapper({
+        type: heartbeatType,
+      }, 'customer')));
+    }
+  }, 60000)
 }
 
 const channel = ({
   socketUrl,
+  onReady = () => {},
+  onError = () => {},
+  onMessage = () => {},
 }) => {
   console.log(socketUrl); 
   //ws://product.company.com/channelMessage?venderId=1573090357357&cluster=PRODUCTUAT&aid=5A29EBDE0DB049D9BB426C6C2A0E6582
@@ -140,8 +145,10 @@ const channel = ({
       webSocket.send(JSON.stringiy(sayHelloMessage));
     }
     
+    //隔一段时间发送心跳, 保持连接
     heartbeat();
     
+    //执行外部回调
     onReady();
   };
   
