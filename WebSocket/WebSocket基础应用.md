@@ -38,6 +38,30 @@ webSocket.addEventListener('message', (event) => {
 
 ### Examples 2
 
+ws.js
+
 ```javascript
+
+let webSocket = null;
+let socketRetry = 0;
+
+const channel = ({
+  socketUrl,
+}) => {
+  console.log(socketUrl); 
+  //ws://product.company.com/channelMessage?venderId=1573090357357&cluster=PRODUCTUAT&aid=5A29EBDE0DB049D9BB426C6C2A0E6582
+  
+  if(webSocket && webSocket.readyState === webSocket.CONNECTING) {
+    console.log('retrying...');
+    socketRetry -= 1;
+    return;
+  }
+  
+  if(webSocket && webSocket.readyState === webSocket.OPEN) {
+    return;
+  }
+}
+
+export default channel;
 
 ```
