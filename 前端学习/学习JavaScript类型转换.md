@@ -198,10 +198,22 @@ Object(null)  -  {}
 
 ### 隐式的类型转换/自动转换
 
-- 对象到原始值到转换
+当 JavaScript 尝试操作一个“错误”的数据类型时，会自动转换为“正确”的数据类型。
 
-《JavaScript权威指南(第6版)》3.8.3
-toPrimitive()
+```txt
+
+1 + null  -  1
+"1" + null  -  "1null"
+"5" + 1  -  "51"
+"5" - 1  -  4
+
+document.getElementById("demo").innerHTML = something;  -  String(something)
+
+```
+
+- 1)toPrimitive()
+
+《JavaScript权威指南(第6版)》3.8.3  -  `toPrimitive()`
 
 对象->字符串/对象->数字
 
@@ -210,14 +222,14 @@ toPrimitive()
 转换顺序：因为JavaScript对象有两个不同的方法来执行转换，`toString()`和`valueOf()`，通过不同参数值，可以指定先调用执行转换，当对象执行方法后返回的还不是原始值，则调用另一个方法。
 
 
-- ==运算符的类型转换
+- 2)比较运算符==的类型转换
 
 《JavaScript权威指南(第6版)》4.9.1
 
 注意，===恒等运算符在判断相等时并未做任何类型转换。
 
 
-- +双目运算符、+单目运算符的类型转换
+- 3)双目运算符+和单目运算符+的类型转换
 
 1、+双目运算符
 
@@ -232,7 +244,7 @@ x+"test" => String(x)+"test"
 +x => Number(x)
 
 
-- !单目运算符的类型转换
+- 4)单目运算符!的类型转换
 
 将操作数转换为布尔值并取反。
 
