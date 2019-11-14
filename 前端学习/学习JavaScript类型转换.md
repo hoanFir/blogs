@@ -167,8 +167,8 @@ toString()执行结果和String()一样。
 
 Object("text")  - new String ("text")
 Object(3)  -  new Number(3)
-Object(Symbol('sym'))  -  new Symbol('sym')
-Object([1,2,3,4])  -  true
+Object(Symbol('sym'))  - Symbol('sym')
+Object([1,2,3,4])  -  new Array(1,2,3,4)
 Object([])  -  true
 Object({name:'john', age:34})  -  true
 Object(new Date())  -  true
