@@ -20,6 +20,8 @@ let webSocket = new WebSocket(socketUrl);
 
 - ...
 
+---
+
 ### Examples 1
 
 ```javascript
@@ -49,6 +51,10 @@ let calledClose = false;
 let heartbeatInterval = null;
 let heartbeatType = 'client_heartbeat';
 let online = true;
+let disableCare = false;
+let checkRange = 0;
+let statusTimer = null;
+let statusType = 'cfg.customCare';
 
 const sayHelloBase = {
   type: 'event_message',
@@ -71,22 +77,29 @@ const channel = ({
   onMessage = () => {},
 }) => {
   console.log(socketUrl); 
-  //ws://product.company.com/channelMessage?venderId=1573090357357&cluster=PRODUCTUAT&aid=5A29EBDE0DB049D9BB426C6C2A0E6582
+  // ws://product.company.com/channelMessage?venderId=1573090357357&cluster=PRODUCTUAT&aid=5A29EBDE0DB049D9BB426C6C2A0E6582
   
   
+  //正在连接
   if(webSocket && webSocket.readyState === webSocket.CONNECTING) {
     console.log('retrying...');
     
     socketRetry -= 1;
     return;
   }
+  // 处于连接状态
   if(webSocket && webSocket.readyState === webSocket.OPEN) {
     return;
   }
+  
+  
+  // 先关闭通道，清除相关状态
   close();
-
-
+  
+  
+  // 创建WebSocket
   webSocket = new WebSocket(socketUrl);
+  
   
   const sayHelloMessage = messageWrapper(sayHelloBase, 'customer');
   
@@ -105,6 +118,7 @@ const channel = ({
   };
   
   webSocket.onerror = (e) => {
+    //执行外部回调
     onError(e.message);
     
     if(calledClose === true) {
@@ -117,6 +131,7 @@ const channel = ({
       return;
     }
     
+    //尝试重连次数不超过5次就持续尝试创建连接
     setTimeout(() => {
       socketRetry += 1;
       
@@ -125,8 +140,33 @@ const channel = ({
   };
   
   webSocket.onmessage = (event) => {
-  
-  }
+    let message = event.data;
+    
+    if(typeof message === 'string') {
+      message = JSON.parse(message);
+    }
+    
+    if(message.upid === sayHelloMessage.id) {
+      connectedSuccss = true;
+    }
+    
+    if(message.type === 'event_message' || message.type === 'chat_message') {
+      if(!message.body) return;
+      
+      if(!disableCare) {
+        if(message.body.type === 'transfer_artificial' || message.body.type === 'switch_waiter') {
+          window.clearTimeout(statusTimer);
+          disableCare = true;
+        } else {
+          //检测状态
+          checkStatus();
+        }
+      }
+    }
+    
+    //执行外部回调
+    onMessage(message);
+  };
   
   window.addEventListener('online', async () => {
     online = true;
@@ -134,12 +174,12 @@ const channel = ({
     webSocket = new WebSocket(socketUrl);
   })
   
-  window.addEventListener('online', async () => {
+  window.addEventListener('offline', async () => {
     online = false;
     
     if(webSocket) {
       webSocket.close();
-    }
+    };
   });
   
   return {
@@ -149,6 +189,7 @@ const channel = ({
     readAck, // 发送已读回执
     getQuickEntry, // 获取快捷入口
     setHeartbeatType, // 修改heartbeat类型
+    setCheckRange, // 修改检查状态的频率
   };
 
 }
@@ -197,10 +238,10 @@ function heartbeat = () => {
   heartbeatInterval = setInterval(() => {
     if(webSocket && webSocket.readyState === WebSocket.OPEN) {
       webSocket.send(JSON.stringify(messageWrapper({
-        type: heartbeatType,
+        type: heartbeatType, //"client_heartbeat"
       }, 'customer')));
     }
-  }, 60000)
+  }, 60000);
 }
 
 function close() {
@@ -217,6 +258,24 @@ function close() {
         window.clearInterval(heartbeatInterval);
         window.clearTimeout(statusTimer);
     }
+}
+
+function checkStatus() {
+  if(!checkRange) return false;
+  
+  window.clearTimeout(statusTimer);
+  statusTimer = setTimeout(() => {
+    webSocket.send(JSON.stringify(messageWrapper({
+      type: 'event_message',
+      body: {
+        action: {
+          code: statusType
+        }
+        type: 'config',
+      },
+    }, 'customer')));
+    disableCare = true;
+  }, checkRange);
 }
 
 function send(message) {
@@ -256,6 +315,12 @@ function setHeartbeatType(type) {
     }, 'customer')));
 }
 
+function setCheckRange(second) {
+    window.clearTimeout(statusTimer);
+    checkRange = second;
+}
+
 export default channel;
 
 ```
+
