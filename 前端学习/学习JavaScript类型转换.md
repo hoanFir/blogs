@@ -86,20 +86,6 @@ JavaScript 类型转换主要有两种方式：
 
 ```txt
 
-typeof "john"  -  string
-typeof 3.14  - number
-typeof NaN  -  number
-typeof false  -  boolean
-typeof Symbol('sym')  -  symbol
-typeof BigInt(9007199254740991)  -  bigint
-typeof [1,2,3,4]  -  object
-typeof {name:'john', age:34}  -  object
-typeof new Date()  -  object
-typeof function () {}  -  function
-typeof null  - object
-typeof someValue  -  undefined
-
-
 String(12.1)  -  '12.1'
 String(1+2)  -  '3'
 String(NaN)  -  'NaN'
@@ -113,16 +99,30 @@ String(function () {})  -  "function () {}"
 String(null)  -  "null"
 String(undefined)  -  "undefined"
 
-Number("3")  -  3
+Number(" 3 ")  -  3
 Number(" ")  -  0
 Number("")  -  0
 Number(false)  -  0
 Number(true)  -  1
+Number(Symbol('sym'))  -  Uncaught TypeError: Cannot convert a Symbol value to a number
+Number([1,2,3,4])  -  NaN
+Number({name:'john', age:34})  -  NaN
 Number(new Date())  -  1573715061130
+Number(function () {})  -  NaN
+Number(null)  -  0
+Number(undefined)  -  NaN
 
-
-
-Boolean(\[\])  -  true
+Boolean(1)  -  true
+Boolean(0)  -  false
+Boolean(-1)  -  true
+Boolean(Symbol('sym'))  -  true
+Boolean([1,2,3,4])  -  true
+Boolean([])  -  true
+Boolean({name:'john', age:34})  -  true
+Boolean(new Date())  -  true
+Boolean(function () {})  -  true
+Boolean(null)  -  false
+Boolean(undefined)  -  false
 
 ```
 
@@ -161,9 +161,21 @@ toString()执行结果和String()一样。
 
 3. Object()
 
+当不通过`new`运算符调用Object()时，它会作为类型转换函数。
+
 ```txt
 
+Object("text")  - new String ("text")
 Object(3)  -  new Number(3)
+Object(Symbol('sym'))  -  new Symbol('sym')
+Object([1,2,3,4])  -  true
+Object([])  -  true
+Object({name:'john', age:34})  -  true
+Object(new Date())  -  true
+Object(function () {})  -  true
+
+Object(null)  -  {}
+Object(undefined)  -  {}
 
 ```
 
