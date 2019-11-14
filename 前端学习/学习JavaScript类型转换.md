@@ -92,6 +92,7 @@ String(NaN)  -  'NaN' ⭐⭐⭐
 String(false)  -  "false"
 String(Symbol('sym'))  -  "Symbol(sym)"
 String(BigInt(9007199254740991))  -  "9007199254740991"
+String([])  -  "" ⭐⭐⭐
 String([1,2,3,4])  -  "1,2,3,4" ⭐⭐⭐
 String({name:'john', age:34})  -  "[object Object]" ⭐⭐⭐
 String(new Date())  -  "Thu Nov 14 2019 14:24:39 GMT+0800 (中国标准时间)"
@@ -203,41 +204,119 @@ Object(null)  -  {}
 ```txt
 
 1 + null  -  1
+
 "1" + null  -  "1null"
 "5" + 1  -  "51"
+
 "5" - 1  -  4
 
 document.getElementById("demo").innerHTML = something;  -  String(something)
 
 ```
 
-- 1)toPrimitive()
+- 1)i理解ToPrimitive(input, preferedType?)运行机制 ⭐⭐⭐
+
+想要将object data type转换成primitive data type，必然会调用这个JavaScript内部函数。
 
 《JavaScript权威指南(第6版)》3.8.3  -  `toPrimitive()`
 
-`JS::ToPrimitive`: Converts a JavaScript object to a primitive value.
+`ToPrimitive`: Converts a JavaScript object to a primitive value. 
 
-对象->字符串/对象->数字
+1、如果preferedType是number，会执行以下步骤：
 
-通过调用`toPrimitive()`来转换。该方法接受两个参数，指定要转换成原始值的对象和指定转换顺序。
+```txt
 
-转换顺序：因为JavaScript对象有两个不同的方法来执行转换，`toString()`和`valueOf()`，通过不同参数值，可以指定先调用执行转换，当对象执行方法后返回的还不是原始值，则调用另一个方法。
+1. 如果input是原始值，直接返回这个值
+
+2. 否则，如果input是对象，调用input.valueOf()，如果结果是原始值，返回结果
+
+3. 否则，调用input.toString()。如果结果是原始值，返回结果
+
+4. 否则，抛出错误
+
+```
+
+2、如果preferedType是string，会执行以下步骤：
+
+```txt
+
+1. 如果input是原始值，直接返回这个值
+
+2. 否则，调用input.toString()。如果结果是原始值，返回结果
+
+3. 否则，如果input是对象，调用input.valueOf()，如果结果是原始值，返回结果
+
+4. 否则，抛出错误
+
+```
+
+3、如果缺省preferedType
+
+```txt
+
+1. 如果是日期，会被认为是preferedType是string
+
+2. 其他值，会被认为是preferedType是number
+
+```
 
 
-- 2)比较运算符==的类型转换
-
-《JavaScript权威指南(第6版)》4.9.1
-
-注意，===恒等运算符在判断相等时并未做任何类型转换。
-
-
-- 3)双目运算符+和单目运算符+的类型转换
+- 2)双目运算符+和单目运算符+的类型转换
 
 1、+双目运算符
 
-如果一个操作数是字符串，将其另一个操作数转换为字符串。
+转换原则：
 
-x+"test" => String(x)+"test"
+```txt
+
+1. 如果操作数有一个是string（是对象的话得在对象通过ToPrimitive()转换之后），则将第二个操作数也转换成string。
+
+2. 如果操作数都不是string，则两个操作数都转换成number。
+
+示例：
+
+> "1" + null
+> "1null"
+分析：因为有一个操作数为string，则第二个操作数也会转换成string，由于null是基本类型，则执行"1"+String(null)="1null"。
+
+> "1"+{}
+>"1[object Object]"
+分析：因为有一个操作数是string，则第二个操作数也会转换成string，又因为{}是对象，则执行"1"+ToPrimitive({})='1[Object object]'。根据上面关于ToPrimitive()的知识，我们知道ToPrimitive({})会先求{}.valueOf()={}，再求{}.toString()="[Object object]"。
+
+> 1+{}
+> "1[object Object]"
+分析：因为操作数{}经过ToPrimitive()转换后是string，所以另一个操作数1也要转换成string，即执行String(1)+ToPrimitive({})='1[Object Object]'。
+
+> 1+[]
+> "1"
+分析：因为操作数[]经过ToPrimitive()转换后是string，所以另一个操作数1也要转换成string，即执行String(1)+ToPrimitive([])='1'。根据上面关于ToPrimitive()的知识，我们知道ToPrimitive([])会先求[].valueOf()=[]，再求[].toString()=""。
+
+>[] + []
+>ToPrimitive([])+ToPrimitive([])
+>''+''
+>''
+
+>[]+{}
+>ToPrimitive([])+ToPrimitive({})
+>''+'[Object object]'
+>'[Object object]'
+
+>{}+[] ⭐⭐⭐
+>0
+疑问：为什么不是'[Object object]'+''???
+分析：因为js引擎将第一个 {} 解释成一个空的代码块并忽略了它，所以这里的+会被看成单目运算符，即{}+[] = +[] = Number([]) = 0。
+
+
+>{}+{} ⭐⭐⭐
+>"[object Object][object Object]" 或 NaN
+疑问：怎么又有两种结果???
+分析："{}+{}"在Firefox运行会输出"NaN"。这是因为，js引擎将第一个 {} 解释成一个空的代码块并忽略了它，后面的+变成了一元运算符，即{}+{} = +{} = Number({}) = NaN。而在Chrome运行会输出"[object Object][object Object]"，因为它会自动补成({}+{})进行运算。
+
+> 1 + null
+> 1
+分析：因为null和1都不是string，则执行Number(1)+Number(null)=1+0=1。
+
+```
 
 2、+单目运算符
 
@@ -246,11 +325,61 @@ x+"test" => String(x)+"test"
 +x => Number(x)
 
 
+- 3)比较运算符==的类型转换
+
+《JavaScript权威指南(第6版)》4.9.1
+
+转换原则：
+
+```txt
+
+1. 如果操作数有一个是对象，则会先通过ToPrimitive()转换之后，再跟另一操作数进行比较
+
+2. 如果两个操作数分别String或Number或Boolean（包括对象转换成基本类型的操作数），都转换为Number再进行比较
+
+3. 如果某个操作数为NaN，则比较结果必为false ⭐⭐⭐
+
+4. 如果两个操作数都是null，则比较结果为true ⭐⭐⭐
+
+5. 如果两个操作数都是undefined，则比较结果为true ⭐⭐⭐
+
+
+示例：
+
+> ''==[]
+> ''==ToPrimitive([])
+> ''==''
+> true
+
+>'[Object object]'=={}
+>'[Object object]'==ToPrimitive({})
+>'[Object object]'=='[Object object]'
+>true
+
+> 0==false
+> 0==Number(false)
+> 0==0
+> true
+
+> []==false ⭐⭐⭐
+> ToPrimitive([])==false
+> ''==false
+> Number('')==Number(false)
+> 0
+
+```
+
+注意，对于===恒等运算符，只有类型一致值也一致才会相等，并且在判断相等时不会做任何类型转换。
+
+
 - 4)单目运算符!的类型转换
 
 将操作数转换为布尔值并取反。
 
-!!x => Boolean(x)
+
+!x => Boolean(x)
+
+
 
 
 
