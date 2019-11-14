@@ -37,6 +37,7 @@ webSocket.addEventListener('message', (event) => {
 });
 
 ```
+---
 
 ### Examples 2
 
@@ -324,3 +325,42 @@ export default channel;
 
 ```
 
+model.js
+
+```javascript
+
+import channel from './_ws';
+
+let ws;
+
+...
+
+//监听消息
+async listenMessgae() {
+  if(ws) ws.close();
+  
+  ws = channel({
+    socketUrl:   'ws://product.company.com/channelMessage?venderId=1573090357357&cluster=PRODUCTUAT&aid=5A29EBDE0DB049D9BB426C6C2A0E6582',
+    
+    onError: (err) => {
+      this.setState({
+        boolReady: false,
+        errMsg: err,
+      });
+    },
+    
+    onReady: () => {
+    
+    },
+    
+    onMessage: () => {
+    
+    },
+    
+  });
+  
+}
+
+...
+
+```
