@@ -37,7 +37,7 @@ The wrapper's `valueOf()` will returns the primitive value.
 
 typeof "john"  -  string
 typeof 3.14  - number
-typeof NaN  -  number
+typeof NaN  -  number ⭐⭐⭐
 typeof false  -  boolean
 typeof Symbol('sym')  -  symbol
 typeof BigInt(9007199254740991)  -  bigint
@@ -45,8 +45,8 @@ typeof [1,2,3,4]  -  object
 typeof {name:'john', age:34}  -  object
 typeof new Date()  -  object
 typeof function () {}  -  function
-typeof null  - object
-typeof someValue  -  undefined
+typeof null  - object ⭐⭐⭐
+typeof someValue  -  undefined ⭐⭐⭐
 
 ```
 
@@ -88,32 +88,35 @@ JavaScript 类型转换主要有两种方式：
 
 String(12.1)  -  '12.1'
 String(1+2)  -  '3'
-String(NaN)  -  'NaN'
+String(NaN)  -  'NaN' ⭐⭐⭐
 String(false)  -  "false"
 String(Symbol('sym'))  -  "Symbol(sym)"
 String(BigInt(9007199254740991))  -  "9007199254740991"
-String([1,2,3,4])  -  "1,2,3,4"
-String({name:'john', age:34})  -  "[object Object]"
+String([1,2,3,4])  -  "1,2,3,4" ⭐⭐⭐
+String({name:'john', age:34})  -  "[object Object]" ⭐⭐⭐
 String(new Date())  -  "Thu Nov 14 2019 14:24:39 GMT+0800 (中国标准时间)"
 String(function () {})  -  "function () {}"
 String(null)  -  "null"
 String(undefined)  -  "undefined"
 
-Number(" 3 ")  -  3
-Number(" ")  -  0
-Number("")  -  0
+Number(" 3 ")  -  3 
+Number(" ")  -  0 ⭐⭐⭐
+Number("")  -  0 ⭐⭐⭐
 Number(false)  -  0
 Number(true)  -  1
 Number(Symbol('sym'))  -  Uncaught TypeError: Cannot convert a Symbol value to a number
 Number([1,2,3,4])  -  NaN
 Number({name:'john', age:34})  -  NaN
-Number(new Date())  -  1573715061130
+Number(new Date())  -  1573715061130 ⭐⭐⭐
 Number(function () {})  -  NaN
-Number(null)  -  0
-Number(undefined)  -  NaN
+Number(null)  -  0 ⭐⭐⭐
+Number(undefined)  -  NaN ⭐⭐⭐
 
+Boolean(' ')  -  true ⭐⭐⭐
+Boolean('')  -  fasle ⭐⭐⭐
 Boolean(1)  -  true
 Boolean(0)  -  false
+Boolean(NaN)  -  false ⭐⭐⭐
 Boolean(-1)  -  true
 Boolean(Symbol('sym'))  -  true
 Boolean([1,2,3,4])  -  true
@@ -121,8 +124,8 @@ Boolean([])  -  true
 Boolean({name:'john', age:34})  -  true
 Boolean(new Date())  -  true
 Boolean(function () {})  -  true
-Boolean(null)  -  false
-Boolean(undefined)  -  false
+Boolean(null)  -  false ⭐⭐⭐
+Boolean(undefined)  -  false ⭐⭐⭐
 
 ```
 
@@ -169,16 +172,12 @@ Object("text")  - new String ("text")
 Object(3)  -  new Number(3)
 Object(Symbol('sym'))  - Symbol('sym')
 Object([1,2,3,4])  -  new Array(1,2,3,4)
-Object([])  -  true
-Object({name:'john', age:34})  -  true
-Object(new Date())  -  true
-Object(function () {})  -  true
-
+Object([])  -  new Array()
+Object(new Date())  -  Thu Nov 14 2019 16:50:42 GMT+0800 (中国标准时间)
 Object(null)  -  {}
 Object(undefined)  -  {}
 
 ```
-
 
 tips:
 
