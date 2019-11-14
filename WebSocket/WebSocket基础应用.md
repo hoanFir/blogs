@@ -1,6 +1,6 @@
 🐾 WebSocket基础应用
 
-🕘 2019.10.14 由 hoanfirst 编辑
+🕘 2019.10.13 由 hoanfirst 编辑
 
 WebSocket API：
 
@@ -114,7 +114,7 @@ const channel = ({
     //隔一段时间发送心跳, 保持连接
     heartbeat();
     
-    //执行外部回调
+    //websocket连接成功，执行外部回调
     onReady();
   };
   
@@ -332,7 +332,7 @@ model.js
 import channel from './_ws';
 
 let ws;
-
+let customCareInterval;
 ...
 
 //监听消息
@@ -350,11 +350,112 @@ async listenMessgae() {
     },
     
     onReady: () => {
-    
+      this.setState({
+        boolReady: true,
+        errMsg: '',
+      })
+      
+      try {
+        if(customCareInterval && Number(customCareInterval)) {
+          ws.setCheckRange(Number(customCareInterval));
+        }
+      } catch (err) {
+        console.warn('customCareInterval is invalid.')
+      }
     },
     
-    onMessage: () => {
-    
+    onMessage: (message) => {
+      if(typeof message === 'string') {
+        message = JSON.parse(message);
+      }
+      
+      // message.type: event_message, chat_message, ask
+      //if(message.type === 'event_message') {
+      //} else if (message.type === 'chat_message') {
+      //} else if (message.type === 'ack') { //在client_heartbeat和keep_alive等情况时会返回
+      //}
+      
+      if(message.type === 'event_message') {
+      
+        const body = message.body;
+        
+        if(!body) {
+          return;
+        }
+        
+        //头像信息
+        if(body.type && body.type === 'avatar') {
+          const data = body.data;
+          
+          this.setState({
+            venderName: data.venderName,
+            avatar: data.avatarUrl || defaultAvatar,
+          })
+          
+          return;
+        }
+        
+        //系统消息
+        if(body.type && body.type === 'sys' || body.type === 'text') {
+          //do something...
+          
+          if(..) {
+            ...
+          } else if(...) {
+            ...
+          }
+          return;
+        }
+        
+        //会话结束
+        if(body.type && body.type === 'close_session') {
+          const { close_reason } = body.chatinfo;
+          this.setState({
+            sessionClosed: true,
+            sessionReason: close_reason;
+          })
+          
+          ws.close();
+          
+          return;
+        }
+        
+        //转人工客服成功
+        if(body.type && body.type === 'transfer_artificial' || body.type === 'switch_waiter') {
+          //do something...
+
+          ws.setHeartbeatType('keep_alive');
+          
+          return;
+        }
+        
+        //历史消息
+        if(body.type && body.type === 'pull') {
+          if(body.data.hasMore === false) {
+            
+            this.setState({
+              hasMoreHistory: false,
+            })
+          }
+          
+          const nextMessages = body.data.messageList;
+          const currentMessages = OrderedMap(nextMessages);
+          this.setState({
+            messages: this.appendHistoryMessage(currentMessages),
+            historyLoading: false;
+          });
+        
+          return;
+        }
+        
+        ...
+      } else if (message.type === 'chat_message') {
+        //dosomething
+      
+      } else if (message.type === 'ack') {
+        //dosomething
+        
+      }
     },
     
   });
