@@ -2,6 +2,72 @@
 
 🕘 2019.10.19 由 hoanfirst 编辑
 
+### JavaScript数据类型
+
+1. primitive data type\[7\]
+
+基本类型
+
+A primitive is a data that is not an object and has no methods.
+
+There are 7 primitive data types: `string`, `number`, `boolean`, `null`, `undefined`, `symbol`, `bigint`.
+
+All primitives are immutable, they cannot be altered.
+
+2. primitive wrapper objects\[3\]
+
+基本封装类型
+
+Except for `null` and `undefined`, all primitive values have object equivalents that warp around the primitive values.
+
+`String`, `Number`, `Boolean`, `Symbol`, `BigInt`.
+
+The wrapper's `valueOf()` will returns the primitive value.
+
+3. object data type\[3\]
+
+`Object`, `Array`, `Date`
+
+
+### 判断数据类型
+
+1. typeof
+
+```txt
+
+typeof "john"  -  string
+typeof 3.14  - number
+typeof NaN  -  number
+typeof false  -  boolean
+typeof Symbol('sym')  -  symbol
+typeof BigInt(9007199254740991)  -  bigint
+typeof [1,2,3,4]  -  object
+typeof {name:'john', age:34}  -  object
+typeof new Date()  -  object
+typeof function () {}  -  function
+typeof null  - object
+typeof someValue  -  undefined
+
+```
+
+2. constructor.toString()
+
+```txt
+
+"john".constructor.toString()  -  function String() { [native code] }
+(3.14).constructor.toString()  -  function Number() { [native code] }
+false.constructor.toString()  -  function Boolean() { [native code] }
+Symbol('sym').constructor.toString()  -  function Symbol() { [native code] }
+BigInt(9007199254740991).constructor.toString()  -  function BigInt() { [native code] }
+[1,2,3,4].constructor.toString()  -  function Array() { [native code] }
+{name:'john', age:34}.constructor.toString()  -  function Object() { [native code] }
+new Date().constructor.toString()  -  function Date() { [native code] }
+function () {}.constructor.toString()  -  function Function() { [native code] }
+
+tips: Except for null and undefined, all primitive values have object equivalents that warp around the primitive values.
+
+```
+
 ### 一、灵活的类型转换
 
 下面简要说明了再JavaScript中如何进行类型转换('-'表示不必要也没有执行转换)：
