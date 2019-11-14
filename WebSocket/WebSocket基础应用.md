@@ -48,6 +48,7 @@ let connectedSuccess = false;
 let calledClose = false;
 let heartbeatInterval = null;
 let heartbeatType = 'client_heartbeat';
+let online = true;
 
 const sayHelloBase = {
   type: 'event_message',
@@ -62,56 +63,7 @@ const sayHelloBase = {
   },
 };
 
-function messageWrapper(msg, type, to) => {
-  const message = msg;
-  
-  if(type === 'waiter') {
-    message.from.app = 'waiter';
-    
-    message.to.app = 'customer';
-  } else if(type === 'customer') {
-    message.from.app = 'customer';
-    message.from.pin = 'hongzhenpeng';
-    
-    message.to.app = 'waiter';
-    
-    message.body && (message.body.chatinfo = {
-      ...message.body.chatinfo,
-      venderId: 1573090357357,
-    })
-    
-    message.type = message.type || 'chat_message';
-  } else if(type === 'artificial') {
-    message.from.app = 'customer';
-    message.from.pin = 'hongzhenpeng';
-    
-    message.to.app = 'waiter.artificial';
-    
-    message.body && (message.body.chatinfo = {
-      ...message.body.chatinfo,
-      venderId: 1573090357357,
-    })
-  }
-  
-  if(/artificial/.test(message.to.app)) {
-    message.body.chatinfo.toMan = true;
-  }
-  
-  return message;
-}
-
-function heartbeat = () => {
-  window.clearInterval(heartbeatInterval);
-  
-  heartbeatInterval = setInterval(() => {
-    if(webSocket && webSocket.readyState === WebSocket.OPEN) {
-      webSocket.send(JSON.stringify(messageWrapper({
-        type: heartbeatType,
-      }, 'customer')));
-    }
-  }, 60000)
-}
-
+//export default channel
 const channel = ({
   socketUrl,
   onReady = () => {},
@@ -189,7 +141,119 @@ const channel = ({
       webSocket.close();
     }
   });
+  
+  return {
+    close, // 关闭通道
+    send, // 发送消息
+    evaluate, // 发送评价
+    readAck, // 发送已读回执
+    getQuickEntry, // 获取快捷入口
+    setHeartbeatType, // 修改heartbeat类型
+  };
 
+}
+
+function messageWrapper(msg, type, to) => {
+  const message = msg;
+  
+  if(type === 'waiter') {
+    message.from.app = 'waiter';
+    
+    message.to.app = 'customer';
+  } else if(type === 'customer') {
+    message.from.app = 'customer';
+    message.from.pin = 'hongzhenpeng';
+    
+    message.to.app = 'waiter';
+    
+    message.body && (message.body.chatinfo = {
+      ...message.body.chatinfo,
+      venderId: 1573090357357,
+    })
+    
+    message.type = message.type || 'chat_message';
+  } else if(type === 'artificial') {
+    message.from.app = 'customer';
+    message.from.pin = 'hongzhenpeng';
+    
+    message.to.app = 'waiter.artificial';
+    
+    message.body && (message.body.chatinfo = {
+      ...message.body.chatinfo,
+      venderId: 1573090357357,
+    })
+  }
+  
+  if(/artificial/.test(message.to.app)) {
+    message.body.chatinfo.toMan = true;
+  }
+  
+  return message;
+}
+
+function heartbeat = () => {
+  window.clearInterval(heartbeatInterval);
+  
+  heartbeatInterval = setInterval(() => {
+    if(webSocket && webSocket.readyState === WebSocket.OPEN) {
+      webSocket.send(JSON.stringify(messageWrapper({
+        type: heartbeatType,
+      }, 'customer')));
+    }
+  }, 60000)
+}
+
+function close() {
+    calledClose = true;
+    
+    try {
+        if (webSocket) {
+            webSocket.close();
+        }
+    } catch (e) {
+        // do nothing
+    } finally {
+        webSocket = null;
+        window.clearInterval(heartbeatInterval);
+        window.clearTimeout(statusTimer);
+    }
+}
+
+function send(message) {
+  if(!online) {
+    return false;
+  }
+  
+  if(typeof message === 'string') {
+    return false;
+  }
+  
+  const { id } = message;
+  
+  if(!id) {
+    return false;
+  }
+  
+  if(webSocket.readyState === WebSocket.OPEN) {
+    webSocket.send(JSON.stringify(message));
+    return true;
+  }
+  
+  return false;
+}
+
+function evaluate() {}
+
+async function getQuickEntry() {
+    return send(messageWrapper(quickEntryBase, 'customer'));
+}
+
+function setHeartbeatType(type) {
+    heartbeatType = type;
+    
+    webSocket.send(JSON.stringify(messageWrapper({
+        type: heartbeatType,
+    }, 'customer')));
 }
 
 export default channel;
