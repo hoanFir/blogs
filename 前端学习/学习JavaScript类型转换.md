@@ -215,6 +215,8 @@ document.getElementById("demo").innerHTML = something;  -  String(something)
 
 《JavaScript权威指南(第6版)》3.8.3  -  `toPrimitive()`
 
+`JS::ToPrimitive`: Converts a JavaScript object to a primitive value.
+
 对象->字符串/对象->数字
 
 通过调用`toPrimitive()`来转换。该方法接受两个参数，指定要转换成原始值的对象和指定转换顺序。
