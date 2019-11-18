@@ -45,4 +45,25 @@ mask|with the svg mask element|
 clip-path|to clip HTML content|
 filter|apply a fiter to HTML content|
 
+示例：模糊效果filter
 
+```html
+
+<p class="blur">blur text.</p> 
+
+<svg height="0">
+  <defs>
+    <filter id="wherearemyglasses" x="0" y="0">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="1"/>
+    </filter>
+  </defs>
+</svg> 
+
+
+```
+
+```css
+
+.blur { filter: url(#wherearemyglasses); }
+
+```
