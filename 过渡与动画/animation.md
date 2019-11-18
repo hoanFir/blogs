@@ -4,6 +4,8 @@
 
 示例：转人工加载效果
 
+![](https://github.com/hoanFir/blogs/blob/master/%E8%BF%87%E6%B8%A1%E4%B8%8E%E5%8A%A8%E7%94%BB/images/loading.png?raw=true)
+
 ```html
 <div class="dot-loading">
   <div class="dot-wrapper">
