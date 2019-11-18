@@ -8,13 +8,13 @@
 
 ```html
 <div class="dot-loading">
-  <div class="dot-wrapper">
+  <div class="dot-wrapper-before">
     <div class="dot"></div>               
     <div class="dot"></div>               
     <div class="dot"></div>
   </div>
   <div class="dot-content">当前问题正在为您转人工客服处理</div>
-  <div class="dot-wrapper">
+  <div class="dot-wrapper-after">
     <div class="dot"></div>               
     <div class="dot"></div>               
     <div class="dot"></div>
@@ -29,7 +29,7 @@
 .dot-content {
   color: #999;
 }
-.dot-wrapper {
+.dot-wrapper-before, .dot-wrapper-after {
   margin: 0 6px;
 }
 .dot {
@@ -49,29 +49,45 @@
   border-radius: 50%;
   background-color: #999;
 }
-.dot:first-child:before {
+
+.dot-wrapper-after .dot:first-child:before {
   animation: bubble 1.3s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
-.dot:nth-child(2):before {
+.dot-wrapper-after .dot:nth-child(2):before {
   animation: bubble 1.3s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
   animation-delay: .2s;
 }
-.dot:last-child:before {
+.dot-wrapper-after .dot:last-child:before {
   animation: bubble 1.3s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
   animation-delay: .4s;
 }
 
+.dot-wrapper-before .dot:first-child:before {
+  animation: bubble 1.3s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  animation-delay: .4s;
+}
+.dot-wrapper-before .dot:nth-child(2):before {
+  animation: bubble 1.3s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  animation-delay: .2s;
+}
+.dot-wrapper-before .dot:last-child:before {
+  animation: bubble 1.3s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
 @keyframes bubble {
   0% {
-    transform: scale(0.2);
+    -webkit-transform: scale(0.2);
+            transform: scale(0.2);
     opacity: .2;
   }
   50% {
-    transform: scale(1);
+    -webkit-transform: scale(1);
+            transform: scale(1);
     opacity: 1;
   }
   100% {
-    transform: scale(0.2);
+    -webkit-transform: scale(0.2);
+            transform: scale(0.2);
     opacity: .2;
   }
 }
