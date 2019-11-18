@@ -11,8 +11,29 @@ Scalable Vector Graphics images and their related behaviors are defined in XML t
 
 1. Scalable Vector Graphics element
 
+category|elements|
+-|-|
+Animations elements|animate, animateColor, animateMotion, animateTransform, discard, mpath, set|
+Basic shapes|circle, ellipse, line, polygon, polyline, recr|
+Container elements|a, defs, g, marked, mask, missing-glyph, pattern, svg, switch, symbol|
+Descriptive elements|desc, metadata, title|
+Font element|font, font-face, font-face-format, font-face-name, font-face-src, font-face-uri, hkern, vkern|
+Gradient elements|linearGradient, meshgradient, radialGradient, stop|
+Light source elements|feDistantLight, fePointLight, feSpotLight|
+...|...|
+
+
 2. Scalable Vector Graphics attribute
+
+SVG elements can be modified using attributes that specify details about exactly how the element should be handled or rendered. 
 
 3. Scalable Vector Graphics DOM interface
 
-4. Applying Scalable Vector Graphics effects to HTML content
+Details about the SVG DOM API, for interaction with JavaScript.
+
+4. **Applying Scalable Vector Graphics effects to HTML content**
+
+Use SVG to works togethe with HTML, CSS and Javascript to enhance a regular HTML page or web application.
+
+
+
