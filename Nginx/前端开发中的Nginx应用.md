@@ -33,3 +33,50 @@ server {
 }
 
 ```
+
+
+### 二、请求过滤
+
+匹配操作符|含义|
+-|-|
+~|区分大小写匹配|
+~\*|不区分大小写匹配|
+
+1. 限制某些类型的客户端
+
+```
+server {
+  location / {
+    # 限制IE访问
+    if($http_user_agent ~ MSIE) {
+      return 503;
+    }
+  }
+}
+```
+
+2. 针对不同文件类型或目录
+
+预防`盗链`
+
+```
+
+server {
+  location ~ .*\.()$ {
+    if($http_refer ~* hecks.tk) {
+      return 403;
+    }
+  }
+}
+
+server {
+  location /img/ {
+    root /data/img/;
+    if($http_refer ~* hecks.tk) {
+      return 403;
+    }
+  }
+}
+
+```
+
