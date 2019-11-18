@@ -18,7 +18,7 @@
     <div class="dot"></div>               
     <div class="dot"></div>               
     <div class="dot"></div>
-  </div
+  </div>
 </div>
 ```
 
@@ -76,18 +76,15 @@
 
 @keyframes bubble {
   0% {
-    -webkit-transform: scale(0.2);
-            transform: scale(0.2);
+    transform: scale(0.2);
     opacity: .2;
   }
   50% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     opacity: 1;
   }
   100% {
-    -webkit-transform: scale(0.2);
-            transform: scale(0.2);
+    transform: scale(0.2);
     opacity: .2;
   }
 }
