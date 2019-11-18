@@ -55,28 +55,24 @@ server {
 }
 ```
 
-2. 针对不同文件类型或目录
+2. 针对不同文件类型
 
 预防`盗链`
 
 ```
 
-server {
-  location ~ .*\.()$ {
-    if($http_refer ~* hecks.tk) {
-      return 403;
-    }
-  }
-}
-
-server {
-  location /img/ {
-    root /data/img/;
-    if($http_refer ~* hecks.tk) {
-      return 403;
-    }
+location ~* \.(gif|jpg|png|jpeg)$ {
+  # 设置过期时间
+  expires 30d;
+  
+  # 设置白名单
+  valid_referers *.mysite.com www.mysite.com m.mysite.com *.baidu.com *.google.com;
+  
+  # 设置盗链限制
+  if ($invalid_referer) {
+    rewrite ^/ http://static.othersite.com/images/404.jpg;
+    #return 404;
   }
 }
 
 ```
-
