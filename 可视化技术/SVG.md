@@ -9,7 +9,7 @@ Scalable Vector Graphics is a text-based open web standard.
 Scalable Vector Graphics images and their related behaviors are defined in XML text files. **So they can be searched, indexed, scripts and compressed, and they can be created and edited with any text editor and with drawing software**.
 
 
-1. Scalable Vector Graphics element
+1. **Scalable Vector Graphics element**
 
 category|elements|
 -|-|
@@ -35,5 +35,14 @@ Details about the SVG DOM API, for interaction with JavaScript.
 
 Use SVG to works togethe with HTML, CSS and Javascript to enhance a regular HTML page or web application.
 
+Modern browsers support using SVG within CSS styles to apply graphical effects to HTML content.
+
+There are 3 properties we can use: 
+
+property name|desc|
+-|-|
+mask|with the svg mask element|
+clip-path|to clip HTML content|
+filter|apply a fiter to HTML content|
 
 
