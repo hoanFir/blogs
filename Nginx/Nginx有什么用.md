@@ -2,6 +2,8 @@
 
 🕘 2019.10.18 由 hoanfirst 编辑
 
+**nginx is an `HTTP and reverse proxy server`, a `mail proxy server`, and a `generic TCP/UDP proxy server`.**
+
 As we all known, Nginx can improve the `performance`(性能), `reliability`(可靠性), and `security`(安全性) of our applications.
 
 - API Gateway
