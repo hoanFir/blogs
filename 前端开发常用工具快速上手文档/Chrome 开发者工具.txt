@@ -1,0 +1,5 @@
+[Google webdeveloper]
+https://developers.google.com/web/tools/chrome-devtools/?hl=zh-cn
+
+[极客学院 - Chrome 开发工具指南]
+http://wiki.jikexueyuan.com/project/chrome-devtools/

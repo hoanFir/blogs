@@ -1,0 +1,15 @@
+方案一：
+引用normalize.css、minireset和ress
+
+方案二：
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+为什么所有元素都要设置box-sizing: border-box？
+可以更轻松的改变元素的大小，而不必担心padding或者border值会将元素撑开变形或者换行显示。
+理由：
+box-sizing属性有两个值：
+content-box（默认） - 当我们设置一个元素的宽度或高度时，就是设置它的内容的大小。所有的padding和边框值都不包含。例如，一个div的宽度设置为100，padding为10，于是这个元素将占用120像素（100+2*10）。
+border-box - padding与边框包含在元素的宽度或高度中，一个设置为width: 100px和box-sizing: border-box的div元素，他的总宽度就是100px，无论它的内边距和边框有多少。
