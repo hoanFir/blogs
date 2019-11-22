@@ -1,6 +1,17 @@
-启动
+🐾 Nginx
 
-start nginx 或 nginx.exe 或 
+🕘 2019.11.22 由 hoanfirst 编辑
+
+1. 启动
+
+```
+
+start nginx
+
+nginx.ext
+
+```
+
 
 nginx //直接启动
 
