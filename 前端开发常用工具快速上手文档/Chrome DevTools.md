@@ -30,3 +30,11 @@ console.table()|输出表格化后的数据信息|
 console.time() console.timeEnd()|统计代码执行时间|
 console.group() console.groupEnd()|分组输出多条信息|
 console.count()|统计代码执行次数|
+
+4. 提高性能的几个面板
+
+面板|说明|
+-|-|
+'Network'面板|提供资源下载和加载的详细分析，用于提高网络性能|
+'Audits'面板|提供加载页面过程的详细分析，用于减少页面加载时间，提高响应和用户体验|
+'Performance'面板|允许为页面配置执行时间和内存使用量，有助于分析资源消耗问题，进一步优化代码|
