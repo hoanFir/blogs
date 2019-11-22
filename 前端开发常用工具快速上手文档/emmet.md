@@ -54,3 +54,47 @@
 <li></li>
 
 ```
+
+
+6. `div>ul>li*2`
+
+```html
+
+<div>
+    <ul>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+
+```
+
+7. `div>p>span^ul>li*2`
+
+```html
+
+<div>
+    <p><span></span></p>
+    <ul>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+
+```
+
+8. `a:link`
+
+```html
+
+<a href="http://"></a>
+
+```
+
+9. `span[style=color:red].myclass`
+
+```html
+
+<span style="color:red" class="myclass"></span>
+
+```
