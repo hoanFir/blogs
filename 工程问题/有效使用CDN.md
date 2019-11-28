@@ -17,3 +17,19 @@ CDN，Content Delivery Network，内容分发网络。通过在现有的Internet
 CDN从技术上全面解决由于网络带宽小、用户访问量大、网点分布不均等问题，解决用户访问网站的响应速度慢的根本问题。
 
 针对互联网业务在网络层面存在的问题，CDN帮助yoghurt解决互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，业务只需简单接入即可完成访问加速，无需关注复杂多变的网络状况。
+
+### CDN典型拓扑
+
+![](https://github.com/hoanFir/blogs/blob/master/%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98/images/%E4%BC%81%E4%B8%9A%E5%92%9A%E5%92%9A%E6%88%AA%E5%9B%BE20191128174629.png?raw=true)
+
+### \[NOT\]Cache
+
+1. Cache
+
+目前支持任何格式的文件
+
+2. Not Cache
+
+涉及到用户隐私的数据、影响用户使用感受的数据、有法律风险的数据
+
+相关字段：Cache-Control、Expires、Last-Modified、Etag
