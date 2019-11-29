@@ -69,7 +69,12 @@ https = http + TLS/SSL，即在http和tcp之间加了一层TLS/SSL。
 ![](https://github.com/hoanFir/blogs/blob/master/%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98/images/%E4%BC%81%E4%B8%9A%E5%92%9A%E5%92%9A%E6%88%AA%E5%9B%BE20191129105040.png?raw=true)
 
 
-示例：访问 https://www.jd.com
+- 注意
+
+当用户第一次使用http域名时，这个过程还是有可能被流量劫持的，为了解决这个问题，可以通过网关给响应加一个HSTS响应头，浏览器会自动换成https进行访问。
+
+
+- 示例：访问 https://www.jd.com
 
 ```
 
@@ -84,8 +89,33 @@ Non-Authoritative-Reason: HSTS
 
 ```
 
-拓展：重定向状态码
+- 拓展：重定向状态码
 
 ```
+
+1. 301, Moved Permanently
+
+The requested resource has been permanently moved to the new location, and any future reference to this resource should use one of the several uris returned by this response.
+
+tips:
+1.1 the response is cacheable by default
+1.2 if this is not a GET or HEAD request, the browser prohibits automatic redirection unless confirmed by the user
+
+
+2. 302, Moved Temporarily
+
+The client is required to use a temporary redirect, and since such a redirect is temporary, the client should continue sending future requests to the original address.
+
+tips:
+2.1 the response is cacheable only if it is specified in cache-control or Expires
+2.2 if this is not a GET or HEAD request, the browser prohibits automatic redirection unless confirmed by the user
+
+
+注意：虽然RFC 1945和RFC 2068规范不允许客户端在重定向时改变请求的方法，但是很多现存的浏览器将302视作303，并且使用GET方式访问在Location中规定的URI，而无视原先请求的方法。因此状态码303和307被引入，用以明确服务器期待客户端进行何种反应。
+
+
+3. 3.7 Temporary Redirect
+
+Unlike 302, you are not allowed to change the request method when the original request is reissued.
 
 ```
