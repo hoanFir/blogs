@@ -63,3 +63,29 @@ https = http + TLS/SSL，即在http和tcp之间加了一层TLS/SSL。
 
 
 ```
+
+### 解决方案
+
+![](https://github.com/hoanFir/blogs/blob/master/%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98/images/%E4%BC%81%E4%B8%9A%E5%92%9A%E5%92%9A%E6%88%AA%E5%9B%BE20191129105040.png?raw=true)
+
+
+示例：访问 https://www.jd.com
+
+```
+
+(request headers)
+Request URL: http://www.jd.com/
+Request Method: GET
+Status Code: 307 Internal Redirect
+
+(response headers)
+Location: https://www.jd.com/
+Non-Authoritative-Reason: HSTS
+
+```
+
+拓展：重定向状态码
+
+```
+
+```
