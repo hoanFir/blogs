@@ -5,6 +5,10 @@
 ### MVC和MVVC
 
 
+![MVC模型](https://github.com/hoanFir/blogs/blob/master/vue/images/%E4%BC%81%E4%B8%9A%E5%92%9A%E5%92%9A%E6%88%AA%E5%9B%BE20191209155129.png?raw=true)
+
+![MVVC模型](https://github.com/hoanFir/blogs/blob/master/vue/images/%E4%BC%81%E4%B8%9A%E5%92%9A%E5%92%9A%E6%88%AA%E5%9B%BE20191209155915.png?raw=true)
+
 
 ### Vue.js
 
@@ -17,7 +21,7 @@ Vue.js是一套用于构建用户界面的渐进式框架，其核心库只聚�
 
 基础 -> 进阶 -> 高阶
 
-基础：通读官方文档的基础篇，模仿案例
+基础：通读官方文档的基础篇，模仿案例代码实现
 
 进阶：阅读官方文档的进阶篇的前半部分，着重理解Vue.js的`响应式机制`和`组件生命周期`
 
@@ -34,7 +38,7 @@ Vue.js是一套用于构建用户界面的渐进式框架，其核心库只聚�
 
 规模化：路由vue-router、状态管理vuex、服务端渲染ssr
 
-内在：深入响应式原理
+内在核心：深入响应式原理等
 
 
 
