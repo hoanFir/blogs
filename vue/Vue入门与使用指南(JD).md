@@ -41,4 +41,15 @@ Vue.js是一套用于构建用户界面的渐进式框架，其核心库只聚�
 内在核心：深入响应式原理等
 
 
+### 深入响应式原理
+
+响应式，即数据双向绑定。
+
+![](https://github.com/hoanFir/blogs/blob/master/vue/images/%E4%BC%81%E4%B8%9A%E5%92%9A%E5%92%9A%E6%88%AA%E5%9B%BE20191209170103.png?raw=true)
+
+
+分析：
+
+响应式的关键在于使用`Object.defineProperty`把data对象中的属性转换为`getter/setter`。注意，由于es5不可以shim Object.defineProperty，所以vue不支持IE8及以下版本的浏览器。每个component都有一个watcher实例，它会在组件渲染过程中把“接触/Touch”过的数据属性记录为依赖/Dependency，之后当依赖项的setter触发时，就会 通知/Notify watcher，从而使它关联的组件重新渲染。
+
 
