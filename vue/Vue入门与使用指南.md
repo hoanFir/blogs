@@ -1,6 +1,6 @@
 🐾 Vue入门与使用指南
 
-🕘 2019.12.09 由 hoanfirst 编辑, 原作者为JD前辈
+🕘 2019.12.09 由 hoanfirst 编辑（原作者为JD_mk）
 
 ### MVC和MVVC
 
