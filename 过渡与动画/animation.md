@@ -2,7 +2,38 @@
 
 🕘 2019.10.18 由 hoanfirst 编辑
 
-示例：转人工加载效果
+### animation
+
+实现动画。
+
+注意，IE9及更早版本都不支持animation。
+
+```
+
+animation: name duration timing-funciton delay iteration-count direction;
+
+animation-name 绑定keyframe，设置关键帧
+animation-duration
+animation-timing-function
+animation-delay
+animation-iteration-count 动画播放的次数，如infinite
+animation-direction 是否应该轮流反向播放动画
+
+div {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  animation: mymove 5s infinite;
+}
+@keyframe mymove {
+  from{top: 0px;left: 0px;}
+  to{top: 0px;left: 200px;}
+}
+
+```
+
+
+### 示例：转人工加载效果
 
 ![](https://github.com/hoanFir/blogs/blob/master/%E8%BF%87%E6%B8%A1%E4%B8%8E%E5%8A%A8%E7%94%BB/images/loading.png?raw=true)
 
