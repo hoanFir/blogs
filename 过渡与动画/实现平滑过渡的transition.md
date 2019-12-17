@@ -32,3 +32,20 @@ P3、P4是终点调整区域的x轴和y轴
 
 ```
 
+ease:cubic-bezier(0.25,0.1,0.25,1)
+
+![](https://github.com/hoanFir/blogs/blob/master/%E8%BF%87%E6%B8%A1%E4%B8%8E%E5%8A%A8%E7%94%BB/images/ease.png?raw=true)
+
+
+ease-in:cubic-bezier(0.42,0,1,1)
+
+![](https://github.com/hoanFir/blogs/blob/master/%E8%BF%87%E6%B8%A1%E4%B8%8E%E5%8A%A8%E7%94%BB/images/ease-in-1.png?raw=true)
+
+
+ease-out:cubic-bezier(0,0,0.58,1)
+
+![](https://github.com/hoanFir/blogs/blob/master/%E8%BF%87%E6%B8%A1%E4%B8%8E%E5%8A%A8%E7%94%BB/images/ease-out.png?raw=true)
+
+ease-in-out:cubic-bezier(0.42,0,0.58,1)
+
+![](https://github.com/hoanFir/blogs/blob/master/%E8%BF%87%E6%B8%A1%E4%B8%8E%E5%8A%A8%E7%94%BB/images/ease-in-out.png?raw=true)
