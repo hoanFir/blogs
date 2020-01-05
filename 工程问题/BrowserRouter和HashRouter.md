@@ -2,7 +2,7 @@
 
 🕘 2020.01.03 由 hoanfirst 编辑
 
-### 简介
+### 一、简介
 
 For React web projects, react-router-dom(to be used in a browser) provides `<BrowserRouter>` and `<HashRouter>` routers.
 
@@ -13,7 +13,7 @@ URL and communicate with your web server.
 
 - A `<HashRouter>` stores the current location in the hash portion of the URL, and uses the hash in the URL to render the component. Since the hash is never sent to the server, this means that no special server configuration is needed.
 
-### History API for BrowserRouter
+### 二、History API for BrowserRouter
 
 As of HTML5, they let us manipulate the contents of the history stack.
 
@@ -64,9 +64,29 @@ history.go(2)  // alerts "location: http://example.com/example.html?page=3, stat
 
 ```
 
-### Window: hashchange event for HashRouter
+### 三、Window: hashchange event for HashRouter
 
+The hashchange event is fired when the fragment identifier of the URL(the part of the URL beginning with and following the # symbol) has changed.
 
+1. we can use the hashchange event in an addEventListener method
 
+```
+window.addEventListener('hashchange', function() {
+  console.log('The hash has changed!')
+}, false);
+```
 
+2. use the onhashchange event handler property
+
+SPA中路由对应组件的实现，就是基于location.hash和onhashchange来实现。
+
+```
+function locationHashChanged() {
+  if (location.hash === '#cool-feature') {
+    console.log("You're visiting a cool feature!");
+  }
+}
+
+window.onhashchange = locationHashChanged;
+```
 
