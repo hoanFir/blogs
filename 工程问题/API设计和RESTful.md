@@ -95,11 +95,16 @@ Another important thing associated with REST is `resource methods` to be used to
 
 RESTful提出者Roy Fielding从来没有提到过在什么情况下使用哪种方法的建议。他所强调的是：**界面应该是统一的（uniform interface）**。如果开发者决定使用HTTP POST来更新资源，而不是大多数人建议使用HTTP PUT，那么就没有问题，应用程序接口就是RESTful的。
 
-在构建RESTful API时，另一件可以帮助的事情是，基于查询的API结果应该由带有摘要信息的链接列表表示，而不是由原始资源表示的数组表示，因为查询不能代替资源标识。
+在构建RESTful API时，另一件可以帮助开发者的事情是，**基于查询的API结果应该由带有摘要信息的链接列表表示（query based API results should be represented by a list of links with summary information），而不是由原始资源表示的数组表示，因为查询不能代替资源标识**。
 
 
+3. 总结
 
+In simplest words, in the REST architectural style, data and functionality are considered resources and are accessed using Uniform Resource Identifiers (URIs). The resources are acted upon by using a set of simple, well-defined operations. The clients and servers exchange representations of resources by using a standardized interface and protocol – typically HTTP.
 
+Resources are decoupled from their representation so that their content can be accessed in a variety of formats, such as HTML, XML, plain text, PDF, JPEG, JSON, and others. Metadata about the resource is available and used, for example, to control caching, detect transmission errors, negotiate the appropriate representation format, and perform authentication or access control. 
+
+And most importantly, every interaction with a resource is stateless.
 
 
 
