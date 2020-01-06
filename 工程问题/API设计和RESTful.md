@@ -25,3 +25,17 @@ RESTful的核心思想就是，客户端发送的请求，即数据操作指令�
 
 对于多级URL，推荐除第一级，其他级别使用查询字符串来表达，如`get/authors/12?categories=2`。
 
+### What is REST
+
+REST is REpresentational State Transfer.
+
+It is architectural style for `distributed hypermedia systems`.（分布式超媒体系统的体系结构风格）
+
+
+### RESTful's 6 guiding constraints
+
+To be referred as RESTful, a interface must satisfy 6 guiding constraints.
+
+1. 
+
+
