@@ -18,8 +18,7 @@ ls -a
 
 - **cat**
 
-连接指定文件
-
+连接指定文件并打印其内容到标准输出设备
 
 
 
@@ -62,7 +61,7 @@ Secure shell, an encrypted network protocol allowing for remote login and comman
 
 - **netstat**
 
-network statistics，查看网络及端口情况
+network statistics，显示网络信息，一般用于查看各端口到网络连接情况
 
 ```
 netstat -nlptu
@@ -71,11 +70,40 @@ netstat -an
 
 netstat -anp|grep 80
 
+-n numeric，使用IP地址，而不显示域名
+-l listening，显示监听中到服务器到socket
+-p programs，显示正在使用socket的程序
+-t 显示tcp传输协议的连接信息 
+-u 显示udp传输协议的连接信息
+-a 显示所有连接中的socket
+
 ```
+
 
 
 - **ifconfig**
 
+显示或设置网络设备的状态信息，如配置网卡的IPv6、MAC、IP地址
+
+```
+
+ifconfig eth0 down
+关闭指定网卡
+
+ifconfig eth0 up
+启动指定网卡
+
+
+ifconfig eth0 -arp
+关闭arp协议
+
+ifconfig eth0 arp
+启动arp协议
+
+ifconfig eth0 mtu 1500
+设置最大传输单元为1500bytes
+
+```
 
 
 
