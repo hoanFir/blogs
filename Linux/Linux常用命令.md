@@ -51,12 +51,15 @@ what is eating your cpu，实时显示 process 信息
 ```
 
 top -n 2
-更新两次后终止更新
+显示更新2次后就退出
+只显示2个进程的信息（Mac OS）
 
 top -d 3
+top -s 3（Mac OS）
 更新周期为3秒
 
 top -p 123
+top -pid 123（Mac OS）
 显示进程号为123的进程实时信息，如CPU、内存占用率等
 
 
