@@ -16,6 +16,12 @@ ls -a
 ```
 
 
+- **cat**
+
+连接指定文件
+
+
+
 
 - **pwd**
 
@@ -48,6 +54,31 @@ where is the execute located, 显示命令所处位置
 
 
 
+- **ssh**
+
+Secure shell, an encrypted network protocol allowing for remote login and command execution.
+
+
+
+- **netstat**
+
+network statistics，查看网络及端口情况
+
+```
+netstat -nlptu
+
+netstat -an
+
+netstat -anp|grep 80
+
+```
+
+
+- **ifconfig**
+
+
+
+
 - **top**
 
 what is eating your cpu，实时显示CPU和内存使用情况，以及占用资源由高到低排序低进程，关注点在于实时查看各进程资源占用情况
@@ -73,14 +104,16 @@ top -pid 123（Mac OS）
 
 - **ps**
 
-process status，查看进程信息快照
+process status，查看指定进程信息快照
 
 ```
 
-ps -ef|grep app
+ps -ef|grep keyword
 返回系统所有用户的所有进程信息
--e 
-| 管道，前
+-e 显示其他用户类似进程的信息
+-f 显示详细信息
+| 管道，前一个命令的输出作为后一个命令的输入
+grep global regular expression print，查找，基于正则表达式进行匹配
 
 
 ```
@@ -89,4 +122,10 @@ ps -ef|grep app
 
 - **free**
 
-相比于top，使用free查看内存信息会更准确
+相比于top，使用free查看内存信息会更准确，在Mac OS使用vm_stat替代
+
+vm_stat, virtual memory statistics
+
+
+
+
