@@ -1,17 +1,29 @@
-npm全局安装  更新到最新版
+npm安装  
+
+```
+npm install --save ...
+npm i -s ...
+
+npm install --save-de ...
+npm i -D ...
+
+npm install -g ...
+npm i -g ...
+```
+
+
+更新到最新版
 
 ```
 npm install -g npm
 ```
 
 
-
 淘宝镜像
 
-```bash
+```
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
-
 
 
 npm list --depth 0 获取当前项目的依赖结构
@@ -22,7 +34,6 @@ npm list --depth 0 获取当前项目的依赖结构
 +-- vue-loader@15.7.0
 `-- webpack@4.35.3
 ```
-
 
 
 npm list -g --depth 0 获取全局的依赖结构
@@ -39,18 +50,6 @@ npm list -g --depth 0 获取全局的依赖结构
 `-- webpack@4.29.6
 `-- webpack-cli@3.3.5
 ```
-
-
-
-npm i xxx 默认为-save，而不是global
-
-```
-npm i --save xxx
-
-npm i --save-dev xxx
-```
-
-
 
 
 
