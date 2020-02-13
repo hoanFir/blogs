@@ -1,4 +1,6 @@
 
+```javascript
+
 switch (expression) {
   case value: 
     /* 合并情形 */
@@ -13,5 +15,38 @@ switch (expression) {
     break;    
 }
 
+```
+
 ECMAScript 中的 switch 具有自身特色，首先，可以在 switch 语句中使用任何数据类型，无论是字符串或者对象；其次，每个 case 值不一定是常量，可以是变量，甚至是表达式。
 
+注意，switch 语句在比较时使用的是恒等操作符，仅比较不转换。
+
+示例：
+
+```
+
+switch ("hello world") {
+  case "hello" + "world": //表达式
+    ...
+    break;
+  default:
+    ...
+    break;
+}
+
+
+var num = 15;
+switch (true) {
+  case num < 0:
+    ...
+    break;
+  case number >= 0 && num <= 10:
+    ...
+    break;
+  default:
+    ...break;
+}
+
+
+
+```
