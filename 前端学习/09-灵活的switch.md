@@ -23,7 +23,9 @@ ECMAScript 中的 switch 具有自身特色，首先，可以在 switch 语句�
 
 示例：
 
-```
+```javascript
+
+1）
 
 switch ("hello world") {
   case "hello" + "world": //表达式
@@ -34,13 +36,14 @@ switch ("hello world") {
     break;
 }
 
+2）
 
 var num = 15;
 switch (true) {
-  case num < 0:
+  case num < 0: //表达式
     ...
     break;
-  case number >= 0 && num <= 10:
+  case number >= 0 && num <= 10: //表达式
     ...
     break;
   default:
