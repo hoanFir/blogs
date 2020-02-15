@@ -42,3 +42,10 @@ ECMAScript 5 引入了严格模式，为 JavaScript 定义了一种不同的解�
 **5. 初始化未声明的变量**
 
 初始化未经声明的变量会报错。
+
+
+**6. 不支持arguments.callee和caller**
+
+在严格模式下，访问 arguments.callee会报错，为函数的 caller 属性赋值会报错。
+
+这样是为了加强安全性，避免第三方代码在相同的环境里窥视其他代码。
