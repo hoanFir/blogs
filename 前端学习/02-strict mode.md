@@ -49,3 +49,9 @@ ECMAScript 5 引入了严格模式，为 JavaScript 定义了一种不同的解�
 在严格模式下，访问 arguments.callee会报错，为函数的 caller 属性赋值会报错。
 
 这样是为了加强安全性，避免第三方代码在相同的环境里窥视其他代码。
+
+
+**7. 未指定环境对象而调用函数，则 this 值不会转成 window**
+
+在严格模式下，未指定环境对象而调用函数，则 this 值不会转成 window。除非明确把函数添加到某个对象或调用 apply() 或 call()，否则 this 值将是 undefined。
+
