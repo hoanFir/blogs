@@ -37,6 +37,8 @@
 
 2. String对象
 
+《JavaScript高级程序设计》145/749
+
 `match()`、`matchAll()`、`replace()`、`search()`、`split()`
 
 
