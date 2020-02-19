@@ -4,6 +4,8 @@
 
 :cupid: 原作：@刘羽冲
 
+编译过程：词法分析-**语法分析**-语义分析-中间代码-目标代码
+
 抽象语法树，Abstract Syntax Tree。
 
 当你不止于想做一个前端工程师，而是希望自己也能写出像vue、react之类的大型框架，或像webpack、vue-cli、react-create-app等前端自动化的工具，或者其他工程需求，那你必须懂得AST。
