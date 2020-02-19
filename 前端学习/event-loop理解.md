@@ -104,7 +104,7 @@ Promise.resolve().then();
 执行过程中先将同步任务执行完，空闲时读取当前微任务的事件处理队列，执行完所有当前微任务，再读取当前宏任务的事件处理队列，执行完所有当前宏任务。
 
 
-### RequestAnimationFrame
+### 三、RequestAnimationFrame
 
 在为什么要引入RequestAnimationFrame之前，我们首先要理解GUI渲染线程的工作原理。
 
