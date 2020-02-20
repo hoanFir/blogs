@@ -1,10 +1,10 @@
 ### 一、head 标签
 
-所有浏览器都支持 `<head>` 标签。
+所有浏览器都支持 `<head>` 头部标签。
 
-该标签用于定义文档的头部，是所有`头部元素`的容器。
+The HTML <head> element contains machine-readable information (metadata) about the document, like its title, scripts, and style sheets.
 
-`头部元素`，可以提供元信息、引用脚本以及指示浏览器在哪里找到样式表等。
+该标签用于定义文档的头部，是所有`头部元素`的容器。`头部元素`，可以提供元信息、引用脚本以及指示浏览器在哪里找到样式表等。
 
 
 ### 二、可以用在`<head>`里的头部元素标签
