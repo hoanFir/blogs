@@ -1,16 +1,5 @@
-原文：https://www.520ued.com/article/rem
 
-Web app开发，经常运用 `rem` 来适配多个设备分辨率。
-较早有许多方式来适配：
-1. 流式布局
-2. 固定宽度方式
-3. 响应式方式
-4. 设置viewport进行缩放
-
-# rem 是什么
-rem（font size of the root element）是指相对于根元素 `html` 的字体大小 `font-size` 的单位。
-
-# media query 媒体查询是什么
+# 一、media query 媒体查询是什么
 CSS3 `@media` 媒体查询， media query。
 
 示例：
