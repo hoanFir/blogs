@@ -1,6 +1,3 @@
-🐾 并排div一固定一自适应
-
-🕘 2019.10.28 由 hoanfirst 编辑
 
 ### 方式一：flex+width+calc
 
