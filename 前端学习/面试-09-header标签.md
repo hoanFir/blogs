@@ -58,17 +58,22 @@
 	<meta name="twitter:description" content="人气网红 | 前端萌新 | 有猫 | 开源">	
 ```
 
-`<link>`
+#### 2.2 link
+
 可选。
 
-`<style>`
+#### 2.3 style
+
 必须。
 
-`<title>`
+#### 2.4 title
+
 可选。
 
-`<script>`
+#### 2.5 script
+
 可选。
 
-`<base>`
+#### 2.6 base
+
 可选。
