@@ -50,7 +50,7 @@ Vue.js是一套用于构建用户界面的渐进式框架，其核心库只聚�
 
 1. 分析
 
-响应式的关键在于使用`Object.defineProperty`把data对象中的属性转换为`getter/setter`。注意，由于es5不可以shim Object.defineProperty，所以vue不支持IE8及以下版本的浏览器。
+响应式的关键在于使用`Object.defineProperty`把data对象中的属性转换为`getter/setter`。对象有两种类型：数据属性和访问器属性，访问器属性需要手动设置。
 
 每个component都有一个watcher实例，它会在组件渲染过程中把“接触/Touch”过的数据属性记录为依赖/Dependency，之后当依赖项的setter触发时，就会 通知/Notify watcher，从而使它关联的组件重新渲染。
 
