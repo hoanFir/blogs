@@ -6,8 +6,10 @@ The HTML <head> element contains machine-readable information (metadata) about t
 
 该标签用于定义文档的头部，是所有`头部元素`的容器。`头部元素`，可以提供元信息、引用脚本以及指示浏览器在哪里找到样式表等。
 
+但是，各个浏览器内核也有自己的头部元素，因此还是会有许多差异。
 
-### 二、可以用在`<head>`里的头部元素标签
+
+### 二、可以用在`<head>`里的头部元素
 
 #### 2.1 meta
 
