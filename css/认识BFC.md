@@ -6,10 +6,11 @@ BFC is a part of a visual css rendering of a web page. it’s the region(区域)
 
 我们首先要知道，BFC 的应用主要在两种场景：
 
-解决外边距折叠问题，margin collapsing。因为外边距折叠只会发生在属于同一个BFC的块级元素之间。
+- 解决外边距折叠问题，margin collapsing。因为外边距折叠只会发生在属于同一个BFC的块级元素之间。
 
 
-  
+```
+
 red inner
 
 </div>
@@ -25,9 +26,13 @@ red inner
   overflow: hidden;
   background: red;
 }
-解决父元素因内部浮动而塌陷的问题。因为浮动定位和清除浮动只会应用于同一个BFC内的元素，浮动不会影响其他BFC元素中的布局，而清除浮动只能清除同一BFC中在它前面的元素的浮动。
+
+```
+
+- 解决父元素因内部浮动而塌陷的问题。因为浮动定位和清除浮动只会应用于同一个BFC内的元素，浮动不会影响其他BFC元素中的布局，而清除浮动只能清除同一BFC中在它前面的元素的浮动。
 
   
+```
 i am a floated div.
 
   
@@ -45,11 +50,14 @@ i am content inside the box.
   height: 150px;
   background-color: white;
 }
+
+```
+
 再者，我们还要知道触发生成BFC常见的有哪些？
 
-html 根元素
-浮动元素：float (除none)
-绝对定位元素：position(absolute, fixed)
-display 为 inline-block, table-cells, flex, inline-flex…
-overflow 为 hidden, auto, scroll，比较常用，但可能会遇到一些不想要的问题，如滚动条或一些剪切的阴影，需要注意。
+- html 根元素
+- 浮动元素：float (除none)
+- 绝对定位元素：position(absolute, fixed)
+- display 为 inline-block, table-cells, flex, inline-flex…
+- overflow 为 hidden, auto, scroll，比较常用，但可能会遇到一些不想要的问题，如滚动条或一些剪切的阴影，需要注意。
 …
