@@ -37,6 +37,34 @@ true type format.
 支持的浏览器：IE9+,Firefox3.5+,Chrome4+,Safari3+,Opera10+,iOS Mobile Safari4.2+
 
 
-2. 
+2. OpenType / .otf
+
+open type format.
+
+.otf是一种原始的字体格式，其在.ttf的基础上提供了更多的功能。
+
+支持的浏览器：Firefox3.5+,Chrome4+,Safari3.1+,Opera10+,iOS Mobile Safari4.2+
 
 
+
+3. Web Open Font Format / .woff
+
+.woff 是 web 最佳格式，是 .ttf/.otf 的压缩版本，同时也支持元数据包的分离
+
+支持的浏览器：IE9+,Firefox3.5+,Chrome6+,Safari3.6+,Opera11.1+
+
+
+
+4. Embedded Open Type / .eot
+
+.eot是IE专用字体。
+
+
+
+5. Svg / .svg
+
+.svg 是基于 SVG 字体渲染的一种格式。
+  
+支持的浏览器：Chrome4+,Safari3.1+,Opera10.0+,iOS Mobile Safari3.2+
+  
+  
