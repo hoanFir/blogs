@@ -17,3 +17,26 @@
 }
 
 ```
+
+### src / source
+
+自定义字体的存放路径
+
+### src / format
+
+自定义字体的格式。
+
+用于帮助浏览器识别字体文件格式，如truetype、opentype、web open font format、embedded-opentype、avg等。
+
+1. TrueType / .ttf
+
+true type format.
+
+.ttf是 widows 和 mac 最常见的字体，是一种 raw 格式，因此不为网站优化。
+
+支持的浏览器：IE9+,Firefox3.5+,Chrome4+,Safari3+,Opera10+,iOS Mobile Safari4.2+
+
+
+2. 
+
+
