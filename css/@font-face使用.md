@@ -66,5 +66,22 @@ open type format.
 .svg 是基于 SVG 字体渲染的一种格式。
   
 支持的浏览器：Chrome4+,Safari3.1+,Opera10.0+,iOS Mobile Safari3.2+
-  
-  
+
+
+
+### Bulletproof @font-size
+
+为了使 @font-face 更多的浏览器支持，Paul Irish写了一个独特的语法
+
+```javascript
+
+@font-size {
+  font-family: 'YourWebFontName'; 
+  src: url('YourWebFontName.eot'); /* IE9 Compat Modes */ 
+  src: url('YourWebFontName.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */              
+          url('YourWebFontName.woff') format('woff'), /* Modern Browsers */                    
+          url('YourWebFontName.ttf')  format('truetype'), /* Safari, Android, iOS */              
+          url('YourWebFontName.svg#YourWebFontName') format('svg'); /* Legacy iOS */ 
+}
+
+```
