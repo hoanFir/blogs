@@ -11,7 +11,7 @@ Nginx 常用于配置 caching, load balancing, cloud deployments, and other crit
 
 ## 学习
 
-![《NGINX Cookbook》](https://www.nginx.com/resources/library/complete-nginx-cookbook/?utm_source=nginxorg&utm_medium=homepagebanner&utm_campaign=complete_cookbook&_ga=2.15365617.697914548.1583230998-956122364.1583230998#download)
+[《NGINX Cookbook》](https://www.nginx.com/resources/library/complete-nginx-cookbook/?utm_source=nginxorg&utm_medium=homepagebanner&utm_campaign=complete_cookbook&_ga=2.15365617.697914548.1583230998-956122364.1583230998#download)
 
 在这本书：
 
