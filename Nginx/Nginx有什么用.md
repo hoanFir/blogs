@@ -2,44 +2,27 @@
 
 🕘 2019.10.18 由 hoanfirst 编辑
 
-**nginx is an `HTTP and reverse proxy server`, a `mail proxy server`, and a `generic TCP/UDP proxy server`.**
 
-As we all known, Nginx can improve the `performance`(性能), `reliability`(可靠性), and `security`(安全性) of our applications.
+## Nginx
 
-- API Gateway
+**nginx is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server.**
 
-Nginx has modernized full api lifecycle management. 
+Nginx 常用于配置 caching, load balancing, cloud deployments, and other critical features.
 
-Traditional api management tools are complex and slow. Nginx is the most-trusted `api gateway`.
+## 学习
 
-- Loading Balancing
+![《NGINX Cookbook》](https://www.nginx.com/resources/library/complete-nginx-cookbook/?utm_source=nginxorg&utm_medium=homepagebanner&utm_campaign=complete_cookbook&_ga=2.15365617.697914548.1583230998-956122364.1583230998#download)
 
-Nginx application platform powers `load balancers`.
+在这本书：
 
-We can stabilize our applications by replacing hardware load balancers with Nginx Plus.
+- how to configure content caching, load balancing, monitoring, high availability...
 
-- Microservices
+- how to protect your applications: mitigate DDoS attacks, stop Layer 7 attacks, and configure signle sign-on with OpenID
 
-Nginx application paltform powers `microservices`.
+- how to deploy Nginx and Nginx Plus in AWS, Azure, and GCP, as well as in Docker containers
 
-We can build a microservices to request router with Nginx Plus.
+- how to monitor and toubleshoot application performance
 
-```
-Nginx Plus: the only all-in-one load balancer, web server, content cache and api gateway.
-```
 
-- Cloud
 
-We can deploy Nginx on any cloud, eliminate vendor lock‑in and reduce complexity.
 
-- Security
-
-We can prevents security breaches(防止安全漏洞) and limits malicious traffic(限制恶意流量) with Nginx Plus and the Nginx WAF.
-
-```
-Nginx WAF: the web application firewall.
-```
-
-- Web & Mobile Application
-
-Nginx provides a fast, high-performance experience for users.
