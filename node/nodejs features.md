@@ -1,4 +1,13 @@
 
+Node runs on Chrome's high-speed V8 engine and carries a library of fast, robust asynchronous network I/O components(异步网络I/O组件库).
+
+Node is primarily used to build high-performance, highly scalable server and client applications.
+
+### features
+
+traditional thread-based concurrency model ==> event-driven asynchronous systems.
+
+
 1. 采用事件驱动、异步编程，为网络服务而设计
 
 2. 基于 C++ 和 V8，以单进程、单线程模式运行
