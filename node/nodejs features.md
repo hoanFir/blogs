@@ -1,11 +1,16 @@
+Node is designed to provide an "easy way to create scalable web servers."
 
 Node runs on Chrome's high-speed V8 engine and carries a library of fast, robust asynchronous network I/O components(异步网络I/O组件库).
 
 Node is primarily used to build high-performance, highly scalable server and client applications.
 
-### features
+### 一、what's in it
 
-traditional thread-based concurrency model ==> event-driven asynchronous systems.
+
+
+### 二、features
+
+`traditional thread-based concurrency model` ==> `event-driven asynchronous systems`. Compared to multi-threaded system, development is simple, the system overhead is lower, and faster.
 
 
 1. 采用事件驱动、异步编程，为网络服务而设计
