@@ -32,7 +32,16 @@ JavaScript 的一个短板是全局对象。所有的顶级变量都被扔给一
 
 #### 2.2 架构问题：线程，还是异步事件驱动
 
-首先，Node 不是 `traditional thread-based concurrency model`，而是 `event-driven asynchronous systems`. 这相比较多线程系统，很明显编程模型更简单，内存占用量低，吞吐量高。因为 Node 通过内部单线程高效率地维护事件循环队列来实现，没有多线程的资源占用和上下文切换。
+首先，Node 不是 `traditional thread-based concurrency model`，而是 `event-driven asynchronous systems`. 
+
+传统应用服务器，使用阻塞 I/O 和线程来实现并发，**阻塞 I/O 会导致线程等待**，如果所有线程都处于繁忙状态，客户端请求就会被丢弃，这当然会造成线程资源浪费。因此，当应用服务器处理请求时，需要等待 I/O 执行结束后才能继续处理。
+
+
+
+而相比多线程系统，Node 有一个非阻塞的异步事件驱动 I/O 的单独执行环境，具体来说，其 I/O 调用会转换为请求处理函数。
+
+
+编程模型更简单，内存占用量低，吞吐量高。因为 Node 通过内部单线程高效率地维护事件循环队列来实现，没有多线程的资源占用和上下文切换。
 
 面对大规模的 http 请求，Node 凭借高速事件驱动 I/O 和 高速 V8 JavaScript 引擎搞定一切。
 
