@@ -65,7 +65,7 @@ sudo usermod -aG docker $USER
 
 ```
 
-service docker start
+service docker start / systemctl start docker
 
 ```
 
