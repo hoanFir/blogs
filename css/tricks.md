@@ -32,7 +32,7 @@
     }
 ```
 
-![在这里插入图片描述]()
+![在这里插入图片描述](https://github.com/hoanFir/blogs/blob/master/css/images/%E6%88%AA%E5%B1%8F2020-03-05%E4%B8%8B%E5%8D%881.29.18.png?raw=true)
 
 
 ### 二、text-align vertical-align
@@ -77,8 +77,6 @@
     }
 ```
 
-![在这里插入图片描述]()
-
 
 ### 三、text-align right
 
@@ -106,7 +104,7 @@
     }
 ```
 
-![在这里插入图片描述]()
+![在这里插入图片描述](https://github.com/hoanFir/blogs/blob/master/css/images/%E6%88%AA%E5%B1%8F2020-03-05%E4%B8%8B%E5%8D%881.39.04.png?raw=true)
 
 ### 四、text-shadow
 
@@ -130,7 +128,5 @@
       /* 偏距为0时, 实现一个周围会发光的字母. 如果单一的阴影不够强烈, 那就重复同样的阴影几次 */
     }
 ```
-
-![在这里插入图片描述]()
 
 ### 五、...
