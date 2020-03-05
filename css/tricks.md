@@ -1,12 +1,15 @@
 
-一、border-radius box-shadow
+### 一、border-radius box-shadow
 
+```html
     <div id="plat-to-cooperation">
       <div class="fb-btn-blue">
         <div class="fb-btn-content">我要合作</div>
       </div>
     </div>
+```
 
+```css
     #plat-to-cooperation {
         width: 208px;
         position: relative;
@@ -27,12 +30,14 @@
         vertical-align: middle;
         cursor: pointer;
     }
+```
+
+![在这里插入图片描述]()
 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190506113635871.png)
+### 二、text-align vertical-align
 
-二、text-align vertical-align
-
+```html
     <div id="view">
       <div class="title">平台合作</div>  
       <div class="subtitle">
@@ -41,7 +46,9 @@
         <div class="line"></div>
       </div>
     </div>
+```
 
+```css
     #view {
         position: relative;
         width: 100%;
@@ -68,40 +75,27 @@
         vertical-align: middle; /*垂直居中*/
         background-color: #cccfd1;
     }
+```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190506113752284.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hvYW5GaXI=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述]()
 
-三、white-space background-position
 
-    <span class="error">用户名不合法</span>
+### 三、text-align right
 
-    .error {
-        white-space: nowrap; /*文字超出不会自动换行，即元素的宽虽然比文字长度小，但文字内容不会换行*/
-      
-        height: 34px;
-        line-height: 34px;
-        color: red;
-        background-image: url(/public/img/error.png);
-        background-repeat: no-repeat;
-        padding-left: 20px;
-        background-position: 0 11px; /*将图标位置下移，与文字水平*/
-    }
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190506113655452.png)
-
-四、text-align right
-
+```html
     <div class="form-group"><label for="name"><i class="star"></i> 姓名：</label></div>
     <div class="form-group"><label for="name"><i class="star"></i> 电子邮箱：</label></div>
+```
 
+```css
     label {
         display: inline-block;
         font-size: 14px;
-        font-weight: 500; /*label默认为700*/
+        font-weight: 500;
         width: 100px;
         text-align: right;
-        background: #ddd;
     }
+    /*设置icon*/
     .star {
         display: inline-block;
         height: 10px;
@@ -110,13 +104,18 @@
         background-repeat: no-repeat;
         margin-right: 3px;
     }
+```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190506113731354.png)
+![在这里插入图片描述]()
 
-五、text-shadow
+### 四、text-shadow
 
+```html
     <span>标题</span>
 
+```
+
+```css
     span {
         position: absolute;
         white-space: nowrap;
@@ -126,52 +125,12 @@
         color: #80888d;
     }
     span:hover {
-      color: #FCFF00;
-      text-shadow: 0 0 0.2em #FCFF00, 0 0 0.2em #FCFF00; /* 偏距为0时, 实现一个周围会发光的字母. 如果单一的阴影不够强烈, 那就重复同样的阴影几次 */
-    /*   text-shadow: 0 0 0.2em #FCFF00; */
+      color: blue;
+      text-shadow: 0 0 0.2em blue, 0 0 0.2em blue, 0 0 0.2em blue; 
+      /* 偏距为0时, 实现一个周围会发光的字母. 如果单一的阴影不够强烈, 那就重复同样的阴影几次 */
     }
+```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2019050611380257.png)
+![在这里插入图片描述]()
 
-六、rightbottom flip
-
-    <div class="form-content">
-      <p class="title">账户登录</p>
-      <form></form>
-      <div class="third-login">第三方平台登录</div>
-      <hr class="split">
-      <div class="rightbottombg"></div>
-    </div>
-
-    .form-content {
-        position: relative;
-        width: 380px;
-        border-radius: 4px;
-        background: #4e4e4e;
-        padding: 32px 36px 70px;
-    }
-    form {
-      width: 308px;
-      height: 242px;
-      background: #fff;
-    }
-    .third-login {
-      width: 308px;
-      height: 17px;
-      margin: 20px 0 40px;
-    }
-    .split {
-      margin: 5px 0;
-      border: 0;
-      border-top: 1px solid #eee;
-    }
-    .rightbottombg {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 74px;
-        height: 55px;
-        background: url("/public/right-bottom.png");
-    }
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190506114049322.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hvYW5GaXI=,size_16,color_FFFFFF,t_70)
+### 五、...
