@@ -135,18 +135,85 @@ Connection: keep-alive
 
 即将授权码包含在查询参数里，打印服务应用解析该参数以获取，从而再下一步使用。
 
-授权码，在面
+授权码，在上面已经说明，表示用户授权决策的结果。它是一次性的凭据。
 
 
 ### 666
 
+现在客户端已经得到授权码，它可以将其发送给授权服务器的**令牌端点**获取照片存储服务的访问令牌：
+
 ![](https://github.com/hoanFir/blogs/blob/master/%E5%B7%A5%E7%A8%8B/images/%E6%88%AA%E5%B1%8F2020-03-12%E4%B8%8B%E5%8D%884.36.22.png?raw=true)
 
+这一步，打印服务应用会发送一个 POST 请求给授权服务器，在 HTTP 主体中以表单格式传递参数，并在 HTTP 基本认证头部设置 client_id 和 client_secret。
+
+```
+
+POST /token
+Host: localhost:9001
+Accept: application/json 10 
+Content-type: application/x-www-form-encoded
+
+Authorization: Basic b2F1dGgtY2xpZW50LTE6b2F1dGgtY2xpZW50LXNlY3JldC0x
+grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fcallback&code=8V1pr0rJ
+
+...
+
+```
+
+
 ### 777
+
+授权服务器接收以上请求，如果请求有效，则颁发令牌：
 
 ![](https://github.com/hoanFir/blogs/blob/master/%E5%B7%A5%E7%A8%8B/images/%E6%88%AA%E5%B1%8F2020-03-12%E4%B8%8B%E5%8D%884.36.29.png?raw=true)
 
 
+在这一步，授权服务器需要执行多个步骤以确保请求是合法的：
+
+1. 首先，验证客户端凭据，即Authorization头部。确定是哪个客户端发起的
+2. 然后，读取请求 body 中 code，并从中获取关于授权码的信息，包括发起初始授权请求的是哪个客户端，执行授权的是哪个用户，授权的内容是什么...
+
+如果授权码有效且尚未使用过，而且发起该请求的客户端与最初发起授权请求的客户端相同，则授权服务器会生成一个新的访问令牌并返回给客户端：
+
+```
+
+HTTP 200 OK
+Date: Fri, 31 Jul 2015 21:19:03 GMT Content-type: application/json
+{
+  "access_token": "987tghjkiu6trfghjuytrghj", 
+  "token_type": "Bearer"
+}
+
+```
+
+这里，我们使用了 OAuth **bearer 令牌**，这是通过响应中的 token_type 字段描述的。令牌响应中还可以包含一个刷新令牌(用于获取新的访问令牌而不必重新请求授权)，以及一些关于访问令牌的附加信息，比如令牌的权限范围和过期时间。客户端可以将访问令牌存储在一个安全的地方，以便以后在用户不在场时也能够随时使用。
+
+OAuth 核心规范对 bearer 令牌的使用做了规定，无论是谁，只要持有 bearer 令牌就有权使用它。
+
+
 ### 888
 
+最后，有了令牌，打印服务应用就可以在访问受保护资源时出示令牌：
+
 ![](https://github.com/hoanFir/blogs/blob/master/%E5%B7%A5%E7%A8%8B/images/%E6%88%AA%E5%B1%8F2020-03-12%E4%B8%8B%E5%8D%884.36.36.png?raw=true)
+
+
+打印服务客户端出示令牌的方式有很多种，备受推荐的是：**使用 Authorization 头部**
+
+```
+
+GET /resource HTTP/1.1
+Host: localhost:9002
+Accept: application/json
+Connection: keep-alive
+
+Authorization: Bearer 987tghjkiu6trfghjuytrghj
+
+...
+
+```
+
+受保护资源可以从头部中解析出令牌，判断它是否有效，从中得知授权者是谁以及授权内容，然后返回响应。
+
+受保护资源检查令牌的方式有多种，最简单的方式是：让授权服务器和资源服务器共享存储令牌信息的数据库。授权服务器在生成新的令牌时将其写入数据库，资源服务器在收到令牌时从数据库中读取它们。
+
