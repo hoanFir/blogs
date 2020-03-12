@@ -100,9 +100,41 @@ Connection: keep-alive
 在这一步，资源拥有者选择将一部分权限授予客户端应用。授权服务器可以允许用户拒绝一部分或者全部权限范围，也可以让用户批准或拒绝整个授权请求。
 
 
+### 444-4
+
+此外，很多授权服务器允许将授权决策保存下来，以便以后使用。如果使用了这种方式，那么未来同一个应用客户端请求同样的授权时，用户将不会得到提示。用户仍然会被重定向到授权端点， 并且仍然需要登录，但是会跳过批准授权环节而沿用前一次的授权决策。
+
+授权服务器甚至可以通过像客户端白名单和黑名单这样的内部策略来否决用户的决策。
+
+
 ### 555
 
+再接着，授权服务器将用户重定向回打印服务应用：
+
 ![](https://github.com/hoanFir/blogs/blob/master/%E5%B7%A5%E7%A8%8B/images/%E6%88%AA%E5%B1%8F2020-03-12%E4%B8%8B%E5%8D%884.36.15.png?raw=true)
+
+```
+
+HTTP 302 Found
+Location: http://localhost:9000/oauth_callback?code=8V1pr0rJ&state=Lwt50DDQKU B8U7jtfLQCVGDL9cnmwHH1
+
+```
+
+从而像打印应用服务发起请求：
+
+```
+
+GET /callback?code=8V1pr0rJ&state=Lwt50DDQKUB8U7jtfLQCVGDL9cnmwHH1 HTTP/1.1 Host: localhost:9000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:39.0) Gecko/20100101 Firefox/39.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8 
+Referer: http://localhost:9001/authorize?response_type=code&scope=foo&client_ id=oauth-client-1&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fcallback& state=Lwt50DDQKUB8U7jtfLQCVGDL9cnmwHH1
+Connection: keep-alive
+...
+
+```
+
+即
+
 
 ### 666
 
