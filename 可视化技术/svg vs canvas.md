@@ -4,7 +4,7 @@
 
 首先从通用层面描述两者各自适合的场景：
 
-![](https://github.com/hoanFir/blogs/blob/master/%E5%8F%AF%E8%A7%86%E5%8C%96%E6%8A%80%E6%9C%AF/svgcanvas.png?raw=true)
+![](https://github.com/hoanFir/blogs/blob/master/%E5%8F%AF%E8%A7%86%E5%8C%96%E6%8A%80%E6%9C%AF/images/svgcanvas.png?raw=true)
 
 
 ### 概述
