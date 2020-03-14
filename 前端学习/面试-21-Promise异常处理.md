@@ -1,15 +1,21 @@
 
+### 一、Error propagation
 
-通常在 Promise 链式调用中一遇到异常，promise 链就会停下来，直接调用catch回调来处理异常。
+If there's an exception, the browser will look down the chain for .catch() handlers or onRejected.
+
+```javascript
+
+doSomething()
+.then(result => doSomethingElse(result))
+.then(newResult => doThirdThing(newResult))
+.then(finalResult => console.log(`Got the final result: ${finalResult}`))
+.catch(failureCallback);
 
 ```
-dosomething1()
-  .then(result1 => dosomething2(result1))
-  .then(result2 => dosomething3(result2))
-  .then(finalresult => { /*...*/ })
-  .catch(failureCallback)
-  
-//上面捕获异常的方法和以下代码类似：
+
+This is very much modeled after how synchronous code works:
+
+```
 
 try {
   let result1 = syncDoSomething1(); //同步
@@ -17,13 +23,16 @@ try {
   let finalResult = syncDoSomething3(result2); //同步
   
   /*...*/
+  
 } catch(error) {   
   failureCallback(error); 
 }
 
-//注意，上述代码中 try...catch 捕获的是同步操作的异常
+```
 
-//如果要用于异步的 Promise，可以引入 async+await：
+如果要将 try/catch 用于异步的 Promise，可以引入 ECMAScript 2017 async/await：
+
+```
 
 async function foo() {
   try {
@@ -38,38 +47,41 @@ async function foo() {
 ```
 
 
-#### 1、认识 promise rejection events/promise 拒绝事件：
 
-whenever a promise is rejected, one of two events is sent to the global scope（generally, this is either the window or, if being used in a web worker, it’s the Worker or other worker-based interface）.
+#### 二、Promise rejection events / PromiseRejectionEvent
 
-1. rejectionhandled: Sent when a promise is rejected, and rejection function has been handled(在reject函数处理该rejection之后才派发)
+whenever a promise is rejected, one of two events is sent to the global scope(i.e. window):
 
-2. unhandledrejection: Sent when a promise is rejected, but there is no rejection handler available
+- **rejectionhandled**, Sent when a promise is rejected, and rejection function has been handled by the executor's `reject` function.
 
-对于以上两种情况，the event（of type PromiseRejectionEvent）有两个属性：promise和reason。前者指向被reject的promise，后者说明被reject的原因。
+- **unhandledrejection**, sent when a promise is rejected, but there is no rejection handler available
 
-而且，这两个处理是全局的（window.addEvnetListener(‘a/b’)），因此所有的错误都会调用相同的event handlers。因此make it possible to offer fallback error handling for promises/为promise失败时提供补偿处理.
+add a handler for the `unhandledrejection` event:
 
-```javascript
-window.addEventListener('unhandledrejection', e => {
-  //e.promise
-  //e.reason
-  e.preventDefault();
-})
 ```
 
-#### 2、普通场景：
+window.addEventListener("unhandledrejection", event => {
+  /* You might start here by adding code to examine the
+     promise specified by event.promise and the reason in
+     event.reason */
 
-```javascript
-try {
-  //抛出
-} catch(e) {
-  //捕获和处理
-} finally {}
-try…catch在异步场景中不能使用。
+  event.preventDefault();
+}, false);
+
 ```
 
-#### 3、Promise 中的异常处理：
+In both cases, the event (of type PromiseRejectionEvent) has two propertys:
+
+- promise, indicating the promise that was rejected
+
+- reason, provides the reason given for the promise to be rejected.
+
+综上所述：These make it possible to offer fallback error handling for promises. These handlers are global per context, so all errors will go to the same event handlers, regardless of source.
+
+
+
+
+#### 场景：
 
 第一种直接通过onrejected，适用于单个请求
 
@@ -91,13 +103,11 @@ function app () {
     alert(err);
   })
 }
+
 ```
 
 第二种是多个请求的场景
 
-```javascript
-tips：catch(onrejected) == then(null, onrejected)
-```
 ```javascript
 
 //promise.all
@@ -117,11 +127,13 @@ getData().then(res=>{
 }).catch(err=>{
   console.log(err)
 })
+
 ```
 
-第三种是try…catch搭配新特性async+await使用
+第三种是 try/catch 搭配新特性 async+await
 
 ```javascript
+
 const Axios = {
   get: (url, option) => {
     return new Promise(function(resolve, reject) {
@@ -140,24 +152,5 @@ async loadData() {
     console.log(err);
   }
 }
-```
 
-### 三、提一下promise嵌套
-
-嵌套 Promise 是一种可以限制 catch 语句的作用域的控制结构写法。
-
-嵌套的 catch 仅捕捉在其之前同时还必须是其作用域内的 failureres，而捕捉不到在其链式以外或者其嵌套域以外的 error。
-
-如果使用正确，那么可以实现高精度的错误修复。
-
-```javascript
-
-dosthCritical()
-  .then(res => dosthOptional()
-    .then(optionalRes => dosthExtra(optionalRes))
-    .catch(e => { console.log(e.message) }) //即使有异常也会继续执行，最后会输出。该catch仅能捕获dosthOptional和dosthExtra的失败，而且之后会回复到dosthCritical的执行。
-  )
-  .then(() => dosthCritical2())
-  .catch(e => console.log("critical failure: " + e.message)) //当嵌套的内部失败，不会有输出；如果是dosthCritical失败，会捕获到。
-  
 ```
