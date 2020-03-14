@@ -80,32 +80,29 @@
 
 - 异步请求，如ajax
 
-4）在ES2015之后，js中将异步任务插入事件处理队列中并不是简单的按照它们代码中的定义顺序
+4）**在ES2015之后，引入了微任务的概念**
 
 如下面一段代码
 
 ```javascript
+
 setTimeout(function(){}, 0);
 Promise.resolve().then();
+
 ```
 
-对于上面代码，会先执行then里面的内容。为什么？因为在ES2015之后引入了微任务（microtask）。
+对于上面代码，会先执行then里面的内容，js中将异步任务插入事件处理队列中并不是简单的按照它们代码中的定义顺序，为什么？
 
-对于异步任务，分为task和microtask。相对microtask，原来的task就是宏任务。
+因为在ES2015之后对于异步任务，分为task和microtask。相对microtask，原来的task就是宏任务。
 
 宏任务：setTimeout、setTimeout、异步请求。
 
-**微任务：promise。microtask会在当前的任务执行完成后立即执行。**
+微任务：promise。
+
+**微任务：promise。microtask 特点是会在当前的同步任务执行完成后立即执行。**
+
 
 5）js渲染引擎的执行过程
 
 执行过程中先将同步任务执行完，空闲时读取当前微任务的事件处理队列，执行完所有当前微任务，再读取当前宏任务的事件处理队列，执行完所有当前宏任务。
-
-
-### 三、RequestAnimationFrame
-
-在为什么要引入RequestAnimationFrame之前，我们首先要理解GUI渲染线程的工作原理。
-
-一般来说，渲染工作会在当前的Task执行完成之后，下一个Task执行之前执行。引入microtask之后，micro会优先于渲染工作。这意味着，**使用微任务更新的DOM能更快的被渲染出来。**
-
 
