@@ -1,3 +1,8 @@
+
+The Promise object represents the eventual completion (or faliure) of an **asynchronous operation**, and its resulting value.
+
+
+
 ### 一、基本语法：
 
 ```
@@ -81,49 +86,3 @@ Promise.all([fetch1, fetch2]).then((res) => {
 
 当触发失败状态，该Promise会把iterable里第一个触发失败的promise对象的凑无信息作为失败回调的返回值。
 
-### 五、理解 Promise constructor 的实现
-
-Promise 构造函数用于包装还未支持 Promise 的函数。
-
-```javascript
-
-//new Promise(executor); 
-
-function Promise(fn) {
-  if(typeof this !== 'object') {
-    throw new TypeError("Promie must be constructed via new")
-  }
-  if(typeof fn !== 'function') {
-    throw new TypeError("Promie constructor\'s argument is not a function") 
-  }
-
-  this._deferredState = 0;
-  this._state = 0; //0: pending, 1: fufilled, 2: rejected 
-  this._value = null; //执行结果
-  this._deferreds = []; //then() handlers arr
-  if(fn === noop) return;
-
-  doResolve(fn, this);
-}
-
-function doResolve(fn, this) {
-  a = (value) => {
-    resolve(this, value)
-  }
-  b = (reason) => {
-    reject(this, reason)
-  } 
-  tryCallTwo(fn, a, b, this); //将处理resolve状态和rejected状态的回调函数传递到fn中
-}
-
-function tryCallTwo(fn, a, b, this) {
-  try {
-    fn(a, b);
-  } catch (err) {
-    b(this, err);
-  }
-}
-```
-
-...
-更详细将在以后展开。
