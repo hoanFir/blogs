@@ -229,7 +229,24 @@ console.log(1); // 1, 2, 3, 4
 在上述代码中，Promise 是微任务，会在宏任务 settimeout 之前，js 同步任务之后执行。
 
 
-#### 1.3/5 nesting
+#### 1.3/5 nesting: to limit the scope of catch statements
 
-Simple promise chains are best kept flat without nesting, because nesting can be a result of careless composition.
+**Simple promise chains are best kept flat without nesting, because nesting can be a result of careless composition.**
+
+In another way, a nested `catch` only catches failures in its scope and below, not errors higher up in the chain outside the nested scope. When used correctly, this gives greater precision in error recovery:
+
+```
+
+doSomethingCritical()
+  .then(
+    result => doSomethingOptional(result))
+      .then(optionalResult => doSomethingExtraNice(optionalResult))
+      .catch(e => {})
+  )
+  .then(() => moreCriticalStuff())
+  .catch()
+
+```
+
+在上述代码中，The inner neutralizing catch statement only catches failures from doSomethingOptional() and doSomethingExtraNice(), after which the code resumes with moreCriticalStuff(). Importantly, if doSomethingCritical() fails, its error is caught by the final (outer) catch only.
 
