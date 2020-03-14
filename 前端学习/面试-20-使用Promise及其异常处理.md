@@ -1,85 +1,93 @@
 
-A Promise is an Object representing the eventual completion or failure of an asynchronous operation. Essentially, a promise is a returned object to which you attach callbacks, instead of passing callbacks into a funciton.
+A Promise is an Object representing the eventual completion or failure of an asynchronous operation. 
 
-### 一、使用Promise
+This guide will explain consumption of returned promises before explaining how to create them.
 
-#### 1.1 使用 promise 的约定
+Essentially, a promise is a returned object to which you attach callbacks, instead of passing callbacks into a funciton.
 
-老式：使用传入回调
+
+### 一、using Promises
+
+#### 1.1 replace callback
+
+在引入 promise 之前，基于向函数传入回调函数来处理执行异步任务。如：
 
 ```javascript
 
 function successCallback(result) {}
 function failureCallback(error) {}
+
 createAsync(settings, successCallback, faliureCallback)
-```
-
-新式：返回一个promise对象
-
-```javascript
-createAsync(settings).then(successCallback, failureCallback)
-
-//是以下的缩写
-const promise = createAsync(settings)
-promise.then(successCallback, failureCallback)
 
 ```
 
-1、在使用Promise时，有如下约定：
+…modern functions return a promise you can attach your callbacks to instead:
 
-- 回调在JavaScript 事件循环运行完成之前不会被调用（因此在循环里执行异步常常要搭配匿名闭包自执行来传入每次循环中不同的状态）
 
-- 通过then()添加的回调总会被调用，即使它是在 success or failure of the asynchronous operation 完成之后才被添加
+```
 
-- 可以通过链式then()实现多个回调调用，这些回调会按照顺序一个个执行，因为then()会返回一个新promise（因此Promise最直接的好处是支持链式调用）
+createAsync(settings).then(successCallback, failureCallback);
 
-- 使用Promise链式编程要保持扁平化，要避免嵌套
+```
 
-#### 1.2 链式调用
-
-老式：回调地狱
+That's shorthand for:
 
 ```javascript
-dosomething(function(result) {
-  dosomething2(result, function(result2) {
+
+const promise = createAsync(settings);
+
+promise.then(successCallback, failureCallback);
+
+```
+
+#### 1.2 a promise comes with some guarantees
+
+- Callbacks will never be called before the completion of the current run of the js event loop.（因此，当在循环里执行 promise 时常常要搭配闭包来每次传给 promise 不同的状态）
+
+- Callbacks added with `then()` even after the success or failure of the asynchronous operation, will be called, as above.
+
+- Multiple callbacks may added by calling `then()` several times. Each callback is executed on after another, in the order in which they were inserted.（使用 Promise 最直接的好处是支持链式调用）
+
+
+#### 1.3/1 chaining: the great things about using promises
+
+A common need, is to execute two or more asynchronous operations back to back.
+
+In the old days, lead to the classic callback pyramid of doom：
+
+```javascript
+
+dosomething1(function(result1) {
+
+  dosomething2(result1, function(result2) {
+  
     dosomething3(result2, function(finalresult) {
+    
       //...
     }, failureCallback)
-  } , failureCallback)
-} , failureCallback)
+    
+  }, failureCallback)
+  
+}, failureCallback)
+
 ```
 
 
-新式：Promise链式
+With modern functions, attach callbacks to the returned promises instead, foming a promise chain：
 
 ```javascript
-dosomething().then(result => dosomething2(result))
+
+dosomething1()
+  .then(result1 => dosomething2(result1))
   .then(result2 => dosomething3(result2))
   .then(finalresult => { /*...*/ })
-  .catch(failureCallback) //.then(null, failureCallback)
-//通常在链中一遇到异常，promise链就会停下来，直接调用catch回调来处理异常。
-
-//上面捕获异常的方法和以下代码类似：
-try {   
-  let result = syncDoSomething();   
-  let newResult = syncDoSomethingElse(result);   
-  let finalResult = syncDoThirdThing(newResult);   
-  console.log(`Got the final result: ${finalResult}`); 
-} catch(error) {   
-  failureCallback(error); 
-}
-
-//因为 try...catch不能用于异步操作，所以我们在promise异常处理中提到了使用async+await搭配try...catch来捕获异常。代码如下：
-async function foo() {
-  try {
-    let result = await dosomething();
-    let result2 = await dosomething(result); 
-    let finalresult = await dosomething(result2); 
-  } catch(error) {
-    failureCallback(error);
-  }
-}
+  .catch(failureCallback)
+  
 ```
+
+tips: `catch(failureCallback)` is short for `then(null, failureback)`
+
+
 
 支持 chaining after a failure catch, which is useful to accomplish new actions even after an action failed in the chain：
 
@@ -100,47 +108,31 @@ new Promise((resolve, reject) => {
 
 ```
 
-#### 1.3 在旧式回调API外结合promise
+#### 1.3/2 creating a Promise around an old callback API
 
-混用旧式回调和promise可能会造成时序问题。而且对于旧式回调，如果失败或包含编程错误，没办法捕获。
+In an ideal world, all asynchronous functions would already return promises. 
 
-请看下面代码：
+Unfortunately, some APIs still expect success and/or failure callbacks to be passed in the old way.
 
-```javascript
-setTimeout(()=>console.log('1'), 0);
-new Promise((resolve, reject)=>{
-  console.log('2');
-  resolve();
-}).then(()=>console.log('3'))
-  .then(()=>console.log('4'))
-process.nextTick(console.log('5'));
-console.log('6'); 
+The most obvious example is the setTimeout() function：
 
-//输出结果：2 6 5 3 4 1
 ```
 
-可以使用promise包裹旧式回调，不直接调用它。代码如下：
+setTimeout(() => saySomething("..."), 10*1000)
 
-```javascript
+```
 
-setTimeout(()=>console.log('1'), 0);
-new Promise((resolve, reject)=>{
-  console.log('2');
-  setTimeout(()=>resolve(), 0);
-}).then(()=>console.log('3'))
-  .then(()=>console.log('4'))
-process.nextTick(console.log('5'));
-console.log('6');
-//输出结果：2 6 5 1 3 4 
+And if `saySomething()` fails or contains a programming error, nothing catches it(`setTimeout` is to blame for this)!
 
-//示例2
+
+Luckily we can wrap `setTimeout` in promise:
+
+```
+
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-//通过promise的构造器函数接受一个执行函数，并在执行函数内部手动resolve。
 
-wait(10000)
-  .then(()=>saysomething("10 seconds"))
-  .catch(failureCallback)
-  
+wait(10*1000).then(() => saySomething('...')).catch(failureCallback);
+
 ```
   
   
@@ -210,6 +202,44 @@ console.log('4');
 
 
 ### 二、异常处理
+
+通常在 Promise 链式调用中一遇到异常，promise 链就会停下来，直接调用catch回调来处理异常。
+
+```
+dosomething1()
+  .then(result1 => dosomething2(result1))
+  .then(result2 => dosomething3(result2))
+  .then(finalresult => { /*...*/ })
+  .catch(failureCallback)
+  
+//上面捕获异常的方法和以下代码类似：
+
+try {
+  let result1 = syncDoSomething1(); //同步
+  let result2 = syncDoSomething2(result1); //同步
+  let finalResult = syncDoSomething3(result2); //同步
+  
+  /*...*/
+} catch(error) {   
+  failureCallback(error); 
+}
+
+//注意，上述代码中 try...catch 捕获的是同步操作的异常
+
+//如果要用于异步的 Promise，可以引入 async+await：
+
+async function foo() {
+  try {
+    let result1 = await dosomething1();
+    let result2 = await dosomething2(result1); 
+    let finalresult = await dosomething3(result2); 
+  } catch(error) {
+    failureCallback(error);
+  }
+}
+
+```
+
 
 #### 1、认识 promise rejection events/promise 拒绝事件：
 
