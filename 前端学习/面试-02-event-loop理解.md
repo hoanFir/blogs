@@ -10,18 +10,16 @@
 
 - event-loop
 
-- RequestAnimationFrame
-
 
 ### 一、浏览器组成中的进程和线程
 
-1）首先，浏览器由`用户界面`、`浏览器引擎`、`渲染引擎（网络、UI Backend、JS解释器）`、`数据存储`组成。
+1）首先，浏览器由`用户界面`、`浏览器引擎`、`渲染引擎（网络、display Backend、JS解释器）`、`数据存储`组成
 
 ![](https://github.com/hoanFir/blogs/blob/master/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/images/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE20191025103315.png?raw=true)
 
-具体查看[浏览器组成和缓存机制](https://github.com/hoanFir/blogs/blob/master/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BB%84%E6%88%90%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6.md)
+具体查看[浏览器组成和缓存机制](https://github.com/hoanFir/blogs/blob/master/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/%E9%9D%A2%E8%AF%95-08-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BB%84%E6%88%90%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6.md)
 
-2）理解进程和线程。
+2）理解进程和线程
 
 进程是CPU资源分配的最小单位，线程是CPU调度的最小单位。
 
