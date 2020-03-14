@@ -116,7 +116,7 @@ Unfortunately, some APIs still expect success and/or failure callbacks to be pas
 
 The most obvious example is the setTimeout() function：
 
-```
+```javascript
 
 setTimeout(() => saySomething("..."), 10*1000)
 
@@ -127,7 +127,7 @@ And if `saySomething()` fails or contains a programming error, nothing catches i
 
 Luckily we can wrap `setTimeout` in promise:
 
-```
+```javascript
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -165,7 +165,7 @@ array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
 
 In ECMAScript 2017, sequential composition can be done more simply with async/await:
 
-```
+```javascript
 
 let result;
 for (const f of [func1, func2, func3]) {
@@ -235,7 +235,7 @@ console.log(1); // 1, 2, 3, 4
 
 In another way, a nested `catch` only catches failures in its scope and below, not errors higher up in the chain outside the nested scope. When used correctly, this gives greater precision in error recovery:
 
-```
+```javascript
 
 doSomethingCritical()
   .then(
@@ -255,7 +255,7 @@ doSomethingCritical()
 
 It's possible to chain after a failure, which is useful to accomplish new actions even after an action failed in the chain:
 
-```
+```javascript
 
 new Promise((resolve, reject) => {
     console.log('Initial');
