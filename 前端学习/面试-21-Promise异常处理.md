@@ -15,7 +15,7 @@ doSomething()
 
 This is very much modeled after how synchronous code works:
 
-```
+```javascript
 
 try {
   let result1 = syncDoSomething1(); //同步
@@ -32,7 +32,7 @@ try {
 
 如果要将 try/catch 用于异步的 Promise，可以引入 ECMAScript 2017 async/await：
 
-```
+```javascript
 
 async function foo() {
   try {
@@ -58,7 +58,7 @@ whenever a promise is rejected, one of two events is sent to the global scope(i.
 
 add a handler for the `unhandledrejection` event:
 
-```
+```javascript
 
 window.addEventListener("unhandledrejection", event => {
   /* You might start here by adding code to examine the
