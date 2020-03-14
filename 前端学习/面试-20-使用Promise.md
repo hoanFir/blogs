@@ -250,3 +250,34 @@ doSomethingCritical()
 
 在上述代码中，The inner neutralizing catch statement only catches failures from doSomethingOptional() and doSomethingExtraNice(), after which the code resumes with moreCriticalStuff(). Importantly, if doSomethingCritical() fails, its error is caught by the final (outer) catch only.
 
+
+#### 1.3/6 chaining after a catch
+
+It's possible to chain after a failure, which is useful to accomplish new actions even after an action failed in the chain:
+
+```
+
+new Promise((resolve, reject) => {
+    console.log('Initial');
+
+    resolve();
+})
+.then(() => {
+    throw new Error('Something failed');
+        
+    console.log('Do this');
+})
+.catch(() => {
+    console.error('Do that');
+})
+.then(() => {
+    console.log('Do this, no matter what happened before');
+});
+
+
+Initial
+Do that
+Do this, no matter what happened before
+
+```
+
