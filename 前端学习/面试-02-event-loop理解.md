@@ -102,6 +102,40 @@ Promise.resolve().then();
 **微任务：promise。microtask 特点是会在当前的同步任务执行完成后立即执行。**
 
 
+settimeout 和 promise 相关面试题 - 1：
+
+```javascript
+
+setTimeout(()=>console.log('1'), 0);
+new Promise((resolve, reject) => {
+  console.log('2');
+  resolve();
+}).then(()=>console.log('3'))
+  .then(()=>console.log('4'))
+process.nextTick(console.log('5'));
+console.log('6'); 
+
+//输出结果：2 6 5 3 4 1
+
+```
+
+settimeout 和 promise 相关面试题 - 2：
+
+```javascript
+
+setTimeout(()=>console.log('1'), 0);
+new Promise((resolve, reject)=>{
+  console.log('2');
+  setTimeout(()=>resolve(), 0);
+}).then(()=>console.log('3'))
+  .then(()=>console.log('4'))
+process.nextTick(console.log('5'));
+console.log('6');
+
+//输出结果：2 6 5 1 3 4 
+
+```
+
 5）js渲染引擎的执行过程
 
 执行过程中先将同步任务执行完，空闲时读取当前微任务的事件处理队列，执行完所有当前微任务，再读取当前宏任务的事件处理队列，执行完所有当前宏任务。
