@@ -18,7 +18,7 @@ Why using XHR?
 
 Why using fetch?
 
-- Fetch provides a better alternative that can be easily used by other technoligies sucs as Service Workers.
+- Fetch provides a better alternative that can be easily used by other technoligies such as **Service Workers**.
 
 - Fetch provides a single logical place to defined other Http-related concepts such as CORS and extensions to HTTP.
 
@@ -26,7 +26,7 @@ what differs from ajax?
 
 - fetch()返回的Promise在响应码为404或500时不被转化为reject，除了出现网络故障或请求被阻止时才会。其他情况都被标记为resolve。
 
-- fetch()如果要从服务器端发送或接收任何cookies时，需要设置 credentials，因为默认是不会带上cookies。
+- fetch()如果要从服务器端发送或接收任何cookies时，需要设置 credentials，因为默认不带上cookies。
 
 how using fetch？
 
@@ -169,3 +169,5 @@ const myRequestCopy = new Request(myRequest, myInit);
 ```
 
 注意，拷贝Request对象是很有用的。因为request and response bodies 规定只能被使用一次。
+
+...
