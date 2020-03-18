@@ -20,7 +20,7 @@ document.body.insertBefore(script, document.body.firstChild);
 
 ```
 
-服务器
+服务器：动态根据参数添加 callback 放在 js 文件里
 
 ```
 
