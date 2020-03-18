@@ -60,40 +60,10 @@ audio	表明是某种音频文件。`audio/mpeg`
 
 video	表明是某种视频文件。`video/mp4`
 
-application	表明是某种二进制数据。`application/octet-stream`, `application/pdf`, `application/zip`
+application	表明是某种二进制数据。`application/octet-stream`, `application/pdf`, `application/zip`。`application/x-www-form-urlencoded` 用于表单数据编码为key/value格式发起请求。`application/octet-stream` 用于二进制流数据
 
 font 表明是某种文字。`font/woff`, `font/tff`, `font/otf`
 
----
+`multipart/form-data`，用于在表单中上传文件时
 
-Important MIME types for Web developers:
-
-### text/plain
-
-### text/javascript
-
-### text/html
-
-### text/css
-
-### application/x-www-form-urlencoded
-
-用于表单数据编码为key/value格式发起请求
-
-### application/octet-stream
-
-用于二进制流数据
-
-### application/pdf
-
-### application/zip
-
-### 'Image types'
-
-### 'Audio and video types'
-
-### multipart/form-data
-
-用于在表单中上传文件时
-
-### multipart/byteranges
+...
