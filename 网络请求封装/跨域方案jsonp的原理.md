@@ -1,2 +1,5 @@
 
-jquery jsonp 是跨域发起 get 请求的常用手段。
+jquery jsonp 是发起 get 请求实现跨域的一种纯前端的手段。
+
+
+
