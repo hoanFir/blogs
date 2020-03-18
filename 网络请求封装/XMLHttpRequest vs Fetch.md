@@ -1,10 +1,16 @@
 
 
-XMLHttpRequest: ajax/axios
+XMLHttpRequest: ajax、axios
 
-Fetch: fetch, the kind of functionality was previously achieved using XMLHttpRequest.
+Fetch: fetch. The kind of functionality was previously achieved using XMLHttpRequest.
 
 ### XMLHttpRequest
+
+Use XMLHttpRequest(XHR) objects to interact with servers.
+
+Why using XHR?
+
+- With XHR, you can retrieve data from a URL without having to do a full page refresh. This enables a Web page to update just part of a page without disrupting what the user is doing.
 
 
 
