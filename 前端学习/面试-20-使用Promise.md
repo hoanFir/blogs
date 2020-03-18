@@ -108,6 +108,8 @@ new Promise((resolve, reject) => {
 
 ```
 
+![](https://github.com/hoanFir/blogs/blob/master/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/images/%E6%88%AA%E5%B1%8F2020-03-18%E4%B8%8B%E5%8D%881.43.25.png?raw=true)
+
 #### 1.3/2 creating a Promise around an old callback API
 
 In an ideal world, all asynchronous functions would already return promises. 
