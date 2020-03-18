@@ -1,11 +1,15 @@
-在传统开发中，对于多个ajax有时候需要按顺序发起请求。
+在传统开发中，对于多个 ajax 有时候需要按顺序发起请求。
 
-虽然现在可以通过 多层Promise的then方法 或者 async+await 来实现按顺序发起请求，但我们有必要学习一下如何通过队列实现同步ajax。
+tips：现在常用 Promise 甚至 async/await 来实现按顺序发起请求。
+
+### ajaxQueue
 
 使用方法：
 
-```
+```javascript
+
 $.newAjaxQueue().post([url], [params], [callback]).post( [url], [params], [callback] ).post( [url], [params], [callback] );
+
 ```
 
 - 首先创建一个ajax queue
