@@ -47,6 +47,30 @@ number of constructor arguments(always 1)
 represents the prototype for the Promise constructor
 
 
+#### 2.1 Promise prototype
+
+2.1.1 properties
+
+Promise.prototype.constructor
+
+
+2.1.2 methods
+
+- Promise.prototype.then()
+
+Appends fulfillment and rejection handlers to the promise
+
+- Promise.prototype.catch()
+
+Appends a rejection handler callback to the promise
+
+- Promise.prototype.finally()
+
+The handler is called when the promise is settled, whether fulfilled or rejected.
+
+
+
+
 ### 三、Promise Methods
 
 - Promise.all(iterable)
@@ -59,6 +83,7 @@ tips: Promise.all() 常被用于处理多个 promise 对象的状态集合，比
 - Promise.allSettled(iterable)
 
 Wait until all promises have settled (each may resolve or reject) with an array of objects that each describe the outcome of each promise.
+
 
 - Promise.race(iterable)
 
@@ -114,11 +139,11 @@ console.log('original === cast ? ' + (original === cast)); //original === cast ?
 
 ```
 
+resolving thenables and throwing Errors
+
 ```javascript
 
 //4
-//resolving thenables and throwing Errors
-
 
 
 //resolving a thenable object
@@ -172,5 +197,8 @@ p2.then(function(v) {
 
 
 ```
+
+
+
 
 
