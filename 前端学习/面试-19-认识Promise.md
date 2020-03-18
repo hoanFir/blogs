@@ -112,9 +112,63 @@ cast.then(function(value) {
 });
 console.log('original === cast ? ' + (original === cast)); //original === cast ? true
 
+```
+
+```javascript
 
 //4
 //resolving thenables and throwing Errors
+
+
+
+//resolving a thenable object
+var p1 = Promise.resolve({ 
+  then: function(onFulfill, onReject) { onFulfill('fulfilled!'); }
+});
+console.log(p1 instanceof Promise) //true
+
+p1.then(function(v) {
+    console.log(v); // "fulfilled!"
+  }, function(e) {
+    // not called
+});
+
+
+
+//thenable throws before callback
+//Promise rejects
+var thenable = {
+  then: function(resolve) {
+    throw new TypeError("Throwing");
+    resolve('Resolveing');
+  }
+}
+
+var p2 = Promise.resolve(thenable);
+p2.then(function(v) {
+  // not called
+}, function(e) {
+  console.error(e); // TypeError: Throwing
+});
+
+
+
+//thenable throws after callback
+//Promise rejects
+var thenable = {
+  then: function(resolve) {
+    resolve('Resolveing');
+    throw new TypeError("Throwing");
+  }
+}
+
+var p3 = Promise.resolve(thenable);
+p2.then(function(v) {
+  console.log(v); // "Resolving"
+}, function(e) {
+  //not called
+});
+
 
 
 ```
