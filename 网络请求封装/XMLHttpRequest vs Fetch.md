@@ -4,6 +4,10 @@ XMLHttpRequest: ajax/axios
 
 Fetch: fetch, the kind of functionality was previously achieved using XMLHttpRequest.
 
+### XMLHttpRequest
+
+
+
 ### Using Fetch
 
 Why using fetch?
