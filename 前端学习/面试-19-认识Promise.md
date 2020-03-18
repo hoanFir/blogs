@@ -4,11 +4,39 @@ A `Promise` allows you to associate handlers with an asynchronous action's event
 A `Promise` is in one of these states:
 
 - pending: initial state
-- fulfilled: 
-- rejected:
+- fulfilled: meaning that the operation completed successfully
+- rejected: meaning that the operation failed
 
 
-### 三、properties of Promise
+### 一、Promise Contructor
+
+The Promise Constructor is primarily used to wrap functions that do not already support promises.
+
+`new Pomise(executor)`
+
+- executor
+
+A function that is passed with the arguments resolve and reject. The executor function is executed immediately by the Promise implementation, passing resolve and reject functions **(the executor is called before the Promise constructor even returns the created object)**. The executor normally initiates some asynchronous work, and then, once that completes, either calls the resolve function to resolve the promise or else rejects it if an error occurred. 
+
+javascript demo:
+
+```javaScript
+
+const promise1 = new Promise(function(resolve, reject) {
+  setTimeout(function() {
+    resolve('foo');
+  }, 300);
+})
+
+promise1.then(function(value) {
+  console.log(value);
+  // expected output: "foo"
+});
+
+```
+
+
+### 二、Promise Properties
 
 - Promise.length: the number of constructor arguments(always 1)
 
