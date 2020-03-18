@@ -2,6 +2,10 @@
 
 🕘 2019.10.13 由 hoanfirst 编辑
 
+**For full-duplex communition, WebSockets is a good choice.**
+
+---
+
 WebSocket API：
 
 let webSocket = new WebSocket(socketUrl);
