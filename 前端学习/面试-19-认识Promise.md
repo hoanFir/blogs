@@ -1,3 +1,12 @@
+```
+
+Q: Promise/A+ ?
+
+https://promisesaplus.com/
+
+A: ECMAScript's Promise global is just one of many Promises/A+ implementations.
+
+```
 
 A `Promise` allows you to associate handlers with an asynchronous action's eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: **instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future**.
 
