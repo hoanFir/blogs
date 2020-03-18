@@ -1,33 +1,11 @@
 
-The Promise object represents the eventual completion (or faliure) of an **asynchronous operation**, and its resulting value.
+A `Promise` allows you to associate handlers with an asynchronous action's eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: **instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future**.
 
+A `Promise` is in one of these states:
 
-
-### 一、基本语法：
-
-```
-
-1. new Promise(executor);
-
-executor: function((resolve, reject) {}
-tips: the executor is called before the Promise constructor returns the created promise object.
-
-resolve: calls the resolve function to resolve the promise(fulfilled status)
-reject: calls the reject if an error occurred(rejected status)
-
-2. 
-promise.then(onfulfilled, onrejected) 
-promise.catch(onrejected) 
-promise.finally(onfinally)
-```
-
-### 二、基本概念：
-
-Promise 对象使得异步方法可以像同步方法一样返回值，而不是通过传统的回调模式来执行异步逻辑。其不会立即返回执行结果，而是返回一个promise，其能代表未来出现的结果。
-
-一个 Promise 有三种状态：pending，fulfilled，rejected，根据执行结果转化成对应状态，并执行 .then(onfulfilled, onrejected) 或者 .catch(onrejected) 和 .finally(onFinaly)
-
-注意，一个promise处于fulfilled或rejected状态时，可以被称为settled状态或resolved状态。
+- pending: initial state
+- fulfilled: 
+- rejected:
 
 
 ### 三、properties of Promise
