@@ -28,3 +28,147 @@ There are three approaches to code splitting:
 - Dynamic Imports: Split code via inline function calls within modules
 
 
+
+### 三、方案一 / Entry Points
+
+project
+
+```
+
+webpack-demo
+|- package.json
+|- webpack.config.js
+|- /dist
+|- /src
+  |- index.js
+  |- another-module.js
+|- /node_modules
+
+```
+
+webpack.config.js
+
+```javascript
+
+const path = require('path');
+
+module.exports = {
+  mode: 'development',
+  entry: {
+    index: './src/index.js',
+    another: './src/another-module.js',
+  },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+
+```
+
+npm run build
+
+```
+
+...
+            Asset     Size   Chunks             Chunk Names
+another.bundle.js  550 KiB  another  [emitted]  another
+  index.bundle.js  550 KiB    index  [emitted]  index
+Entrypoint index = index.bundle.js
+Entrypoint another = another.bundle.js
+...
+
+```
+
+注意，该方案有如下两种不足：
+
+1. If there are any duplicated modules between entry chunks they will be included in both bundles
+
+如果在 `./src/index.js` 和 `./src/another-module.js` 中 import 相同的依赖，会重复引入
+
+2. It isn't as flexible and can't be used to dynamically split code with the core application logic
+
+
+### 四、方案二 / Prevent Duplication
+
+该方案主要是为了解决引入相同依赖的问题。
+
+webpack.config.js
+
+tips: the `dependOn` option allows to share the modules(i.e. loadsh) between the chunks
+
+```javascript
+
+ const path = require('path');
+
+  module.exports = {
+    mode: 'development',
+    entry: {
+      index: { import: './src/index.js', dependOn: 'shared' },
+      another: { import: './src/another-module.js', dependOn: 'shared' },
+      shared: 'lodash',
+    },
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+  };
+
+```
+
+**Using the `SplitChunksPlugin`**
+
+The `SplitChunksPlugin` allows us to extract common dependencies into an existing entry chunk or an entirely new chunk.
+
+tips: The `CommonsChunkPlugin` has been removed in webpack v4 legato. In the latest version, using the `SplitChunksPlugin`.
+
+webpack.config.js
+
+```javascript
+
+  const path = require('path');
+
+  module.exports = {
+    mode: 'development',
+    entry: {
+      index: './src/index.js',
+      another: './src/another-module.js',
+    },
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
+    },
+
+```
+
+With the `optimization.splitChunks` configuration option, we should now see the duplicate dependency removed from our `index.bundle.js` and `another.bundle.js`, and run
+
+npm run build
+
+```
+
+...
+                          Asset      Size                 Chunks             Chunk Names
+              another.bundle.js  5.95 KiB                another  [emitted]  another
+                index.bundle.js  5.89 KiB                  index  [emitted]  index
+vendors~another~index.bundle.js   547 KiB  vendors~another~index  [emitted]  vendors~another~index
+Entrypoint index = vendors~another~index.bundle.js index.bundle.js
+Entrypoint another = vendors~another~index.bundle.js another.bundle.js
+
+...
+
+```
+
+
+### 五、方案三 / Dynamic Imports
+
+
+
+
+
+
