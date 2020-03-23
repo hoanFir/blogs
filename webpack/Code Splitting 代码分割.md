@@ -1,6 +1,7 @@
 
 Code splitting is one of the most compelling features of webpack.
 
+代码切割在项目中，主要是（1）路由时按需加载不同的modules和（2）分割出不同modules之间引用的相同的依赖.
 
 ### 一、打包和代码分割
 
@@ -13,6 +14,8 @@ Code splitting is one of the most compelling features of webpack.
 - 代码分割
 
 随着应用规模增长，代码也随之增长，尤其是在整合了体积巨大的第三方库的情况下，导致包体积过大加载时间过长。为了解决这个问题，代码分割技术能够创建多个包并在运行时动态加载。
+
+对应用进行代码分割能帮助你“懒加载”当前用户所需的内容，能够显著提升性能，避免加载用户永远不需要的代码，并在初始加载时减少所需加载的代码量。
 
 
 ### 二、代码分割的三种方案
@@ -251,7 +254,53 @@ Entrypoint index = index.bundle.js
 ```
 
 
+### 六、在 React 应用中的 代码分割
+
+#### 6.1 dynamic import()
+
+使用之前：
+
+```javascript
+
+import { add } from './math';
+add(12, 13);
+
+```
+
+使用之后：
+
+```javascript
+
+import("./math").then(math => {
+  add(12, 13);
+})
+
+```
+
+当 Webpack 解析到该语法，会自动进行代码分割。如果使用 create react app，该功能已开箱即用。注意，当使用 babel 时，要确保 babel 能解析动态 import 语法而不是将其进行转换，可以引入 `bable-plugin-syntax-dynamic-import`插件。
 
 
+#### 6.2 React.lazy or react-loadable
 
+这两个依赖能让开发者想渲染常规组件一样处理 dynamic import。
+
+**决定在哪引入代码分割需要一些技巧，必须确保选择的位置能够均匀分割代码而不会影响用户体验。一个不错的选择是从路由开始**
+
+如 React.lazy
+
+```
+
+const Home = React.lazy(() => {
+  import('./Home');
+})
+const Other = React.lazy(() => {
+  import('./OtherComponent');
+})
+
+...
+<Route exact path="/" component={Home} />
+<Route path="/other" component={Other} />
+...
+
+```
 
