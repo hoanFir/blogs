@@ -84,7 +84,7 @@ Entrypoint another = another.bundle.js
 
 1. If there are any duplicated modules between entry chunks they will be included in both bundles
 
-如果在 `./src/index.js` 和 `./src/another-module.js` 中 import 相同的依赖，会重复引入
+如果在 `./src/index.js` 和 `./src/another-module.js` 中 import 相同的依赖，如 `lodash`，会重复引入，导致两个模块文件都很大
 
 2. It isn't as flexible and can't be used to dynamically split code with the core application logic
 
@@ -166,6 +166,89 @@ Entrypoint another = vendors~another~index.bundle.js another.bundle.js
 
 
 ### 五、方案三 / Dynamic Imports
+
+using the `import() syntax` that the ECMAScript proposal for dynamic imports.
+
+tips: `import()` calls use promises internally.
+
+project
+
+```
+
+webpack-demo
+|- package.json
+|- webpack.config.js
+|- /dist
+|- /src
+  |- index.js
+|- /node_modules
+
+```
+
+webpack.config.js
+
+```javascript
+
+
+const path = require('path');
+
+  module.exports = {
+    mode: 'development',
+    entry: {
+      index: './src/index.js',
+    },
+    output: {
+      filename: '[name].bundle.js',
+      chunkFilename: '[name].bundle.js',
+      publicPath: 'dist/',
+      path: path.resolve(__dirname, 'dist'),
+    },
+  };
+  
+```
+
+`chunkFileName` option, which determines the name of non-entry chunk files.
+
+
+Now, instead of **statically** importing `loadsh`, we'll use dynamic importing to separate a chunk:
+
+index.js
+
+```javascript
+
+function getComponent() {
+
+  return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
+    const element = document.createElement('div');
+
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+
+    return element;
+
+  }).catch(error => 'An error occurred while loading the component');
+
+}
+
+getComponent().then(component => {
+  document.body.appendChild(component);
+})
+
+```
+
+`webpackChunkName` in the comment will cause our separate bundle to be named `lodash.bundle.js` instead of just `[id].bundle.js`.
+
+npm run build
+
+```
+
+...
+                   Asset      Size          Chunks             Chunk Names
+         index.bundle.js  7.88 KiB           index  [emitted]  index
+vendors~lodash.bundle.js   547 KiB  vendors~lodash  [emitted]  vendors~lodash
+Entrypoint index = index.bundle.js
+...
+
+```
 
 
 
