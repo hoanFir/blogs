@@ -9,7 +9,7 @@ Even though React only updates the changed DOM nodes, re-rendering still some ti
 
 ### 一、shouldComponentUpdate
 
-`shouldComponentUpdate` is triggered before the re-rendering process starts. In the lifecycle of React, `shouldComponentUpdate` is between `getDerivedStateFromProps` and `render`.
+`shouldComponentUpdate` is triggered before the re-rendering process starts.
 
 The default implementation of the function returns `true`, leaving React to perform the update:
 
@@ -22,6 +22,8 @@ shouldComponentUpdate(nextProps, nextState) {
 ```
 
 So, if you know that in some situations your component doesn's need to update, you can return `false` instead, to skip the whole rendering process, including calling `render()` on this component and below.
+
+简单的说，如果不手动使用 `shouldComponentUpdate`，而默认返回 `true` 时，节点每次都会进行浅比较，比较为真执行`render()`，比较为假则跳过 `render()`；如果手动使用 `shouldComponentUpdate` 且返回 `false`，直接跳过 `render()`，无须比较 vDOM。
 
 
 ### 二、PureComponent
