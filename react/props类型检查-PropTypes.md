@@ -7,7 +7,7 @@
 
 ### 一、PropTypes
 
-通过配置
+To run typechecking on the props for a component, you can assign the spcecail `propTypes` property:
 
 ```react
 
@@ -26,4 +26,6 @@ Greeting.propTypes = {
 };
 
 ```
+
+`PropTypes` exports a range of **validators** that can be used to make sure the data you receive is valid.
 
