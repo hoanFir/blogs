@@ -171,5 +171,11 @@ For example:
 tips: As a last resort, you can pass an item'index in the array as a key. This can work well if the items are never reordered, but renders will be slow.
 
 
+### 四、总结
+
+在当前的实现中，一旦组件类型不同，就会重新生成一个组件；组件类型相同时，状态不会丢失，会进行比较更新部分内容；对于一颗子树，它能在其兄弟之间移动，但不能移动到其他位置。
+
+
+
 
 
