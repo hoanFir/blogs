@@ -25,7 +25,7 @@ When diffing two trees, React first compares the two **root elements**.
 
 The behavior is different depending on the types of the root elements: 
 
-#### 3.1 the root elements have different types
+#### 3.1 elements of different types
 
 wheneven the root elements have different types, React will tear down the old tree and build the new tree form scratch. When tearing down a tree, old DOM nodes are destroyed. Component instances receive `componentWillUnmount()`. When building up a new tree, new DOM nodes are inserted into the DOM. Component instances receive `componentDidMount()`. Any state associated with the old tree is lost.
 
@@ -50,6 +50,66 @@ For example:
 
 
 #### 3.2 dom elements of the same type
+
+When comparing two React DOM elements of the same type, React looks at the attibutes of both, keeps the same underlying DOM node, and only updates the changed attributes.
+
+For example:
+
+```
+
+<div className="hide">
+</div>
+
+<div className="show">
+</div>
+
+//only modify the className on the underlying DOM node
+
+
+<div style={{ color: "blue", fontWeight: 'bold' }}>
+</div>
+
+<div style={{ color: "grey", fontWeight: 'bold' }}>
+</div>
+
+//only modify the color style, not the fontWeight
+
+
+```
+
+#### 3.3 component elements of the same type
+
+When a component updates, the instance stays the same, so that state is maintained across renders.
+
+React updates the props of the underlying component instance to match the new element, and calls `componentWillReceiveProps()` and `componentWillUpdate()` on the underlying instance. Next, the `render()` is called and **the diff algorithm recurses on the previous result and the new result**.
+
+
+#### 3.4 recursing on children
+
+By default, when recursing on the children of a DOM node, React just **iterates over both lists of children at the same time and generates a mutation** whenever there's a difference.
+
+
+For example:
+
+```
+
+//before
+<ul>
+  <li>1</li>
+  <li>2</li>
+</ul>
+
+
+//after
+<ul>
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>  
+</ul>
+
+//add an element at the end of the children after converting between these two trees
+
+```
 
 
 
