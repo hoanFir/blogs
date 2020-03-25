@@ -27,5 +27,52 @@ Greeting.propTypes = {
 
 ```
 
-`PropTypes` exports a range of **validators** that can be used to make sure the data you receive is valid.
+`PropTypes` exports a range of **validators** that can be used to make sure the data you receive is valid. When an invalid value is provided for a prop, a warning will be shown in the JavaScript console.
+
+For examples:
+
+```react
+
+import PropTypes from 'prop-types';
+
+MyComponent.propTypes = {
+  optionalArray: PropTypes.array,
+    optionalBool: PropTypes.bool,
+      optionalFunc: PropTypes.func,
+        optionalNumber: PropTypes.number,
+          optionalObject: PropTypes.object,
+            optionalString: PropTypes.string,
+              optionalSymbol: PropTypes.symbol,
+  
+  optionalNode: PropTypes.node,
+  
+  optionalElement: PropTypes.element,
+  
+  //delcare that a prop is a react element type(ie. MyComponent)
+  optionalElementType: PropTypes.elementType,
+  
+  //declare that a prop is an instance of a class
+  optionalMessage: PropTypes.instanceOf(Message),
+  
+  //ensure that prop is limited to specific values by treating it as an enum
+  optionalEnum: PropTypes.oneof(['news', 'photos']),
+  
+  //could be one of many types
+  optionalUnion: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.instanceof(Message)
+  ]),
+  
+  //an array of a certain type
+  optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
+  
+  //an object with property values of a certain type
+  optionalObjectOf: PropTypes.objectOf(PropTypes.number),
+  
+  //an object taking on a particular shape
+  
+}
+
+```
 
