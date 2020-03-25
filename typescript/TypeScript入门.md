@@ -45,4 +45,12 @@ DefinitelyTyped 是一个庞大的声明仓库，为没有 declaration file 的�
 npm i --save-dev @types/react
 ```
 
-tips：如果 DefinitelyTyped 没有某个库的 declaration file，这种情况
+tips：如果 DefinitelyTyped 没有某个库的 declaration file，这种情况下可以创建一个本地的 declaration file。即在项目根目录创建一个 `declarations.d.ts` 文件，如
+
+```
+declare module 'querystring' {
+  export function stringify(val: object): string
+  export function parse(val: string): object
+}
+
+```
