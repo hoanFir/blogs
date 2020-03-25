@@ -31,11 +31,13 @@ Greeting.propTypes = {
 
 For examples:
 
-```react
+```javascript
 
 import PropTypes from 'prop-types';
 
+//1
 MyComponent.propTypes = {
+
   optionalArray: PropTypes.array,
     optionalBool: PropTypes.bool,
       optionalFunc: PropTypes.func,
@@ -71,7 +73,51 @@ MyComponent.propTypes = {
   optionalObjectOf: PropTypes.objectOf(PropTypes.number),
   
   //an object taking on a particular shape
+  optionalObjectWithShape: PropTypes.shape({
+    color: PropTypes.string,
+    fontSize: PropTypes.number,
+  }),
   
+  //an object with warnings on extra properties
+  optionalObjectWithStrictShape: PropTypes.exact({
+    name: PropTypes.string,
+    quantity: PropTypes.number
+  }),
+}
+
+
+//2
+MyComponent.propTypes = {
+  //chain any of the above with 'isRequired'
+  requiredFunc: PropTypes.func.isRequired,
+  
+  //a value of any data type
+  requiredAny: PropTypes.any.isRequired,
+}
+
+
+//3
+MyComponent.propTypes = {
+  //custom validator, which should return an Error object if the validation fails.
+  //tips: don't console.warn or throw, because this won't work inside 'oneOfType'
+  customProp: function(props, propName, componentName) {
+    if(!/matchme/.test(props[propName])) {
+      return new Error(
+        'Invalid prop ' + propName + ' supplied to' + componentName + '. Validation failed.'
+      )
+    }
+  },
+  
+  //custom validator to arrayOf and objectOf
+  //the validator will be called for each key in the array or object.
+  //the first two arguments of the validator are the array or object it itself
+  customArrayProp: PropTypes.arrayOf(function(propValue, key, componentName, location, propFullName) {
+    if(!/matchme/.test(propValue[key])) {
+      return new Error(
+        'Invalid prop ' + propFullName + ' supplied to' + componentName + '. Validation failed.'
+      )      
+    }
+  })
 }
 
 ```
