@@ -140,9 +140,35 @@ But, when inserting an element at the  beginning, converting between these two t
 
 - 改进 / keys
 
+React supports a `key` attribute.
+
+When children have keys, React uses the key to match children in the original tree with children in the subsequent tree.
+
+For example:
+
+```
+
+//before
+<ul>
+  <li key="one">one</li>
+  <li key="two">two</li>
+</ul>
 
 
+//after
+<ul>
+  <li key="three">three</li>
+  <li key="one">one</li>
+  <li key="two">two</li>  
+</ul>
 
+//add an element at the start of the children
+
+//React knows that the element with key 'three' is the new one, and the elements with key 'one' and 'two' have just moved
+
+```
+
+tips: As a last resort, you can pass an item'index in the array as a key. This can work well if the items are never reordered, but renders will be slow.
 
 
 
