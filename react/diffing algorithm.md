@@ -86,8 +86,9 @@ React updates the props of the underlying component instance to match the new el
 
 #### 3.4 recursing on children
 
-By default, when recursing on the children of a DOM node, React just **iterates over both lists of children at the same time and generates a mutation** whenever there's a difference.
+- by default
 
+when recursing on the children of a DOM node, React just **iterates over both lists of children at the same time and generates a mutation** whenever there's a difference.
 
 For example:
 
@@ -109,7 +110,37 @@ For example:
 
 //add an element at the end of the children after converting between these two trees
 
+//React will match the two <li>1</li> trees, match the two <li>2</li> trees, and then insert the <li>3</li> tree.
+
 ```
+
+But, when inserting an element at the  beginning, converting between these two tress works poorly:
+
+```
+
+//before
+<ul>
+  <li>one</li>
+  <li>two</li>
+</ul>
+
+
+//after
+<ul>
+  <li>three</li>
+  <li>one</li>
+  <li>two</li>  
+</ul>
+
+//add an element at the start of the children
+
+//React will mutate every child, because it can not realize it can keep the <li>one</li> and <li>two</li>
+
+```
+
+- 改进 / keys
+
+
 
 
 
