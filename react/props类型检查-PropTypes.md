@@ -5,7 +5,7 @@
 
 可以在项目引入 Flow 或 TypeScript 等扩展来进行类型检查。但 React 也内置了一些类型检查的功能，比如对组件的 `props` 进行类型检查。
 
-### 一、PropTypes
+### 一、PropTypes.\[types\] and custom validators
 
 To run typechecking on the props for a component, you can assign the spcecail `propTypes` property:
 
@@ -49,7 +49,10 @@ MyComponent.propTypes = {
   optionalNode: PropTypes.node,
   
   optionalElement: PropTypes.element,
-  
+  //with PropTypes.element you can specify that only a single child can be passed to a compoennt as children
+  children: PropTypes.element.isRequired
+
+
   //delcare that a prop is a react element type(ie. MyComponent)
   optionalElementType: PropTypes.elementType,
   
@@ -120,5 +123,25 @@ MyComponent.propTypes = {
   })
 }
 
+
 ```
 
+### 二、PropTypes.defaultProps
+
+ou can define default values for your props by assigning to the special defaultProps property:
+
+```
+
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+
+Greeting.defaultProps = {
+  name: 'Stranger'
+};
+
+```
