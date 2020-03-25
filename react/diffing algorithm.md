@@ -19,12 +19,37 @@ React implements a heuristic O(n) algorithm based on two assumptions:
 In practice, these assumptions are valid for almost all practical use cases.
 
 
-### The diffing algorithm
+### 三、The diffing algorithm
+
+When diffing two trees, React first compares the two **root elements**. 
+
+The behavior is different depending on the types of the root elements: 
+
+#### 3.1 the root elements have different types
+
+wheneven the root elements have different types, React will tear down the old tree and build the new tree form scratch. When tearing down a tree, old DOM nodes are destroyed. Component instances receive `componentWillUnmount()`. When building up a new tree, new DOM nodes are inserted into the DOM. Component instances receive `componentDidMount()`. Any state associated with the old tree is lost.
+
+tips: any components below the root will also get unmounted and have their state destroyed.
+
+For example:
+
+```
+
+<div>
+  <Other />
+</div>
+
+<span>
+  <Other />
+</span>
+
+//destroy the old Other and remount a new one
+
+```
 
 
 
-
-
+#### 3.2 dom elements of the same type
 
 
 
