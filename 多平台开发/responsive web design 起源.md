@@ -14,7 +14,22 @@
 
 ## 新
 
-2010 年 5 月 25 日，iPhone 发布 3 年后，Ethan Marcotte 在 A List Apart 上发表了一篇题为 “(Responsive Web Design)[http://alistapart.com/article/responsive-web-design]”的长文。
+2010 年 5 月 25 日，iPhone 发布 3 年后，Ethan Marcotte 在 A List Apart 上发表了一篇题为 “(Responsive Web Design)[http://alistapart.com/article/responsive-web-design]” 的长文。
 
-这篇 文章并没有介绍新的学科知识，也没有打出口号，让困境中的开发者聚集起来;而是描述 了一种创建新型网站的方式，这些网站可以根据用户访问设备的尺寸来做出响应，并且调 节自身大小来适配对应的视口。响应式 Web 设计(responsive Web design，RWD)不是一
-种新科技，而是现有工具和技术的一个集合，包括以下内容。
+文章里并没有介绍新的学科知识，也没有喊口号。而只是描述了一种创建新型网站的方式，这些网站可以根据用户访问设备的尺寸来做出响应，并且调节自身大小来适配对应的视口。
+
+响应式 Web 设计(responsive Web design，RWD)不是一种新技术，而是现有工具和技术的一个集合，Ethan 对 RWD 的描述清晰地定义了每个人都在迫切寻找的解决方案。
+
+包括以下内容：
+
+- 流式网格
+
+用基于百分比的宽度代替固定像素的尺寸。
+
+- 自适应图片
+
+用 100% 宽度的图片填充它们的容器，并且随着视口大小的改变而改变。
+
+- 媒体查询
+
+允许对不同的视口大小使用不同的样式，我们现在可以基于屏幕的大小来改变页面布局。
