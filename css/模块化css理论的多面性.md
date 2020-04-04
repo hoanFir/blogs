@@ -1,88 +1,4 @@
 
-在较早的 css，几乎总是从全局作用域开始开发，一层一层增加细节，如使用通用样式开始，比如页首和段落的标签，然后给页面里的各个部分应用更具体的样式：
-
-```html
-
-<body>
-  <div class="main">
-    <h2>I'm a Header</h2>
-  </div>
-  <div id="sidebar">
-    <h2>I'm a Sidebar Header</h2>
-  </div>
-</body>
-
-<style> 
-  h2 {
-    font-size: 24px;
-    color: red;
-  }
-  #sidebar h2 {
-    font-size: 20px;
-    background: red;
-    color: white;
-  }
-</style>
-
-```
-
-对于上述代码，如果有一个新需求，在侧边栏添加一个日历组件，并要求其内部 H2 显示的样式和页首一样，就会写成下面的代码：
-
-```html
-
-<body>
-  <div class="main">
-    <h2>I'm a Header</h2>
-  </div>
-  <div id="sidebar">
-    <h2>I'm a Sidebar Header</h2>
-    <div class="calendar">
-      <h2>I'm a Calendar Header</h2>
-    </div>
-  </div>
-</body>
-
-<style> 
-  h2 {
-    font-size: 24px;
-    color: red;
-  }
-  #sidebar h2 {
-    font-size: 20px;
-    background: red;
-    color: white;
-  }
-  #sidebar .calendar h2 {
-    background: none;
-    color: red;
-  }  
-</style>
-
-```
-
-这样的开发模式存在很多问题：
-
-- 选择器优先级
-
-无论你处理带 ID 的标签还是长选择器，重写一个选择器时，总是需要注意它的优先级。 
-
-- 颜色重置
-
-要恢复到原来的 H2 颜色，我们必须再次指定样式，并且要覆盖当前的背景颜色。 
-
-- 位置依赖
-
-现在我们的日历样式依赖于侧边栏的样式。如果将日历移到页首或者页尾，样式将会改变。
-
-- 多重继承
-
-现在这个 H2 的样式来源多达三个，这意味着只要改变主体或侧边栏的样式，都会影响到日历的呈现。
-
-- 深层嵌套
-
-日历控件里的日历条目可能还有其他的 H2，而它们也需要一个更具体的选择器，这样 一来，H2 的样式来源就增加到了四个。
-
-
 ## 一、OOCSS
 
 OOCSS, Object-Oriented CSS.
@@ -167,7 +83,7 @@ SMACSS将样式系统分了五个具体的类别：
 > 对于如何创建功能的小模块，OOCSS 和 SMACSS 有许多相似之处。它们都把样式作用域限定到根节点的 CSS 类名上，然后通 过皮肤(OOCSS)或者子模块(SMACSS)进行修改。两者之间最显著的差异是使用皮肤而不是子模块，以及带 is 前缀的状态类名。
 
 
-### BEM
+### 三、BEM
 
 BEM, Block Element Modifier.
 
@@ -202,7 +118,104 @@ BEM 其实只是一个 css 类名命名规则。它不涉及如何书写你的 C
 
 > BEM 使用非常简洁的约定来创建 CSS 类名，而这些字符串可能会相当长。但每一个 CSS 类名都详细地描述了它实现了什么。
 
-## 组合
+## 四、组合
 
 当然，最重要的还是要找到一个适合的解决方案。不要因为一套规范很流行或者别的团队正在使用就选择它。比如使用 SMACSS 和 BEM 相混合的方案。
 
+
+
+## 五、应用
+
+在较早的 css，几乎总是从全局作用域开始开发，一层一层增加细节，如使用通用样式开始，比如页首和段落的标签，然后给页面里的各个部分应用更具体的样式：
+
+```html
+
+<body>
+  <div class="main">
+    <h2>I'm a Header</h2>
+  </div>
+  <div id="sidebar">
+    <h2>I'm a Sidebar Header</h2>
+  </div>
+</body>
+
+<style> 
+  h2 {
+    font-size: 24px;
+    color: red;
+  }
+  #sidebar h2 {
+    font-size: 20px;
+    background: red;
+    color: white;
+  }
+</style>
+
+```
+
+对于上述代码，如果有一个新需求，在侧边栏添加一个日历组件，并要求其内部 H2 显示的样式和页首一样，就会写成下面的代码：
+
+```html
+
+<body>
+  <div class="main">
+    <h2>I'm a Header</h2>
+  </div>
+  <div id="sidebar">
+    <h2>I'm a Sidebar Header</h2>
+    <div class="calendar">
+      <h2>I'm a Calendar Header</h2>
+    </div>
+  </div>
+</body>
+
+<style> 
+  h2 {
+    font-size: 24px;
+    color: red;
+  }
+  #sidebar h2 {
+    font-size: 20px;
+    background: red;
+    color: white;
+  }
+  #sidebar .calendar h2 {
+    background: none;
+    color: red;
+  }  
+</style>
+
+```
+
+这样的开发模式存在很多问题：
+
+- 选择器优先级
+
+无论你处理带 ID 的标签还是长选择器，重写一个选择器时，总是需要注意它的优先级。 
+
+- 颜色重置
+
+要恢复到原来的 H2 颜色，我们必须再次指定样式，并且要覆盖当前的背景颜色。 
+
+- 位置依赖
+
+现在我们的日历样式依赖于侧边栏的样式。如果将日历移到页首或者页尾，样式将会改变。
+
+- 多重继承
+
+现在这个 H2 的样式来源多达三个，这意味着只要改变主体或侧边栏的样式，都会影响到日历的呈现。
+
+- 深层嵌套
+
+日历控件里的日历条目可能还有其他的 H2，而它们也需要一个更具体的选择器，这样 一来，H2 的样式来源就增加到了四个。
+
+
+### 5.1 OOCSS
+
+OOCSS 带来分离容器和内容的思想，我们学会不再使用位置作为样式的限定词。你完全 可以在网站上放一个侧边栏，并且给这个侧边栏使用任何你喜欢的样式，但是，侧边栏的样式不应该影响侧边栏的内容。
+
+比如用 `.my-sidebar-widget-heading` 代替 `#sidebar h2`。`#sidebar h2`意味着，放在侧边栏的每一个H2元素，要么接受这个样式，要么就重写来避免使用这个样式。而 `.my-sidebar-widget-heading` 意味着 样式只限定于这一个标题，完全不会影响其他标题。
+
+### 5.2 SMACSS
+
+### 5.3 BEM
