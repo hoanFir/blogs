@@ -1,4 +1,67 @@
 
+在较早的 css，几乎总是从全局作用域开始开发，一层一层增加细节，如使用通用样式开始，比如页首和段落的标签，然后给页面里的各个部分应用更具体的样式：
+
+```html
+
+<body>
+  <div class="main">
+    <h2>I'm a Header</h2>
+  </div>
+  <div id="sidebar">
+    <h2>I'm a Sidebar Header</h2>
+  </div>
+</body>
+
+<style> 
+  h2 {
+    font-size: 24px;
+    color: red;
+  }
+  #sidebar h2 {
+    font-size: 20px;
+    background: red;
+    color: white;
+  }
+</style>
+
+```
+
+对于上述代码，如果有一个新需求，在侧边栏添加一个日历组件，并要求其内部 H2 显示的样式和页首一样，就会写成下面的代码：
+
+```html
+
+<body>
+  <div class="main">
+    <h2>I'm a Header</h2>
+  </div>
+  <div id="sidebar">
+    <h2>I'm a Sidebar Header</h2>
+    <div class="calendar">
+      <h2>I'm a Calendar Header</h2>
+    </div>
+  </div>
+</body>
+
+<style> 
+  h2 {
+    font-size: 24px;
+    color: red;
+  }
+  #sidebar h2 {
+    font-size: 20px;
+    background: red;
+    color: white;
+  }
+  #sidebar .calendar h2 {
+    background: none;
+    color: red;
+  }  
+</style>
+
+```
+
+
+
 ## 一、OOCSS
 
 OOCSS, Object-Oriented CSS.
