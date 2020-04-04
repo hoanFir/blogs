@@ -218,4 +218,50 @@ OOCSS 带来分离容器和内容的思想，我们学会不再使用位置作�
 
 ### 5.2 SMACSS
 
+SMACSS 给我们带来把布局和组件分离到不同文件夹的思想，进一步将侧边栏的角色和日 历模块划分开。现在我们只是定义了侧边栏的角色是布局，甚至不允许元素样式在那部分 Sass 语法的代码里出现。如果你要在侧边栏里放一些代码，并且向它们添加样式，那么这 些元素需要是某个组件的一部分，并且需要在组件的文件夹里定义。
+
 ### 5.3 BEM
+虽然严格来说，BEM 并不算是一种 CSS 方法论，但它让我们知道，给标记中每个 CSS 类 名一个独一无二的标识是有价值的。这是因为这样会使每个 BEM 风格的 CSS 类名都可以 对应到某一组独属于该元素的 CSS 属性，而不会随着具体情境或选择器的使用而变化:
+
+```html
+
+<body>
+  <div class="main">
+    <h2 class="content__title">"I'm a Header"</h2>
+  </div>
+  <div class="sidebar">
+    <h2 class="content__title--reversed">"I'm a Sidebar Header" </h2>
+    <div class="calendar">
+      <h2 class="calendar__title">"I'm a Calendar Header"</h2>
+    </div>
+  </div>
+</body>
+
+<style>
+/* 组件文件夹 */
+.content__title {
+  font-size: 24px;
+  color: red; 
+}
+  
+.content__title--reversed { 
+  font-size: 20px; background: red;
+  color: white;
+}
+  
+.calendar__title {
+  font-size: 20px;
+  color: red;
+}
+  
+/* 布局文件夹 */ 
+.main {
+  float: left; ...
+}
+  
+.sidebar {
+  float: right; ...
+} 
+
+</style>
+```
