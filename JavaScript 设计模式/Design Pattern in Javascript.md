@@ -16,9 +16,10 @@ Design patterns help to keep your modules more loosely coupled(低耦合). This 
 
 - Communication
 
- They give programmers shorthand for describing how their systems work. Instead of long explanations, 
-
+It gives programmers shorthand for describing how their systems work instead of long explanations. you can just say, “It uses the factory pat- tern.”
 
 
 - Performance
+
+Some of the patterns we cover are optimization patterns. They can drastically improve the speed at which your program runs and reduce the amount of code you need to transmit to the client.
 
