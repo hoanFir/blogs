@@ -13,8 +13,10 @@ There are three main reasons why you would want to use design patterns in JavaSc
 
 Design patterns help to keep your modules more loosely coupled(低耦合). This makes it easier to refactor your code and swap out different modules. It also makes ti easier to work in large teams and to collaborate with other programmers.
 
+
 - Communication
 
+ They give programmers shorthand for describing how their systems work. Instead of long explanations, 
 
 
 
