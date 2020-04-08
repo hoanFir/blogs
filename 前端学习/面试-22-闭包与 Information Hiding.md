@@ -81,6 +81,8 @@ Using underscores to denote methods and attributes that are intended to be pri- 
 
 ```javascript
 
+var Publication = new Interface('Publication', ['getIsbn', 'setIsbn', 'getTitle', 'setTitle', 'getAuthor', 'setAuthor', 'display']);
+
 var Book = function(isbn, title, author) { // implements Publication 
   this.setIsbn(isbn);
   this.setTitle(title);
@@ -163,6 +165,63 @@ blat(); // returns 20, because a new copy of a is being used.
 
 ```
 
-This function is now executed outside of `foo`, and it still has access to `a`. 
+This function is now executed outside of `foo`, and it still has access to `a`. As long as `bar` is defined within `foo`, it has access to all of foo’s variables, even if `foo` is finished executing.
+
+This is an example of a closure. After foo returns, its scope is saved, and only the function that it returns has access to it.
+
+```
+
+var Publication = new Interface('Publication', ['getIsbn', 'setIsbn', 'getTitle', 'setTitle', 'getAuthor', 'setAuthor', 'display']);
+
+
+var Book = function(newIsbn, newTitle, newAuthor) { // implements Publication
+
+  //private attributes
+  var isbn, title, author;
+  
+  //private method
+  function checkIsbn(isbn) {
+    ...
+  }
+  
+  //privileged methods
+  this.getIsbn = function() {
+      return isbn;
+    };
+  this.setIsbn = function(newIsbn) {
+    if(!checkIsbn(newIsbn)) throw new Error('Book: Invalid ISBN.'); 
+    isbn = newIsbn;
+  };
+  this.getTitle = function() { 
+    return title;
+  };
+  this.setTitle = function(newTitle) {
+    title = newTitle || 'No title specified';
+  };
+  this.getAuthor = function() {
+    return author;
+  };
+  this.setAuthor = function(newAuthor) {
+    author = newAuthor || 'No author specified'; 
+  };
+
+  //constructor code
+  this.setIsbn(newIsbn);
+  this.setTitle(newTitle); 
+  this.setAuthor(newAuthor);
+}
+
+
+// Public, non-privileged methods. 
+Book.prototype = {
+  display: function() {
+    ...
+  } 
+};
+
+
+```
+
+In this example, we declared these variables using var, not using this keyword.  That means they will only exist within the Book constructor. We also declare the checkIsbn function in the same way, making it a private method.
 
 
