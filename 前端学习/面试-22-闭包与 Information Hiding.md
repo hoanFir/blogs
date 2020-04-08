@@ -121,11 +121,48 @@ Book.prototype = {
 
 Create true private members, which can only be accessed through the use of privileged methods.
 
+First, in JavaScript, only functions have scope; that is to say, a variable declared within a function is not accessible outside of that function. 
 
+So a variable defined within a function is accessible to its nested functions:
 
 ```javascript
 
-
+function foo() {
+  var a = 10;
+  
+  function bar() {
+    a *= 2;
+  }
+  
+  bar();
+  return a;
+}
 
 
 ```
+
+But what if we could execute `bar` outside of `foo`:
+
+```javascript
+
+function foo() { var a = 10;
+  function bar() { 
+    a *= 2;
+    return a;
+  }
+  return bar; 
+}
+
+var baz = foo();
+baz(); // returns 20.
+baz(); // returns 40.
+baz(); // returns 80.
+
+var blat = foo(); // blat is another reference to bar. 
+blat(); // returns 20, because a new copy of a is being used.
+
+```
+
+This function is now executed outside of `foo`, and it still has access to `a`. 
+
+
