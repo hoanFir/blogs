@@ -9,7 +9,7 @@ JavaScript 可以通过自身特性来模仿 interface。
 
 1. Describing Interfaces with Comments
 
-```
+```javascript
 
 /*
 interface Composite {
@@ -40,6 +40,85 @@ CompositeForm.prototype.getChild = function(index) {
 // Implement the FormItem interface.
 CompositeForm.prototype.save = function() { ...
 };
+
+```
+
+2. Emulating Interfaces with Attribute Checking
+
+```javascript
+
+/*
+interface Composite {
+    function add(child);
+    function remove(child);
+    function getChild(index);
+}
+
+interface FormItem {
+    function save();
+}
+*/
+
+var CompositeForm = function(id, method, action) {  
+
+    this.implementsInterfaces = ['Composite', 'FormItem'];
+    //...
+};
+
+...
+
+function addForm(formInstance) {
+    if(!implements(formInstance, 'Composite', 'FormItem')) {
+throw new Error("Object does not implement a required interface.");     }
+    ...
+}
+
+// The implements function, which checks to see if an object declares that it 
+// implements the required interfaces.
+function implements(object) {
+    for(var i = 1; i < arguments.length; i++) { 
+        // Looping through all arguments
+        // after the first one.
+        
+        var interfaceName = arguments[i];
+        var interfaceFound = false;
+        for(var j = 0; j < object.implementsInterfaces.length; j++) {
+            if(object.implementsInterfaces[j] == interfaceName) {                   
+                interfaceFound = true;
+                break;
+            } 
+        }
+
+        if(!interfaceFound) {
+            return false; // An interface was not found.
+        } 
+    }
+    
+    return true; 
+    // All interfaces were found. 
+
+}
+
+```
+
+3. Emulating Interfaces with Duck Type
+
+```javascript
+
+// Interfaces.
+var Composite = new Interface('Composite', ['add', 'remove', 'getChild']); 
+var FormItem = new Interface('FormItem', ['save']);
+
+// CompositeForm class
+var CompositeForm = function(id, method, action) { 
+    //...
+};
+
+...
+function addForm(formInstance) {
+    ensureImplements(formInstance, Composite, FormItem);
+    // This function will throw an error if a required method is not implemented. ...
+}
 
 ```
 
