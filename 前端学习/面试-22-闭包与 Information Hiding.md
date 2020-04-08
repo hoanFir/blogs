@@ -18,6 +18,15 @@ The simplest but provides only public members.
 ```javascript
 
 
+var Book = function(isbn, title, author) {
+  if(isbn == undefined) throw new Error('Book constructor requires an isbn.');    
+  this.isbn = isbn;
+  this.title = title || 'No title specified';
+  this.author = author || 'No author specified';
+}
+Book.prototype.display = function() { 
+  ...
+};
 
 ```
 
@@ -25,7 +34,53 @@ The simplest but provides only public members.
 
 Using underscores to denote methods and attributes that are intended to be pri- vate
 
+```javascript
+
+var Book = function(isbn, title, author) { // implements Publication 
+  this.setIsbn(isbn);
+  this.setTitle(title);
+  this.setAuthor(author);
+}
+
+Book.prototype = {
+  checkIsbn: function(isbn) {
+    ...
+  },
+  getIsbn: function() {
+    return this._isbn; 
+  },
+  setIsbn: function(isbn) {
+    if(!this.checkIsbn(isbn)) throw new Error('Book: Invalid ISBN.'); 
+    this._isbn = isbn;
+  },
+  getTitle: function() { 
+    return this._title;
+  },
+  setTitle: function(title) {
+    this._title = title || 'No title specified'; 
+  },
+  getAuthor: function() { 
+    return this._author;
+  },
+  setAuthor: function(author) {
+    this._author = author || 'No author specified'; 
+  },
+  display: function() { 
+    ...
+  } 
+};
+
+```
+
 ## 三、closures
 
 Create true private members, which can only be accessed through the use of privileged methods.
-## 二、naming convention
+
+
+
+```javascript
+
+
+
+
+```
