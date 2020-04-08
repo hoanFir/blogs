@@ -24,11 +24,56 @@ var Book = function(isbn, title, author) {
   this.title = title || 'No title specified';
   this.author = author || 'No author specified';
 }
+
 Book.prototype.display = function() { 
   ...
 };
 
 ```
+
+But we don’t have any control over what another programmer will assign to the attribute directly. In order to protect the internal data, we can create accessor and mutator methods for each attribute. 
+
+```javascript
+
+var Publication = new Interface('Publication', ['getIsbn', 'setIsbn', 'getTitle', 'setTitle', 'getAuthor', 'setAuthor', 'display']);
+
+var Book = function(isbn, title, author) { // implements Publication 
+  this.setIsbn(isbn);
+  this.setTitle(title);
+  this.setAuthor(author);
+}
+
+
+Book.prototype = {
+  checkIsbn: function(isbn) {
+    ...
+  },
+  getIsbn: function() {
+    return this.isbn; 
+  },
+  setIsbn: function(isbn) {
+    if(!this.checkIsbn(isbn)) throw new Error('Book: Invalid ISBN.'); 
+    this.isbn = isbn;
+  },
+  getTitle: function() { 
+    return this.title;
+  },
+  setTitle: function(title) {
+    this.title = title || 'No title specified'; 
+  },
+  getAuthor: function() { 
+    return this.author;
+  },
+  setAuthor: function(author) {
+    this.author = author || 'No author specified'; 
+  },
+  display: function() { 
+    ...
+  }
+};
+
+```
+
 
 ## 二、naming convention
 
@@ -43,7 +88,7 @@ var Book = function(isbn, title, author) { // implements Publication
 }
 
 Book.prototype = {
-  checkIsbn: function(isbn) {
+  _checkIsbn: function(isbn) {
     ...
   },
   getIsbn: function() {
@@ -67,12 +112,12 @@ Book.prototype = {
   },
   display: function() { 
     ...
-  } 
+  }
 };
 
 ```
 
-## 三、closures
+## 三、Scope, Nested Functions, and Closures
 
 Create true private members, which can only be accessed through the use of privileged methods.
 
