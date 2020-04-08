@@ -1,9 +1,48 @@
 
 在 JavaScript 是没有 `interface`, `implements` 这些关键字的，但是 interface 概念在 JavaScript 同样非常重要。
 
-JavaScript 可以通过自身特性来模仿来实现 interface / 接口，比如 class 和 closure。
+JavaScript 可以通过自身特性来模仿 interface。
 
 **参考：《Pro Javascript Design Patterns》**
+
+## Emulating an Interface in js
+
+1. Describing Interfaces with Comments
+
+```
+
+/*
+interface Composite {
+    function add(child);
+    function remove(child);
+    function getChild(index);
+}
+interface FormItem {
+    function save();
+}
+*/
+
+// implements Composite, FormItem ...
+var CompositeForm = function(id, method, action) {
+  //...
+};
+
+// Implement the Composite interface.
+CompositeForm.prototype.add = function(child) { ...
+};
+CompositeForm.prototype.remove = function(child) {
+...
+};
+CompositeForm.prototype.getChild = function(index) {
+...
+};
+
+// Implement the FormItem interface.
+CompositeForm.prototype.save = function() { ...
+};
+
+```
+
 
 ## 一、Patterns That Rely on the Interface
 
