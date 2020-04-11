@@ -14,7 +14,7 @@
 
 ## 新
 
-2010 年 5 月 25 日，iPhone 发布 3 年后，Ethan Marcotte 在 A List Apart 上发表了一篇题为 “(Responsive Web Design)[http://alistapart.com/article/responsive-web-design]” 的长文。
+2010 年 5 月 25 日，iPhone 发布 3 年后，Ethan Marcotte 在 A List Apart 上发表了一篇题为 “ (Responsive Web Design)[http://alistapart.com/article/responsive-web-design] ” 的长文。
 
 文章里并没有介绍新的学科知识，也没有喊口号。而只是描述了一种创建新型网站的方式，这些网站可以根据用户访问设备的尺寸来做出响应，并且调节自身大小来适配对应的视口。
 
