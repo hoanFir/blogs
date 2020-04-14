@@ -14,7 +14,7 @@
 
 在这本书：
 
-- how to configure content caching, load balancing, monitoring, high availability...
+- how to configure reverse proxy, load balancing, content caching
 
 - how to protect your applications: mitigate DDoS attacks, stop Layer 7 attacks, and configure signle sign-on with OpenID
 
