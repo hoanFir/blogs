@@ -7,7 +7,6 @@
 
 **nginx is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server.**
 
-Nginx 常用于配置 caching, load balancing, cloud deployments, and other critical features.
 
 ## 学习
 
