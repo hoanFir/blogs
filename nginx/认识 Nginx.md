@@ -14,13 +14,15 @@
 
 在这本书：
 
-- how to configure reverse proxy, load balancing, content caching
+1. how to configure reverse proxy, load balancing, content caching
 
-- how to protect your applications: mitigate DDoS attacks, stop Layer 7 attacks, and configure signle sign-on with OpenID
+2. how to protect your applications: mitigate DDoS attacks, stop Layer 7 attacks, and configure signle sign-on with OpenID
 
-- how to deploy Nginx and Nginx Plus in AWS, Azure, and GCP, as well as in Docker containers
+3. how to deploy Nginx and Nginx Plus in AWS, Azure, and GCP, as well as in Docker containers
 
-- how to monitor and toubleshoot application performance
+NGINX Plus, the licensed version of NGINX that provides many advanced features, such as a real-time monitoring dashboard and JSON feed, the ability to add servers to a pool of application servers with an API call, and active health checks with an expected response.
+
+4. how to monitor and toubleshoot application performance
 
 
 
