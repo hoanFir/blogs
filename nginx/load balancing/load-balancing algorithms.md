@@ -24,7 +24,15 @@ this method balances load by proxying the current request to the upstream server
 
 weight can be taken into consideration for a weighted least connections, which could be used to decide to which server to send the connection.
 
+```
 
+upstream backend { 
+  least_conn;
+  server backend.example.com;
+  server backend1.example.com; 
+}
+
+```
 
 ## 三、Least time
 
