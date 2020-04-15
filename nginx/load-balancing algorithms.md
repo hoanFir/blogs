@@ -17,6 +17,14 @@ weight can be taken into consideration for a weighted round robin, which could b
 
 ## 二、Least connections
 
+最少连接，`least_conn`.
+
+this method balances load by proxying the current request to the upstream server with the least number of open connections proxied through NGINX.
+
+weight can be taken into consideration for a weighted least connections, which could be used to decide to which server to send the connection.
+
+
+
 ## 三、Least time
 
 ## 四、Generic hash
