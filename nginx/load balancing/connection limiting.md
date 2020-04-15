@@ -1,7 +1,13 @@
 
 ## 场景：
 
-You have too much load overwhelming your upstream servers.
+You have too much load overwhelming your upstream servers. 
+
+Overloading a server will cause it to **queue connections** in a listen queue. And depending on the upstream server to process its own queue will lead to poor user experience as connections start to timeout, even load the server’s listen queue beyond repair.
+
+So the ideal approach is for the load balancer to be aware of the connection limitations of the server and queue the connections itself so that it can send the connection to the next available server with understanding of load as a whole.
+
+
 
 ## 方案：
 
