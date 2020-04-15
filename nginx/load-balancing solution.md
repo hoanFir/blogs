@@ -25,7 +25,14 @@ server {
 
 //description
 
-weight: instructs NGINX to pass twice as many connections to the second server, and the weight parameter defaults to 1.
+
+upstream: 
+
+the http upstream module defines a pool of destinations, either a list of Unix sockets, ip addresses, and dns records, or a mix. the upstream module also defines how any individual request is assgined to any of the upstream servers.
+
+weight: 
+
+instructs NGINX to pass twice as many connections to the second server, and the weight parameter defaults to 1.
 
 ```
 
