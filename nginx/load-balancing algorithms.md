@@ -5,6 +5,7 @@ Not all requests or packets carry an equal weight. Given this, round robin, or e
 
 These load-balancing algorithms or methods can not only be chosen, but also configured. And they are available for upstream HTTP, TCP, and UDP pools:
 
+
 ## 一、Round robin
 
 轮询。
@@ -27,6 +28,35 @@ weight can be taken into consideration for a weighted least connections, which c
 
 ## 三、Least time
 
+最少时间，`least_time`.
+
+this method balances load by proxying the current request to the upstream server with the lowest average response times.
+
+this method is one of the most sophisticated load-balancing algorithms out there and fits the need of highly performant web applications.
+
+
+
 ## 四、Generic hash
 
+NGINX distributes the load amongst the servers by producing a `hash` for the current request and placing it against the upstream servers.
+
+this method is very useful when you need more control over `where requests are sent` or `determining what upstream server most likely will have the data cached`.
+
+note that when a server is added or removed from the pool, the hashed requests will be redistributed.
+
+this algorithm has an optional parameter, `consistent`, to minimize the effect of redistribution.
+
+
+
 ## 五、IP hash
+
+`ip_hash`.
+
+supported for HTTP.
+
+this method uses the client IP address as the hash, ensures that clients get proxied to the same upstream server as long as that server is available, which is extremely helpful when the session state is of concern and not handled by shared memory of the application.
+
+different from using the remote variable in a generic hash, this algorithm uses the first three octets(字节) of an IPv4 address or the entire IPv6 address.
+
+note that this method also takes the weight parameter into consideration when distributing the hash. 
+
