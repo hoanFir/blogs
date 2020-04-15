@@ -23,16 +23,49 @@ server {
 }
 
 
-//description
+# description
+
+1. upstream(module): 
+
+the http upstream module defines a pool of destinations, either a list of Unix sockets, ip addresses, and dns records, or a mix. the upstream module also defines how any individual request is assgined to any of the upstream servers, along with a number of optional parameters.
+
+these parameters give more control over the routing of requests.
 
 
-upstream: 
+2. weight(parameter): 
 
-the http upstream module defines a pool of destinations, either a list of Unix sockets, ip addresses, and dns records, or a mix. the upstream module also defines how any individual request is assgined to any of the upstream servers.
-
-weight: 
-
-instructs NGINX to pass twice as many connections to the second server, and the weight parameter defaults to 1.
+weight parameter instructs NGINX to pass twice as many connections to the second server, and the weight parameter defaults to 1.
 
 ```
 
+
+## 二、TCP Load Balancing
+
+场景： distribute load between two or more TCP servers.
+
+方案：
+
+使用 NGINX 的 stream module 在 TCP 服务器上使用 upstream block 进行负载平衡:
+
+```
+
+stream {
+  upstream mysql_read {
+    server read1.xx.xx.xx:3306         weight=5;
+    server read2.xx.xx.xx:3306;    
+    server blance.example.com:3306  backup;
+  }
+
+  server {
+    listen 3306;
+    proxy_pass mysql_read;
+  }
+}
+
+
+
+# description
+
+the server block instructs NGINX to listen on TCP port 3306 and balance load between two MySQL database read replicas, and lists another as a backup that will be passed traffic if the primaries are down.
+
+```
