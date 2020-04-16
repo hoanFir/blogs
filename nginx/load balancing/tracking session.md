@@ -12,6 +12,31 @@ NGINX Plus offers multiple ways to solve this problem by tracking cookies or rou
 NGINX tracks session persistence in three ways: by creating and tracking its own cookie, detecting when applications prescribe cookies, or routing based on runtime variables.
 
 
+## 一、sticky cookie
+
+```
+
+upstream backend {
+  server xx1.xx.xx;
+  server xx2.xx.xx;
+  
+  sticky cookie
+         affinity
+         expires=1h
+         domain=.xx.xx
+         httponly
+         secure
+         path=/;
+}
+
+
+# description
+
+this configuration creates and tracks a cookie, "affinity", that ties a downstream client to an upstream server.
+
+the cookie is set for xx.xx, persists an hour, cannot be consumed client-side, can only be sent over HTTPS, and is valid for all paths.
+
+```
 
 
 
