@@ -38,6 +38,8 @@ the cookie is set for xx.xx, persists an hour, cannot be consumed client-side, c
 
 ```
 
+NGINX Plus tracks this cookie, enabling it to continue directing subsequent requests to the same server. 
+
 
 
 
