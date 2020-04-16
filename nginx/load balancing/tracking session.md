@@ -14,6 +14,8 @@ NGINX tracks session persistence in three ways: by creating and tracking its own
 
 ## 一、sticky cookie
 
+场景：You need to bind a downstream client to an upstream server.
+
 ```
 
 upstream backend {
@@ -40,6 +42,53 @@ the cookie is set for xx.xx, persists an hour, cannot be consumed client-side, c
 
 NGINX Plus tracks this cookie, enabling it to continue directing subsequent requests to the same server. 
 
+
+## 二、sticky learn
+
+> \<\<Complete NGINX Cookbook\>\> p23
+
+场景：You need to bind a downstream client to an upstream server by using an existing cookie.
+
+```
+
+upstream backend {
+  server xx1.xx.xx:8080; 
+  server xx2.xx.xx:8081;
+  
+  sticky learn 
+         create=$upstream_cookie_cookiename
+         lookup=$cookie_cookiename 
+         zone=client_sessions:2m;
+}
+
+```
+
+
+## 三、sticky routing
+
+> \<\<Complete NGINX Cookbook\>\> p24
+
+场景：You need granular(细粒度) control over how your persistent sessions are routed to the upstream server.
+
+```
+
+map $cookie_jsessionid $route_cookie {
+  ~.+\.(?P<route>\w+)$ $route;
+}
+
+map $request_uri $route_uri {
+  ~jsessionid=.+\.(?P<route>\w+)$ $route;
+}
+
+upstream backend {
+  server xx1.xx.xx route=a;
+  server xx2.xx.xx route=b;
+  
+  sticky route $route_cookie $route_uri; 
+}
+
+
+```
 
 
 
