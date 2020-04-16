@@ -29,6 +29,11 @@ upstream backend {
 
 If the max number of connections has been reached on each server, the request can be placed into the queue for further processing, provided(前提是) the optional `queue` directive is specified.
 
-The optional `queue` directive sets the maximum number of requests that can be simultaneously in the queue.
+The optional `queue` directive sets the maximum number of requests that can be simultaneously in the queue. **When queuing, we must take into consideration a reasonable queue length**. Much like in everyday life, users and applications would much rather be asked to come back after a short period of time than wait in a long line and still not be served. 
+
+The `timeout` parameter of the queue directive specifies how long any given request should wait in queue before giving up, which defaults to 60 seconds. 
 
 A shared memory `zone` allows NGINX Plus worker processes to share information about `how many connections are handled by each server` and `how many requests are queued`.
+
+
+
