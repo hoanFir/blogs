@@ -14,7 +14,7 @@
 
 在这本书：
 
-1. how to configure reverse proxy, load balancing, content caching
+1. how to configure load balancing, content caching, ...
 
 2. how to protect your applications: mitigate DDoS attacks, stop Layer 7 attacks, and configure signle sign-on with OpenID
 
@@ -22,7 +22,7 @@
 
 NGINX Plus, the licensed version of NGINX that provides many advanced features, such as a real-time monitoring dashboard and JSON feed, the ability to add servers to a pool of application servers with an API call, and active health checks with an expected response.
 
-4. how to monitor and toubleshoot application performance
+4. how to monitor application performance
 
 
 
