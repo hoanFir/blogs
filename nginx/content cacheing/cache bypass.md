@@ -13,4 +13,12 @@ proxy_cache_bypass $http_cache_bypass;
 
 ```
 
-The configuration tells NGINX to bypass the cache if the HTTP request header named cache_bypass is set to any value that is not 0.
+The configuration tells NGINX to bypass the cache if the HTTP request header named cache_bypass is set to any value that is not 0, so **the request will be sent to an upstream server rather than be pulled from cache**.
+
+
+## description
+
+There are many scenarios that demand that the request is not cached. One important scenario is troubleshooting and debugging, because reproducing issues(复现问题) can be hard if you’re consistently pulling cached pages or if your cache key is specific to a user identifier. 
+
+
+
