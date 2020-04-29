@@ -8,7 +8,28 @@
 ```javascript
 
 function partition(data, length, start, end) {
+  if(data === null || length  <= 0 || start >= length) {
+    return;
+  }
   
+  /* 生成一个在start和end之间对随机数，并放在数组最后 */
+  let index = RandomInRange(start, end);
+  Swap(data[index], data[end]);
+  
+  let small = start-1;
+  for(index = start; index < end; index++) {
+    if(data[index] < data[end]) {
+      small++;
+      if(small != index) {
+        Swap(data[index], data[small]);
+      }
+    }
+  }
+  
+  small++;
+  Swap(data[small], data[end]);
+  
+  return samll;
 }
 
 ```
@@ -34,5 +55,7 @@ function qucikSort(data, length, start, end) {
     QuickSort(data, length, index+1, end);
   }
 }
+
+quickSort(data, 0, data.length-1);
 
 ```
