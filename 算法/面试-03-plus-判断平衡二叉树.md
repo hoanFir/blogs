@@ -61,4 +61,36 @@ bool IsBalanced(BinaryTreeNode* pTreeRoot) {
 
 ```
 
-上述解法
+上述解法虽然简洁，但是时间效率不高。因为，每次往下遍历子树进行判断时，会重复遍历。
+
+## 解法二
+
+使用后序遍历的方式，那么在遍历到每个节点时，就已遍历了它的左、右子树。只要在遍历每个节点时记录其深度，这样就可以一边从下往上遍历一边判断每个节点是不是平衡的。这种思路其实就是斐波那契数列求第n项从下往上解法。
+
+```c
+
+bool IsBalanced(BinaryTreeNode* pTreeRoot, int* pDepth) {
+  if(!pTreeRoot) {
+    *pDepth = 0;
+    return true;
+  }
+  
+  int left, right;
+  
+  if(IsBalanced(pTreeRoot->pLeft) && IsBalanced(pTreeRoot->pRight)) {
+    int diff = left - right;
+    if(diff <= 1 && diff >= -1) {
+      *pDepth = 1 + (left > right ? left : right);
+      return true;
+    }
+  }
+  
+  return false;
+}
+
+BinaryTreeNode *pTreeRoot;
+int depth = 0;
+bool isBalanced = IsBalanced(pTreeRoot, &depth);
+
+```
+
