@@ -48,11 +48,11 @@ function qucikSort(data, length, start, end) {
   let index = Partition(data, length, start, end);
   
   if(index > start) {
-    QuickSort(data, length, start, index-1);
+    quickSort(data, length, start, index-1);
   }
   
   if(index < end) {
-    QuickSort(data, length, index+1, end);
+    quickSort(data, length, index+1, end);
   }
 }
 
