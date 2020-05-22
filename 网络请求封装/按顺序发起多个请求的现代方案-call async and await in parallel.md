@@ -39,7 +39,7 @@ In sequentialStart, the second timer is not created until the first has already 
 
 
 
-## 改进方案A：concurrent async/await
+## 改进方案：concurrent async/await
 
 ```javascript
 
@@ -60,37 +60,3 @@ In concurrentStart, both timers are created and then awaited. The timers run con
 However, the await calls still run in series, which means the second await will wait for the first one to finish. 
 
 
-## 改进方案B：Promise.all()
-
-```javascript
-
-//3
-//concurrent
-function concurrentPromise() {
-  return Promise.all([resolveAfter2Seconds(), resolveAfter1Second()]).then((messages) => {
-    console.log(messages[0]) // slow
-    console.log(messages[1]) // fast
-  })
-  //same as concurrentStart
-}
-
-```
-
-## 方案：parallel = async/wait + Promise.all()
-
-If we wish to safely perform two or more jobs in parallel, we must await a call to Promise.all, or Promise.allSettled.
-
-```javascript
-
-
-async function parallel() {
- 
-  await Promise.all([
-      (async ()=>console.log(await resolveAfter2Seconds()))(),
-      (async ()=>console.log(await resolveAfter1Second()))()
-  ])
-  
-  //truly parallel: after 1 second, logs "fast", then after 1 more second, "slow"
-}
-
-```
