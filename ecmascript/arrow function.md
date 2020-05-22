@@ -115,23 +115,22 @@ var handler = { //this固定化+封装回调函数
 
 ### 四、箭头函数this的固定是什么含义？
 
-固定**①从自己的作用域链的上一层继承this 或者 ②this指向定义时所处的作用域**。注意不是声明时就固定this对象的值。
+固定**①从自己的作用域链的上一层继承this 或者 ②指向定义时所处的对象**。而不能理解为定义时就固定this对象的值。
 
-如下例子中，箭头函数外层普通函数this发生了变化，它也会跟着变化。但它是固定指向上一层作用域链的this的。
+如下例子中，箭头函数外层普通函数this发生了变化，它也会跟着变化。
 
 ```javascript
 
 var obj = {
     a: 1,
     getA: function(){
-        //普通函数，即不作为对象的属性时，this会指向window
+        //innerGet：普通函数，即不作为对象的属性时，this会指向window
         var innerGet = function(){
             console.log("1", this);
             
-          	(() => {
+            (() => {
             	console.log("2", this)
             })()
-            
         };
       
         innerGet();
@@ -140,7 +139,7 @@ var obj = {
     }
 };
 
-//obj.getA()()
-obj.getA().apply(obj)
+obj.getA()() //都是指向window
+obj.getA().apply(obj) //都是指向obj
 
 ```
