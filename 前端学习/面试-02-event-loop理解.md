@@ -99,7 +99,7 @@ Promise.resolve().then();
 
 微任务：promise。
 
-**微任务：promise。microtask 特点是会在当前的同步任务执行完成后立即执行。**
+**microtask 特点是会在当前的同步任务执行完成后立即执行。**
 
 
 settimeout 和 promise 相关面试题 - 1：
