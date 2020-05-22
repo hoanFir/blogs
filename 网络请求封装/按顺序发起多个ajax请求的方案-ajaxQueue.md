@@ -22,6 +22,7 @@ $.newAjaxQueue().post([url], [params], [callback]).post([url], [params], [callba
 ```javascript
 
 $.newAjaxQueue = function () {
+
   var queue = [];
   var posting = false;
   var fn = function() {
@@ -45,6 +46,7 @@ $.newAjaxQueue = function () {
       }, 'text');
     }
   };
+  
   var instance = ({
     post: function(url ,params, callback) {
       queue.push({
@@ -53,8 +55,17 @@ $.newAjaxQueue = function () {
         callback: callback
       });
       if(posting === false) fn();
-       return instance;
-    }
+      return instance;
+    },
+    get: function(url, params, callback) {
+      queue.push({
+        url: url, 
+        params: params,
+        callback: callback
+      });
+      if(posting === false) fn();
+      return instance;
+    },
   });
   return instance;
 }
