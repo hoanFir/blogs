@@ -35,6 +35,9 @@ async function sequentialStart() {
 
 在上述代码中，同时调用两次 await 来获取数据，但是这样需要等待两个请求的时间。
 
+In sequentialStart, the second timer is not created until the first has already fired, so the code finishes after 3 seconds.
+
+
 
 ## 改进方案A：concurrent async/await
 
@@ -51,6 +54,11 @@ async function concurrentStart() {
 }
 
 ```
+
+In concurrentStart, both timers are created and then awaited. The timers run concurrently, which means the code finishes in 2 seconds.
+
+However, the await calls still run in series, which means the second await will wait for the first one to finish. 
+
 
 ## 改进方案B：Promise.all()
 
@@ -69,6 +77,8 @@ function concurrentPromise() {
 ```
 
 ## 方案：parallel = async/wait + Promise.all()
+
+If we wish to safely perform two or more jobs in parallel, we must await a call to Promise.all, or Promise.allSettled.
 
 ```javascript
 
