@@ -2,6 +2,55 @@
 
 🕘 2019.11.07 由 hoanfirst 编辑
 
+
+Arrows are a function shorthand using the `=>` syntax.
+
+```javascript
+
+//1
+//expression bodies
+var odds = evens.map(v => v+1);
+var nums = evens.map((v, i) => v + i);
+
+//2
+//statement bodies
+nums.forEach(v => {
+  if(v % 5 === 0) {
+    fives.push(v);
+  }
+});
+
+//3
+//lexical this
+var bob = {
+  _name: "bob",
+  _friends: [],
+  printFriends() {
+    this._friends.forEach(f => {
+      console.log(this._name + ' knows ' + f);
+    });
+  }
+}
+
+//4
+//lexical arguments
+function square () {
+  let example = () => {
+    let numbers = [];
+    for(let number of arguments) {
+      numbers.push(number * number);
+    }
+    
+    return numbers;
+  };
+  
+  return example();
+}
+
+...
+
+```
+
 ### 一、箭头函数第一个用处是使得表达更为简洁
 
 ```javascript
@@ -12,16 +61,16 @@ var foo = (param1, param2) => param1+param2;
 var foo = id => ({ id: id });
 
 var full = ({first, last}) => first+''+last; //结合解构赋值
-const person = { first: xing, last: ming };
-full(person);
+const person = { first: xing, last: ming }; full(person);
 
-[1, 2, 3].reduce((total, item)=> { total += item }); //简化回调函数
+[1, 2, 3].reduce((total, item) => { total += item }); //简化回调函数
 [1, 2, 4].map(x => x*x);
 var result = [3, 2, 1].sort((a, b) => a-b);
 
 const numbers = (...nums) => nums; //结合rest运算符
 numbers(1, 2, 3);
-const headAndTail = (head, ...tail) => [head, tail];
+
+const headAndTail = (head, ...tail) => [head, tail]; //结合rest运算符
 headAndTail(1, 2, 3);
 
 ```
@@ -29,9 +78,9 @@ headAndTail(1, 2, 3);
 
 ### 二、箭头函数的第二个是解决this指向问题
 
-在没有箭头函数之前，我们有一种场景，即用const that = this;来解决内部函数this的指向问题。
+在没有箭头函数之前，我们有一种场景，即用`const that = this;`来解决内部函数this的指向问题。
 
-而箭头函数解决了上述问题，即完全修复了this的指向，this总是指向词法作用域，也就是定义时所处的作用域。
+通过箭头函数可以不用那么麻烦，因为它修复了该场景this的指向。Arrows share the same lexical `this` as their surrounding code. 也就是说，箭头函数本身没有 `this`，其继承外部函数。
 
 ```javascript
 
@@ -41,7 +90,7 @@ var handler = { //this固定化+封装回调函数
 
   init: function() {
     document.addEventListener('click', 
-      event => this.dosth(e.type), false); //this总指向handler对象，否则回掉函数在运行时指向的是document对象
+      event => this.dosth(e.type), false); //this总指向handler对象，否则默认情况下回调函数在运行时指向document对象
   },
 
   dosth: function(type) {
