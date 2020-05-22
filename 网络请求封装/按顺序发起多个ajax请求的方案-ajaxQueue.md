@@ -8,7 +8,7 @@ tips：现在常用 Promise 甚至 async/await 来实现按顺序发起请求。
 
 ```javascript
 
-$.newAjaxQueue().post([url], [params], [callback]).post( [url], [params], [callback] ).post( [url], [params], [callback] );
+$.newAjaxQueue().post([url], [params], [callback]).post([url], [params], [callback]).post([url], [params], [callback]);
 
 ```
 
