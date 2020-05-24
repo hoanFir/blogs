@@ -13,7 +13,7 @@ Prefer JavaScript's higher-order functions instead of loops like for-in or for-o
 
 ```
 
-this enforces our immutable rule.
+this can enforce our immutable rule.
 
 dealing with pure functions that return values is easier to reason about than side effects.
 
