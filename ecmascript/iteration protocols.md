@@ -52,3 +52,6 @@ for (const value of iterable) {
 
 ## iterator protocol
 
+
+the iterator protocol defines a standard way to produce a sequence of values, and potentially a return value when all values have been generated.
+
