@@ -13,7 +13,36 @@ Whenever an object needs to be iterated (such as at the beginning of a for...of 
 
 Note that when this zero-argument function is called, it is invoked as a method on the iterable object. Therefore inside of the function, the `this` keyword can be used to access the properties of the iterable object, to decide what to provide during the iteration.
 
-示例：Iterating over iterable objects with for-of
+
+
+
+
+## iterator protocol
+
+
+the iterator protocol defines a standard way to produce a sequence of values. An object is an iterator when it implements a `next()` method.
+
+```
+
+next: function() {
+  return {
+    value: ...,
+    done: ...
+  }
+}
+
+```
+
+- value
+
+Any JavaScript value returned by the iterator
+
+- done
+
+Has the value false if the iterator was able to produce the next value in the sequence. Has the value true if the iterator has completed its sequence.
+
+
+## 示例：Iterating over iterable objects with for-of
 
 ```javascript
 
@@ -21,7 +50,7 @@ const iterable = {
   [Symbol.iterator]() {
     return {
       i: 0,
-      next() {
+      next: function() {
         if(this.i < 3) {
           return {
             value: this.i++,
@@ -47,11 +76,3 @@ for (const value of iterable) {
 //2
 
 ```
-
-
-
-## iterator protocol
-
-
-the iterator protocol defines a standard way to produce a sequence of values, and potentially a return value when all values have been generated.
-
