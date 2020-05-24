@@ -89,12 +89,13 @@ const incrementByone = numbers.map(num => num+1);
 
 ```
 
+示例3:
 
-示例3：
+```
 
-```javasript
+Object.keys(peos).map(key => peos[key]);
+Object.entries(peos).map(([key, value]) => {})
 
-Object.keys(obj).forEach(key => {})
 ```
 
 ### 三、
