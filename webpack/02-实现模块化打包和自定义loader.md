@@ -132,6 +132,7 @@ module.exports = {
       exports: {}
     }
     
+    //执行模块函数
     //(function(module, __webpack_exports__, __webpack_require__) {...})
     modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
     
@@ -153,10 +154,32 @@ module.exports = {
   
 })([
   //每个函数对应一个模块
-  (function(module, __webpack_exports__, __webpack_require__) {...}), //入口模块
-  (function(module, __webpack_exports__, __webpack_require__) {
+  (function(module, __webpack_exports__, __webpack_require__) { //入口模块
+  
+    //r函数用于给导出对象exports定义一个属性：__esModule: {value: true}
+    __webpack_require__.r(__webpack_exports__);
+    
+    //调用其他模块
+    var _module_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+    const module = Object(_module_js__WEBPACK_IMPORTED_MODULE_0__['default'])();
+    
+    //当前模块的业务代码
+    ...
     
   }),
+  (function(module, __webpack_exports__, __webpack_require__) {
+    
+    //r函数用于给导出对象exports定义一个属性：__esModule: {value: true}
+    __webpack_require__.r(__webpack_exports__);
+    
+    __webpack__exports['default'] = (() => {
+    
+      //当前模块的业务代码
+      ...
+      
+    })
+    
+  })
 ]);
 
 ```
