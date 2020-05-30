@@ -2,11 +2,7 @@
 
 ## 一、模块化打包
 
-Webpack 本质目标：将零散的各个 JavaScript 模块文件打包到一个 js 文件中。
-
-对于其他类型的资源，支持通过 Loader 机制在 js 文件中以模块化的方式载入。例如把 `/src/index.js`、`/src/modules.js`、`/src/index.css` 三个资源都打包到 `/dist/build.js` 中，再在 `/src/index.html` 里引入 build.js。
-
-- 打包
+Webpack 本质目标：**将零散的各个 JavaScript 模块文件打包到一个 js 文件中**。例如把 `/src/index.js`、`/src/modules.js` 两个个资源都打包到 `/dist/build.js` 中，再在 `/src/index.html` 里引入 build.js。
 
 ```javascript
 
@@ -184,7 +180,11 @@ module.exports = {
 
 ```
 
+## 二、通过Loader机制加载资源
+
+对于其他类型的资源，支持通过 Loader 机制在 js 文件中以模块化的方式载入。
 
 
-## 二、自定义loader
+
+## 三、自定义loader
 
