@@ -21,7 +21,7 @@
 
 ## 二、实现原理：钩子机制
 
-在 webpack 整个工作过程中，有很多个环节，webpack 本身已经为每个环节都加上了一个钩子，因此在开发插件的时候，可以往钩子上挂载不同的任务实现扩展 webpack 的各种能力。
+在 webpack 整个工作过程中，有很[多个环节](https://github.com/hoanFir/blogs/blob/master/webpack/05-%E5%90%84%E4%B8%AA%E7%8E%AF%E8%8A%82%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.md)，webpack 本身已经为每个环节都加上了一个钩子，因此在开发插件的时候，可以往钩子上挂载不同的任务实现扩展 webpack 的各种能力。
 
 
 
