@@ -228,6 +228,10 @@ module.exports = {
 ## 三、自定义loader
 
 
+实现 “Markdown -> markdown-loader -> html”。
+
+
+
 
 
 
