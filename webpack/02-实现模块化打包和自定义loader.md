@@ -182,9 +182,64 @@ module.exports = {
 
 ## 二、通过Loader机制加载资源
 
-对于其他类型的资源，支持通过 Loader 机制在 js 文件中以模块化的方式载入。
+Webpack 默认只能处理 JavaScript 代码。对于其他类型的资源，支持通过 Loader 机制在 js 文件中以模块化的方式载入。
 
+```
+
+you may need an appropriate loader to handle the file type.
+
+```
+
+- 为什么要在 js 中加载其他资源
+
+
+
+
+
+- css-loader
+
+css-loader 只会把 css 模块加载到 js 代码中，还需要一个 style-loader 把转化后的代码通过 style 标签添加到页面上。
+
+
+```javascript
+
+const path = require('path');
+
+module.exports = {
+
+  entry: ...,
+  output:  {
+    filename: ...,
+    path: path.join(__dirname, '...')
+  },
+  
+  module: {
+    rules: [
+      test: /\.css/,
+      use: ['style-loader', 'css-loader'], //注意rules处理顺序是从数组由后往前，因此style-loader要放在第一个
+    ]
+  }
+}
+
+```
 
 
 ## 三、自定义loader
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
