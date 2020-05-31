@@ -230,6 +230,8 @@ module.exports = {
 
 实现 “Markdown -> markdown-loader -> HTML”。注意，最后loader返回的一定是一段js代码。
 
+- 用一个loader实现
+
 markdown-loader.js
 
 ```javascript
@@ -274,6 +276,43 @@ module.exports = {
 ```
 
 
+- 用多个loader实现
+
+markdown-loader.js
+
+```javascript
+
+const marked = require('marked');
+
+module.exports = source => {
+  const html = marked(source);
+  
+  return html;
+}
+
+```
+
+webpack.config.js
+
+```javascript
+const path = require('path');
+
+module.exports = {
+
+  entry: ...,
+  output:  {
+    filename: ...,
+    path: path.join(__dirname, '...')
+  },
+  
+  module: {
+    rules: [
+      test: /\.md$/,
+      use: ['html-loader', './markdown-loader'],
+    ]
+  }
+}
+```
 
 
 
