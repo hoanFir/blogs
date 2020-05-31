@@ -34,7 +34,7 @@ tips：webpack 要求插件是一个函数或者一个包含 `apply` 方法的�
 
 remove-comments-plugin.js
 
-- 1. 首先，以class形式定义
+**1. 首先，以class形式定义**
 
 ```javascript
 
@@ -48,13 +48,43 @@ class RemoveCommentsPlugin {
 
 ```
 
-- 2. 然后，确定钩子
+**2. 然后，确定钩子**
 
 
 `emit`，在 webpack 即将向输出目录输出文件时执行。
 
 
-- 3. 访问钩子，挂载任务函数
+**3. 访问钩子，挂载任务函数**
 
-通
+通过 `complier` 对象的 `hooks` 属性访问到 `emit` 钩子，再通过 `tap` 方法注册一个钩子函数。
 
+```javascript
+
+class RemoveCommentsPlugin {
+
+  //complier对象包含了构建的所有配置信息
+  apply(complier) {
+  
+    complier.hooks.emit.tap('RemoveCommentsPlugin', compliation => {
+      
+      //compliation可以理解为此次打包的context。如compilation.assets = 打包文件列表，如index.html bundle.js...
+      
+      compilation.assets.keys().map(name =>{
+      
+        if(name.endWith('.js')) {
+        
+           //compilation.assets[name].source()获取文件内容
+           const contents = compilation.assets[name].source();
+           const noCommentsContents = contents.replace(/\/\*{2,}\/\s?/g, "");
+           
+           compilation.assets[name] = {
+            source: () => noCommentsContents,
+            size: () => noCommentsContents.length
+           }
+        }
+      })
+    })
+  }
+}
+
+```
