@@ -216,7 +216,7 @@ module.exports = {
   
   module: {
     rules: [
-      test: /\.css/,
+      test: /\.css$/,
       use: ['style-loader', 'css-loader'], //注意rules处理顺序是从数组由后往前，因此style-loader要放在第一个
     ]
   }
@@ -228,9 +228,50 @@ module.exports = {
 ## 三、自定义loader
 
 
-实现 “Markdown -> markdown-loader -> html”。
+实现 “Markdown -> markdown-loader -> HTML”。注意，最后loader返回的一定是一段js代码。
 
+markdown-loader.js
 
+```javascript
+
+const marked = require('marked');
+
+module.exports = source => {
+  //marked 能将md解析为html字符串
+  const html = marked(source);
+  
+  //把解析后的html字符串拼接为一段js代码
+  const code = `module.exports=${JSON.stringify(html)}`; //小技巧：用JSON.stringify将字符串转化为标准的json格式字符串，再进行拼接，就不会有问题，因为原字符串内容的特殊字符，如换行符或引号，可能会造成语法上的错误，所以需要用JSON.stringify转义一下
+  
+  //也可以使用es module
+  //const code = `export default ${JSON.stringify(html)}`
+  
+  return code;
+}
+
+```
+
+webpack.config.js
+
+```javascript
+const path = require('path');
+
+module.exports = {
+
+  entry: ...,
+  output:  {
+    filename: ...,
+    path: path.join(__dirname, '...')
+  },
+  
+  module: {
+    rules: [
+      test: /\.md$/,
+      use: './markdown-loader',
+    ]
+  }
+}
+```
 
 
 
