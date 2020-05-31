@@ -21,24 +21,40 @@
 
 ## 二、实现原理：钩子机制
 
-在 webpack 整个工作过程中，有很多个环节，webpack 为每个环节都加上了一个钩子，因此在开发插件的时候，就可以往钩子上挂载不同的任务，就可以实现扩展 webpack 的能力。
+在 webpack 整个工作过程中，有很多个环节，webpack 本身已经为每个环节都加上了一个钩子，因此在开发插件的时候，可以往钩子上挂载不同的任务实现扩展 webpack 的各种能力。
 
 
 
 ## 三、开发一个插件
 
-目标：清楚文件里的注释。
+目标：清除 bundle.js 文件里的注释。
 
-首先
+tips：webpack 要求插件是一个函数或者一个包含 `apply` 方法的对象
+
 
 remove-comments-plugin.js
 
-
-
+- 1. 首先，以class形式定义
 
 ```javascript
 
+class RemoveCommentsPlugin {
 
+  //complier对象包含了构建的所有配置信息
+  apply(complier) {
+    ...
+  }
+}
 
 ```
+
+- 2. 然后，确定钩子
+
+
+`emit`，在 webpack 即将向输出目录输出文件时执行。
+
+
+- 3. 访问钩子，挂载任务函数
+
+通
 
