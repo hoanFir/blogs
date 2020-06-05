@@ -1,43 +1,10 @@
-Map + Set + WeakMap + WeakSet
+## 一、Set
 
-```javascript
+通过Set，可以创建没有重复值的集合。使用场景：实现数组合并 —— Array.from(new Set(arr))
 
-//1
-//Sets
-var s = new Set();
-s.add("hello").add("goodbye").add("hello");
-s.size === 2;
-s.has("hello") === true;
 
-s === Set(2) {"hello", "goodbye"}
+## WeakMap
 
-//2
-//Maps
-var m = new Map();
-m.set("hello", 21);
-m.set(s, 21);
-m.get(s) === 21
 
-//3
-//Weak Maps
-var wm = new WeakMap();
-vm.set(s, { extra: 42 });
-vm.size === undefined
-vm.get(s) === { extra: 42 }
 
-//WeakMaps provides leak-free object-key'd side tables
-//WeakMaps 提供无泄漏的对象键的副表
-
-//4
-//Weak Sets
-var ws = new WeakSet();
-ws.add({ data: 21 });
-//because the added object has no other references, it will not be held in the set
-
-```
-
-## Set
-
-通过Set，
-
-1. 创建
+## WeakSet
