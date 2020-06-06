@@ -27,7 +27,7 @@ tips：在创建自定义引用类型以及实现**继承**时，prototype 属�
 
 上述关系如图：
 
-![](https://github.com/hoanFir/blogs/blob/master/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/images/%E6%88%AA%E5%B1%8F2020-02-16%E4%B8%8B%E5%8D%887.22.52.png?raw=true)
+![](https://github.com/hoanFir/blogs/blob/master/JavaScript%20%E5%9F%BA%E7%A1%80/images/%E6%88%AA%E5%B1%8F2020-02-16%E4%B8%8B%E5%8D%887.22.52.png?raw=true)
 
 
 
