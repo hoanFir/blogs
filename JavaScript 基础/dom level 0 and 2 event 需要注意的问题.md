@@ -36,8 +36,26 @@ btn.onclick = function() {
 
 dom2级事件是addEventListener、removeEventListener。
 
+```
+//1
+<a href="#" id="hash" onclick="fn1();"></a> 
 
-## ie
+function fn() {
+  alert('0');
+}
 
-ie事件是attachEvent、detachEvent。
-另外，dom2级方法添加事件处理程序的主要好处是可以添加多个事件处理程序。
+
+//2
+var btn = document.getElementById('hash');
+
+btn.addEventListener('click',function(){
+  alert('1')
+},false);
+
+btn.addEventListener('click',function(){
+  alert('2')
+},false);
+
+```
+
+注意，相比dom0事件，绑定同一事件不会相互覆盖，按顺序执行。
