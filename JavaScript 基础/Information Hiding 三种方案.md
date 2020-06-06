@@ -77,7 +77,7 @@ Book.prototype = {
 
 ## 二、naming convention
 
-Using underscores to denote methods and attributes that are intended to be pri- vate
+Using underscores to denote methods and attributes that are intended to be private
 
 ```javascript
 
