@@ -36,7 +36,7 @@ CSS2 - :before 伪元素，可以在元素的内容前面插入新内容。CSS2 
         display: inline;
     }
     li:not(:last-child)::after {
-        content: "|";
+        content: " |";
     }
 </style>
 
