@@ -90,21 +90,25 @@ CSS2 - :before 伪元素，可以在元素的内容前面插入新内容。CSS2 
         .search{
             position: relative;
         }
-        .search::before{
-            content: "☌";
-            transform: rotate(180deg);
-            float: left;
-            font-size: 25px;
-            position: absolute;
-            line-height: 30px;
-            left: 5px;
-        }
         .search input{
-            display: block;
             padding-left: 25px;
             height: 30px;
             box-sizing: border-box;
         }
+        .search::before{
+            content: "☌";
+          
+            /*transform对inline元素不起作用*/
+            display: inline-block;
+            transform: rotate(180deg);
+          
+            font-size: 25px;
+            line-height: 30px;
+          
+            position: absolute;
+            left: 5px;
+        }
+
 
 ```
 
