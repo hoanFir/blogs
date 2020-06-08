@@ -65,7 +65,7 @@ CSS2 - :before 伪元素，可以在元素的内容前面插入新内容。CSS2 
           border-top-color: green;
           border-bottom-color: yellow; */
           
-          /*inline-block的高度由内容撑开*/
+          /*inline-block可以使高度从50px变为0px*/
           display: inline-block;
           
           position: relative;
