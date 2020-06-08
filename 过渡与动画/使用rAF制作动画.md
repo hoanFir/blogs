@@ -13,7 +13,9 @@ window.requestAnimationFrame()，该方法是用来在页面重绘之前，通�
 
 1. 如果有很多个requestAnimationFrame要执行，浏览器也是通知一次就可以了
 
-2. 如果页面被最小化，因为不会进行重绘，requestAnimationFrame也就不会被触发，提升性能和电池寿命
+2. 如果页面被最小化，因为不会进行重绘，requestAnimationFrame也就不会被触发，可以提升性能和电池寿命
+
+3. 只能实现以 16.7ms 的频率来触发，代表它的可调节性十分差
 
 ```javascript
 
