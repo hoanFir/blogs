@@ -58,12 +58,18 @@ CSS2 - :before 伪元素，可以在元素的内容前面插入新内容。CSS2 
             background: red;
         }
         p::before{
-            display: inline-block;
-            border: 5px solid transparent;
-            border-right-color: red;
-            content: "";
-            position: relative;
-            left: -10px;
+          content: "";
+          border: 5px solid transparent;
+          border-right-color: red;
+          /* border-left-color: black;
+          border-top-color: green;
+          border-bottom-color: yellow; */
+          
+          /*inline-block的高度由内容撑开*/
+          display: inline-block;
+          
+          position: relative;
+          left: -10px;
         }
 </style>
 
