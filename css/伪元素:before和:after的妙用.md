@@ -1,11 +1,11 @@
 
-伪元素，pseudo element.
+伪元素，pseudo element。使用伪元素（pseudo-element）的核心在于更利于语义化。
 
-使用伪元素（pseudo-element）的核心在于更利于语义化。
+CSS2 - :before 伪元素，可以在元素的内容前面插入新内容。CSS2 - :after 伪元素，可以在元素的内容之后插入新内容。
 
-## 示例
+## 示例一
 
-1、使用 ::after 实现 element 之间的间隔符，并使用 :not(:last-child) 排除最后一个元素
+使用 ::after 实现 element 之间的间隔符，并使用 :not(:last-child) 排除最后一个元素
 
 ```html
 
@@ -42,7 +42,9 @@
 
 ```
 
-2、为 element 添加三角图标 实现“对话框”效果
+## 示例2
+
+为 element 添加三角图标 实现“对话框”效果
 
 ```html
 
@@ -68,8 +70,9 @@
 ```
 
 
+## 示例3
 
-3、为 form 表单项前面添加图标
+为 form 表单项前面添加图标
 
 ```html
 
@@ -99,7 +102,10 @@
 
 ```
 
-4、为 form 表单项添加before-“必填” 以及 after-“单位”
+
+## 示例4 
+
+为 form 表单项添加before-“必填” 以及 after-“单位”
 
 ```html
     <label class="required">姓名 <input /> </label>
