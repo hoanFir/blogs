@@ -58,7 +58,14 @@ function state_Change() {
 
 ```
 
-该参数规定请求是否异步处理。true 表示脚本会在 send() 方法之后继续执行，而不等待来自服务器的响应。如果在请求失败时是否执行其余的代码无关紧要，可以通过把该参数设置为 "false"，省去额外的 onreadystatechange 代码，因为 onreadystatechange 事件使代码复杂化了。
+该参数规定请求是否异步处理。
+
+true - 表示脚本会在 send() 方法之后继续执行，而不等待来自服务器的响应，当响应就绪后再对响应进行处理。当使用 async=true 时，需要规定在响应处于 onreadystatechange 事件中的就绪状态时执行的函数
+
+false - 如果在请求失败时是否执行其余的代码无关紧要，可以通过把该参数设置为 "false"。当使用 async=false 时，无需编写 onreadystatechange 函数，把代码放到 send() 语句后面即可
+
+
+不过，XMLHttpRequest 对象如果要用于 AJAX 的话，其 open() 方法的 async 参数必须设置为 true。毕竟是 asynchronous嘛
 
 ```
 
