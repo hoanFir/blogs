@@ -45,6 +45,8 @@ function state_Change() {
   if (xmlhttp.readyState==4) {
     if (xmlhttp.status == 200) {
       //...
+      
+      document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
     } else {
       alert("Problem getting data");
     }
