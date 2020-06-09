@@ -1,5 +1,5 @@
-
 Ajax，Asynchronous JavaScript And XML.
+
 
 ## 一、基于 XMLHttpRequest对象
 
@@ -60,7 +60,7 @@ function state_Change() {
 ```
 
 
-## 大致流程
+## Ajax大致流程
 
 1. 创建 XMLHTTPRequest 对象，`var xhr = new XMLHttpRequest()`
 
