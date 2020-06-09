@@ -29,9 +29,12 @@ function request(url) {
   
     xmlhttp.onreadystatechange=state_Change;
     
-    xmlhttp.open("GET", url, true);
-    
+    xmlhttp.open("GET", url, true);    
     xmlhttp.send(null);
+    
+    //xmlhttp.open("POST", url, true);
+    //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    //xmlhttp.send("x=1&y=2")
     
   } else {
     alert("Your browser does not support XMLHTTP.");
