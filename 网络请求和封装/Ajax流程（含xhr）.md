@@ -21,7 +21,7 @@ function request(url) {
   if(window.XMLHttpRequest) {
     xmlhttp = new XMLHttpRequest();
   } else if(window.ActiveXObject) {
-    //老版本的 Internet Explorer（IE6）使用 ActiveX 对象：
+    //老版本的 Internet Explorer（IE5/IE6）使用 ActiveX 对象：
     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   } 
   
