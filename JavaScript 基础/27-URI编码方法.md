@@ -7,7 +7,7 @@ Global 对象的 encodeURI() 和 encodeURIComponent() 方法，可以对 Uniform
 
 主要用于整个 URI。
 
-该方法不会对本身属于 URI 对特殊字符进行编码，如`:`、`/`、`?`和`#`。
+该方法不会对本身属于 URI 的特殊字符进行编码，如`:`、`/`、`?`和`#`。
 
 
 
