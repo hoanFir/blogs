@@ -71,6 +71,55 @@ false - 如果在请求失败时是否执行其余的代码无关紧要，可以
 
 ```
 
+也可以使用 callback 函数：
+
+```javascript
+
+var xmlhttp = null;
+
+function request(url, cfunc) {
+  
+  if(window.XMLHttpRequest) {
+    xmlhttp = new XMLHttpRequest();
+  } else if(window.ActiveXObject) {
+    //老版本的 Internet Explorer（IE5/IE6）使用 ActiveX 对象：
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  } 
+  
+  if(xmlhttp != null) {
+  
+    xmlhttp.onreadystatechange=cfunc;
+    
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send(null);
+    
+    //xmlhttp.open("POST", url, true);
+    //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    //xmlhttp.send("x=1&y=2")
+    
+  } else {
+    alert("Your browser does not support XMLHTTP.");
+  }
+}
+
+function state_Change() {
+  if (xmlhttp.readyState==4) {
+    if (xmlhttp.status == 200) {
+      //...
+      
+      document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    } else {
+      alert("Problem getting data");
+    }
+  }
+}
+
+//add
+function clickFunction() {
+  request(url, state_change);
+}
+
+```
 
 ## Ajax大致流程
 
