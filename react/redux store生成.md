@@ -70,7 +70,7 @@ module.exports = configureStore;
 
 - 1)createStore
 
-Create a redux store that holds the complete `state tree` of your app. The only way to change the data in the store is to call dispatch() on it. There should only be a single store in your app. To specify how different parts of the state tree respond to actions, you may combine several reducers into a single reducer function by using combineReducers.
+Create a redux store that holds the complete `state tree` of your app. The only way to change the data in the store is to call dispatch() on it. There should only be a single store in your app. To specify how different parts of the state tree respond to actions, you may combine several reducers into a single reducer function by using `combineReducers`.
 
 `createStore(reducer, [preloadedState], enhancer)`
 
