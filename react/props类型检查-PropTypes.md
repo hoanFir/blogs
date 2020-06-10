@@ -126,22 +126,3 @@ MyComponent.propTypes = {
 
 ```
 
-### 二、PropTypes.defaultProps
-
-ou can define default values for your props by assigning to the special defaultProps property:
-
-```
-
-class Greeting extends React.Component {
-  render() {
-    return (
-      <h1>Hello, {this.props.name}</h1>
-    );
-  }
-}
-
-Greeting.defaultProps = {
-  name: 'Stranger'
-};
-
-```
