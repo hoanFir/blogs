@@ -2,6 +2,10 @@
 
 🕘 2019.10.30 由 hoanfirst 编辑
 
+### 关键字
+
+react-redux Provider, store, createStore, reducers, combineReducers, applyMiddleware redux-thunk, dispatch, actions 
+
 ### ./index.js
 
 ```javacript
