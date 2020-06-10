@@ -1,4 +1,4 @@
-🐾 shouldComponent和pureComponent
+🐾 sshouldComponentUpdate和pureComponent
 
 🕘 2020.03.24 由 hoanfirst 编辑
 
