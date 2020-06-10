@@ -53,18 +53,24 @@ for(let prop of Object.keys(s)){
 
 ```
 
-var a = [1, 2, 3];
+Object.prototype.objCustom = function() {}; 
+Array.prototype.arrCustom = function() {};
 
-for(let i in a) {
-    //遍历属性
-    console.log(i); // 0 1 2
-    
-    console.log(a[i]); // 1 2 3
+const iterable = [3, 5, 7];
+iterable.foo = 'hello';
+
+for (const i in iterable) {
+  console.log(i); // logs 0, 1, 2, "foo", "arrCustom", "objCustom"
 }
- 
-//遍历属性的值
-for(let i of a) {
-    console.log(i); //1 2 3
+
+for (const i in iterable) {
+  if (iterable.hasOwnProperty(i)) {
+    console.log(i); // logs 0, 1, 2, "foo"
+  }
+}
+
+for (const i of iterable) {
+  console.log(i); // logs 3, 5, 7
 }
 
 ```
