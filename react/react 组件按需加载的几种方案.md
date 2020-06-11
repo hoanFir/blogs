@@ -197,7 +197,7 @@ export default class extends Component {
 ```
 
 
-## 方案四、webpack + common.js require.ensure
+## 方案四、webpack + 基于CommonJS的require.ensure
 
 
 /routers/index.jsx
@@ -206,12 +206,7 @@ export default class extends Component {
 
 import Load from '../components/lazy';
 
-let Demo = function() {
-  return
-    <Load load={() => import('../component/test')}>
-      {(Com) => <Com />}
-    </Load>
-}
+let Demo = Load(()=>require('../component/test'));
 
 ```
 
@@ -219,31 +214,36 @@ let Demo = function() {
 
 ```javascript
 
+
 import React, { Component } from 'react';
 
-export default class extends Component {
+export default funtion(loading) {
 
-  constructor(props) {
+  rerturn class extends Component {
   
-    super(props);
+    constructor(props) {
+      super(props);
+      
+      this.state = { Com: null };
+    }
     
-    this.state={ Comp: null };
+    componentWillMount() {
     
-    this.load(props);
-  }
-  
-  load = (props) => {
-  
-    props.load().then((Com) => {
-      this.setState({ Com: Com.default ? Comdefault : null })
-    })
-  }
-  
-  render() {
-    if(!this.state.Com) {
-      return null;
-    } else {
-      return this.props.children(this.state.Com);
+      new Promise((resolve, reject) => {
+      
+        require.ensure([], funtion(require) {
+          var c = loading().default;
+          resolve(c);
+        })
+        
+      }).then(data=>{
+        this.setState({Com: data});
+      })
+    }
+    
+    render() {
+      let Com = this.state.Com;
+      return Com ? <Com/> : null; 
     }
   }
 }
