@@ -256,51 +256,5 @@ Entrypoint index = index.bundle.js
 
 ### 六、在 React 应用中的 代码分割
 
-#### 6.1 dynamic import()
 
-使用之前：
-
-```javascript
-
-import { add } from './math';
-add(12, 13);
-
-```
-
-使用之后：
-
-```javascript
-
-import("./math").then(math => {
-  add(12, 13);
-})
-
-```
-
-当 Webpack 解析到该语法，会自动进行代码分割。如果使用 create react app，该功能已开箱即用。注意，当使用 babel 时，要确保 babel 能解析动态 import 语法而不是将其进行转换，可以引入 `bable-plugin-syntax-dynamic-import`插件。
-
-
-#### 6.2 React.lazy or react-loadable
-
-这两个依赖能让开发者想渲染常规组件一样处理 dynamic import。
-
-**决定在哪引入代码分割需要一些技巧，必须确保选择的位置能够均匀分割代码而不会影响用户体验。一个不错的选择是从路由开始**
-
-如 React.lazy
-
-```
-
-const Home = React.lazy(() => {
-  import('./Home');
-})
-const Other = React.lazy(() => {
-  import('./OtherComponent');
-})
-
-...
-<Route exact path="/" component={Home} />
-<Route path="/other" component={Other} />
-...
-
-```
-
+具体[阅读文章](https://github.com/hoanFir/blogs/blob/master/react/react%20%E7%BB%84%E4%BB%B6%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%A1%88.md)
