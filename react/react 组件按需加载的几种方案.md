@@ -1,58 +1,7 @@
-
-#### 6.1 dynamic import()
-
-使用之前：
-
-```javascript
-
-import { add } from './math';
-add(12, 13);
-
-```
-
-使用之后：
-
-```javascript
-
-import("./math").then(math => {
-  add(12, 13);
-})
-
-```
-
-当 Webpack 解析到该语法，会自动进行代码分割。如果使用 create react app，该功能已开箱即用。注意，当使用 babel 时，要确保 babel 能解析动态 import 语法而不是将其进行转换，可以引入 `bable-plugin-syntax-dynamic-import`插件。
+**tips：决定在哪引入代码分割进行按需加载需要一些技巧，必须确保选择的位置能够均匀分割代码而不会影响用户体验。一个不错的选择是从路由开始**
 
 
-#### 6.2 React.lazy or react-loadable
-
-这两个依赖能让开发者想渲染常规组件一样处理 dynamic import。
-
-**决定在哪引入代码分割需要一些技巧，必须确保选择的位置能够均匀分割代码而不会影响用户体验。一个不错的选择是从路由开始**
-
-如 React.lazy
-
-```
-
-const Home = React.lazy(() => {
-  import('./Home');
-})
-const Other = React.lazy(() => {
-  import('./OtherComponent');
-})
-
-...
-<Route exact path="/" component={Home} />
-<Route path="/other" component={Other} />
-...
-
-```
-
-
-
-
-
-
-## 方案一、webpack + es6 import + this.props.children
+## 方案一、webpack + Dynamic Imports + this.props.children
 
 /routers/index.jsx
 
@@ -104,10 +53,12 @@ export default class extends Component {
 
 ```
 
+当 Webpack 解析到 `import().then` 语法时，会自动进行代码分割。**注意，使用 babel 时，要确保 babel 能解析动态 import 语法而不是将其进行转换，所以一般会引入 `bable-plugin-syntax-dynamic-import`插件。**如果使用的是 create react app，该功能已开箱即用。
 
 
-## 方案二、webpack + es6 import + higher order component(pure)
 
+
+## 方案二、webpack + Dynamic Imports + higher order component(pure)
 
 
 /routers/index.jsx
@@ -153,7 +104,7 @@ export default function(loading) {
 ```
 
 
-## 方案三、webpack + es6 import + async/await
+## 方案三、webpack + Dynamic Imports + async/await
 
 
 /routers/index.jsx
@@ -250,4 +201,29 @@ export default funtion(loading) {
 
 ```
 
+
+## 五、React.lazy or react-loadable 库
+
+这两个依赖能让开发者像渲染常规组件一样处理 dynamic import。其实就是封装了上面的 lazy component
+
+如 React.lazy
+
+```
+
+const Home = React.lazy(() => {
+  import('./Home');
+})
+
+const Other = React.lazy(() => {
+  import('./OtherComponent');
+})
+
+...
+
+<Route exact path="/" component={Home} />
+<Route path="/other" component={Other} />
+
+...
+
+```
 
