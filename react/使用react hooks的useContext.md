@@ -2,11 +2,16 @@
 
 🕘 2019.10.12 由 hoanfirst 编辑
 
+
 ### useContext 特性
+
+接收一个context对象，并返回context的当前值，由上层组件某个`Context.Provider`传递过来的的`value`提供。并当值更新时，该hook就会触发重渲染。注意，该hook其实就是react context的consumer（订阅变化）和contextType（读取值）的代替！！！
+
 
 - `useContext(MyContext)` 相当于class组件中 `static contextType = MyContext` 或 `<MyContext.Consumer>`。
 
 - `useContext(MyContext)` 使得开发者能够`读取context的值`以及`订阅context的变化`。
+
 
 ### useContext 使用
 
@@ -16,6 +21,7 @@
 
 
 /pages/test/index.tsx
+
 ```javascript
 
 import OtherContext, { OtherContextProvider } from '../../context/other-context';
@@ -55,7 +61,9 @@ export default () => {
 
 ```
 
+
 /contexts/other-context.tsx
+
 ```javascript
 
 import * as React from 'react';
