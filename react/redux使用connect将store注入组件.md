@@ -2,6 +2,8 @@
 
 🕘 2019.10.30 由 hoanfirst 编辑
 
+`connect`用于映射redux中容器组件和展示组件。
+
 ### ./app/index.js
 
 ```javascript
