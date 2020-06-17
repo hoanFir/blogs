@@ -17,7 +17,7 @@ We will look at examples of the various ways an object can be created and the fe
 
 ## 一、fully exposed object
 
-The simplest but provides only public members.
+> The simplest but provides only public members.
 
 ```javascript
 
@@ -81,7 +81,7 @@ Book.prototype = {
 
 ## 二、naming convention
 
-Using underscores to denote methods and attributes that are intended to be private
+> Using underscores to denote methods and attributes that are intended to be private
 
 ```javascript
 
@@ -125,7 +125,7 @@ Book.prototype = {
 
 ## 三、Scope, Nested Functions, and Closures
 
-Create true private members, which can only be accessed through the use of privileged methods.
+> Using closures to create true private members, which can only be accessed through the use of privileged methods.
 
 First, in JavaScript, only functions have scope; that is to say, a variable declared within a function is not accessible outside of that function. 
 
