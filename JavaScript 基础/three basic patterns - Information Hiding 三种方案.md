@@ -19,6 +19,8 @@ We will look at examples of the various ways an object can be created and the fe
 
 > The simplest but provides only public members.
 
+using a function as a constructor, and the class's attributes and methods are public and accessible.
+
 ```javascript
 
 
