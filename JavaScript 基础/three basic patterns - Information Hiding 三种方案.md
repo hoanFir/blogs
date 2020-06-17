@@ -1,3 +1,4 @@
+## do what
 
 Create a class to store data about a book, and implement a method for displaying the book’s data?
 
@@ -10,6 +11,9 @@ var instanceBook = new Book('0-395-07122-4', 'The Hobbit', 'J. R. R. Tolkien')
 instanceBook.display();
 
 ```
+
+We will look at examples of the various ways an object can be created and the features available in each.
+
 
 ## 一、fully exposed object
 
