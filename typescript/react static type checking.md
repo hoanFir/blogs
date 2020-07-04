@@ -6,5 +6,3 @@ Static type checkers like Flow and TypeScript identify certain types of problems
 参考文档：
 
 - [react - static-type-checking - typescript](https://reactjs.org/docs/static-type-checking.html#typescript)
-
-- [typescript](https://www.typescriptlang.org/)
