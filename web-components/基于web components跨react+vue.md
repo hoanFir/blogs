@@ -1,5 +1,5 @@
 
-[Web Compoennt](https://developer.mozilla.org/en-US/docs/Web/Web_Components)
+参考资料： [Web Compoennt](https://developer.mozilla.org/en-US/docs/Web/Web_Components)
 
 ### 一、react and Web Component
 
