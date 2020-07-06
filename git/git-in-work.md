@@ -5,6 +5,19 @@
 
 **以下总结在工作中常用的一些git版本管理的场景和命令**
 
+- *本地新建并同步远程仓库*
+
+```bash
+
+git add .
+git commit -m ""
+
+git remote add origin git@github.com...
+
+git push -u origin master
+
+
+```
 
 - *git clone工程并切换到指定分支*
 
