@@ -179,22 +179,20 @@ git push origin master
 
 - *打tag*
 
-
 ```bash
-
-git tag
-
-git tag -l "v1.8.5*"
 
 # A：创建附注标签 / annotated tag
 git tag -a v1.4 -m "my version 1.4"
-
 git show v1.4
+
 
 # B：创建轻量标签 / lightweight tag
 
 git tag v1.4-lw
 # 运行 git show，不会看到额外的标签信息，只会显示出提交信息
 
-
 ```
+
+
+
+
