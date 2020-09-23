@@ -47,4 +47,6 @@ git reset commit_id
 
 ```
 
+- *revert*
+
 
