@@ -19,11 +19,11 @@ git commit --amend
 ```bash
 
 # 撤销文件的工作区修改
+
 git status
 git checkout -- <file>
 
 ```
-
 
 
 - *reset*
@@ -49,4 +49,12 @@ git reset commit_id
 
 - *revert*
 
+- *merge abort*
+
+```bash
+
+merge时有冲突，回退到merge之前
+git merge -- abort
+
+```
 
