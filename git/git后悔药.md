@@ -125,6 +125,9 @@ git checkout --theirs <conflict_file>
 
 - 回滚merge commit
 
+merge commit：在该commit之前，有两个分支路径。如master merge feature之后生成的一个merge commit。
+
+
 ```bash
 
 
