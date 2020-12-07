@@ -145,6 +145,24 @@ Merge: 5b59465 9a138e6
 
 ```
 
+在上面的`Merge: 5b59465 9a138e6`，就是两个parent commit。注意，merge commit有不同的类型：
+
+```
+
+1. pul产生的merge commit
+
+parent1 === 本地分支版本
+parent2 === 远程分支版本
+
+2. 分支合并产生的merge commit
+
+parent1 === 本地分支版本
+parent2 === 合并进来的分支版本
+
+
+```
+
+
 具体命令：
 
 ```bash
@@ -154,7 +172,8 @@ git revert -m 1或2 <merge commit_id>
 ```
 
 
-
 ### 4.2 回滚到指定版本
+
+- 个人分支
 
 
