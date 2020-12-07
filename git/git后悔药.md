@@ -125,11 +125,31 @@ git checkout --theirs <conflict_file>
 
 - 回滚merge commit
 
-merge commit：在该commit之前，有两个分支路径。如master merge feature之后生成的一个merge commit。
+merge commit：在该commit之前，有两个分支路径（parent）。如master merge feature之后生成的一个merge commit。在这种情况下使用revert回滚版本会遇到报错：
 
+```
+
+$ git revert C
+error: commit xxxxx is a merge but no -m option was given.
+fatal: revert failed
+
+```
+
+因为revert不知道回退时要选哪个parent，需要使用-m来指定主线。而-m参数的值为1或者2，对应parent在merge commit信息中的顺序。如：
+
+```
+
+$ git log <commit_id> -1
+commit <commit_id>
+Merge: 5b59465 9a138e6
+
+```
+
+具体命令：
 
 ```bash
 
+git revert -m 1或2 <merge commit_id>
 
 ```
 
