@@ -1,3 +1,29 @@
+
+# 一、常用
+
+
+- commit之后发现暂存区还有漏掉的文件，又不想生成两条commit记录
+
+```bash
+
+git commit -m"first commit"
+git add .
+git commit --amend
+
+```
+
+- merge之后想要撤销
+
+```bash
+
+merge时有冲突，回退到merge之前
+git merge -- abort
+
+```
+
+
+# 二、回滚
+
 git需要回滚的场景大概分为四大类：工作区、暂存区、本地仓库、远程仓库。
 
 ## 1. 工作区
@@ -55,43 +81,33 @@ git restore --staged .【Git 2.23版本以上支持】
 
 ```bash
 
-# 撤销从暂存区到本地仓库的提交，变更会恢复到工作区
+# 撤销从暂存区到本地仓库的提交，且变更会恢复到工作区
 # 指定commit_id回退，commit_id可以通过git log查看
 git log --oneline
 git reset <commit_id>
 
-# 回滚到指定版本
+# 本地提交了bad commits，想要将版本回退到指定版本
 git log --oneline
 git reset --hard <commit_id>
   --hard 彻底回退到某个版本，工作区也会变为回退版本的内容。所以强烈建议在reset --hard之前，先把本地未提交的修改stash
 
-```
-
-
-- *amend*
-
-```bash
-
-# 场景
-
-# commit之后发现暂存区还有漏掉的文件，又不想生成两条commit记录
-
-git commit -m"first commit"
-git add .
-git commit --amend
+# 本地的变更不需要了，需要将本地分支更新同步远程仓库的最新，可以直接回滚到远程分之的版本即可
+git reset --hard origin/分支
 
 ```
 
+## 4. 远程仓库
 
+建议：回滚远程仓库的版本，都应立即联系仓库管理员锁库（设置保护分支），减少在错误的版本后提交的变更。
 
-- *revert*
-
-- *merge abort*
+### 4.1 撤销某次提交
 
 ```bash
 
-merge时有冲突，回退到merge之前
-git merge -- abort
+# 回滚普通commit（非merge commit）
+# revert会撤销指定commit提交，但是通过生成一个新的commit来实现
+# 比如，提交了a，b，c三次，b是bad commit，执行下行命令后，commit记录变为a，b，c，d，b'
+git revert <commit-id>
 
 ```
 
