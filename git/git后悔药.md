@@ -176,4 +176,18 @@ git revert -m 1或2 <merge commit_id>
 
 - 个人分支
 
+对于只有个人开发的远程分支，可以通过强制推送来改变远程历史分支的历史。
 
+```bash
+git log --oneline
+git reset --hard <commit_id>
+git push -f
+
+```
+
+- 多人协作分支
+
+```bash
+
+
+```
