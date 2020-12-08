@@ -108,7 +108,7 @@ git reset --hard origin/分支
 
 ### 4.1 撤销某次提交
 
-- 回滚普通commit（非merge commit）
+- 4.1.1回滚普通commit（非merge commit）
 
 ```bash
 
@@ -123,7 +123,7 @@ git checkout --theirs <conflict_file>
 
 ```
 
-- 回滚merge commit
+- 4.1.2回滚merge commit
 
 merge commit：在该commit之前，有两个分支路径（parent）。如master merge feature之后生成的一个merge commit。在这种情况下使用revert回滚版本会遇到报错：
 
@@ -159,7 +159,6 @@ parent2 === 远程分支版本
 parent1 === 本地分支版本
 parent2 === 合并进来的分支版本
 
-
 ```
 
 
@@ -179,6 +178,7 @@ git revert -m 1或2 <merge commit_id>
 对于只有个人开发的远程分支，可以通过强制推送来改变远程历史分支的历史。
 
 ```bash
+
 git log --oneline
 git reset --hard <commit_id>
 git push -f
@@ -187,7 +187,34 @@ git push -f
 
 - 多人协作分支
 
+- 4.2.1回滚普通commit（非merge commit）
+
 ```bash
+
+# 假设dev分支多人协作，且所有人本地分支已经pull了最新代码
+
+git revert <older_commit>..<newer_commit>
+# 指定范围做revert，回滚到older_commit的版本
+# 比如有a，b，c，b和c是bad commits，想要回退到a
+git revert A..C
+
+# 如果不想产生多笔提交
+git revert -n A..C
+
+git status
+git commit
+git push
+
+```
+
+
+- 4.2.2回滚merge commit
+
+```bash
+
+# 这种
 
 
 ```
+
+
