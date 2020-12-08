@@ -125,7 +125,7 @@ git checkout --theirs <conflict_file>
 
 - 4.1.2回滚merge commit
 
-merge commit：在该commit之前，有两个分支路径（parent）。如master merge feature之后生成的一个merge commit。在这种情况下使用revert回滚版本会遇到报错：
+merge commit：表示在要回滚的这个commit之前，有两个分支路径merge过（parent）。如master merge feature之后生成的一个merge commit。在这种情况下使用revert回滚版本会遇到报错：
 
 ```
 
@@ -135,7 +135,7 @@ fatal: revert failed
 
 ```
 
-因为revert不知道回退时要选哪个parent，需要使用-m来指定主线。而-m参数的值为1或者2，对应parent在merge commit信息中的顺序。如：
+因为revert不知道回退时要选哪个parent，需要使用-m来指定主线。-m参数的值为1或者2，对应parent在merge commit信息中的顺序。如：
 
 ```
 
@@ -212,7 +212,28 @@ git push
 
 ```bash
 
-# 这种
+# 这种场景同样会遇到选择哪个parent的问题
+# 但是，应该选择-m 1还是-m 2是个头疼的问题
+
+# 便捷的方案
+# 仓库回滚版本的本质是丢弃要回滚的版本之后的所有修改。所以，可以先将要回滚版本后的修改压缩成一笔提交，然后进行pull（内容无改变，pull时不会产生冲突，会生成一笔自动合并的merge commit），然后再revert之前压缩的那笔提交，推送到远程仓库。这样就达到了回滚版本的效果。
+
+# 比如有a，c，d，e和b，c，d，e，中间a和bmerge成了c
+
+# reset回滚，会把所有变更作为本地修改保存在工作区
+git reset B
+# 提交一个commit，假如叫f
+git add .
+git commit
+# 更新分支，这里会生成一个commit，假如叫g
+git pull
+# revert前面生成的commit f，会生成一个commit，假如叫f'
+git revert F
+# 推送到远程仓库
+git push
+
+# 最后，分支路径会变为：b，f，g，f'
+
 
 
 ```
