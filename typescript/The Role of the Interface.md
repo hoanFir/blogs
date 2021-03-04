@@ -123,7 +123,7 @@ function addForm(formInstance) {
 ```
 
 
-## 一、Patterns That Rely on the Interface
+## Patterns That Rely on the Interface
 
 rely on an interface implementation to work: 
 
@@ -144,14 +144,13 @@ Adecoratorworksbytransparentlywrappinganotherobject.This is accomplished by impl
 Allcommandobjectswithinyourcodewillimplementthesame methods (which are usually named execute, run, or undo). By using interfaces, you can create classes that can execute these commands without needing to know anything about them, other than the fact that they implement the correct interface. This allows you to create extremely modular and loosely coupled user interfaces and APIs.
 
 
-## 二、Encapsulation and Information Hiding
+## Encapsulation and Information Hiding
 
-有时候为了不过分依赖某些内部数据，我们会将其封装成 private 数据，通过提供的接口来访问它们。那么，interface 在这样的场景中起什么作用？
+有时候为了不过分依赖某些内部数据，我们会将其封装成 private 数据，通过提供的接口来访问它们。
 
+那么，interface 在这样的场景中起什么作用？
 
-It provides a contract that documents the publicly accessible methods. It defines the relationship that two objects can have; either object in this relationship can be replaced as long as the interface is main- tained. 
-
-Most of the time you will find it very helpful to have the available methods documented.
+It provides a contract that documents the publicly accessible methods. It defines the relationship that two objects can have; either object in this relationship can be replaced as long as the interface is maintained. Most of the time you will find it very helpful to have the available methods documented.
 
 你可以发现，在使用 Typescript 时会经常定义一些 interface，并且能提供 auto-checking.
 
