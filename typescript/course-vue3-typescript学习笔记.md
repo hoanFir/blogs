@@ -99,8 +99,9 @@ let person: Hero = {
 
 ```
 
-## 3. Vue data with Custom Types: type assertion & as keyword
+## 3. Vue data with Custom Types: type assertion & as keyword，类型断言
 
+类型断言，可以用来手动指定一个值的类型，常用于确保传入的是正确的类型。
 
 ```javascript
 
@@ -145,7 +146,7 @@ const numberList = createList<number>(1)
 const stringList = createList<string>('1')
 
 // 更常用
-funtion createList<T>(item: CustomType): T[] {}
+funtion createList<T>(item: T): T[] {}
 
 ```
 
@@ -170,7 +171,7 @@ expore default defineComponent({
 import { defineComponent, PropType } from 'vue'
 import { EventItem } from '../types'
 
-expore default defineComponent({
+export default defineComponent({
   props: {
     event: {
       //type: EventItem (x)
@@ -183,6 +184,34 @@ expore default defineComponent({
 
 ```
 
-## 5. Computed & Methods with Custom Types
+## 5. Computed Properties & Methods with Custom Types
+
+```javascript
+
+import { defineComponent } from 'vue'
+import { EventItem } from '../types'
+
+export default defineComponent({
+  data() {
+    return {
+      events: [] as EventItem[]
+    }
+  },
+  computed: {
+    firstEvent(): EventItem {
+      return this.events[0]
+    }
+  },
+  methods: {
+    addEvent(newEvent: EventItem) {
+      this.events.push(newEvent)
+    },
+    secondEvent(): EventItem {
+      return this.events[1]
+    },
+  }
+})
+
+```
 
 ## 6. ...
