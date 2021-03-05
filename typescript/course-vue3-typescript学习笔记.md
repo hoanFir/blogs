@@ -121,8 +121,18 @@ liveItem.title = ''
 
 ```
 
-## 4. Vue props with Types
+## 4. Vue props with Types: generic, 泛型
 
+```javascript
+
+props: {
+  id: {
+    type: Number,
+    required: true,
+  }
+}
+
+```
 
 ## 5. Computed & Methods with Custom Types
 
