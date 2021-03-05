@@ -99,8 +99,31 @@ let person: Hero = {
 
 ```
 
-## 3. Props with Types
+## 3. Vue data with Custom Types: type assertion & as keyword
 
-## 4. Computed & Methods with Custom Types
 
-## 5. ...
+```javascript
+
+// it will be warning like
+let person = null
+liveItem.id = ''
+liveItem.title = ''
+
+
+// it's ok to use like
+interface liveItem = {
+  id: string,
+  title: string;
+}
+let person = {} as liveItem
+liveItem.id = ''
+liveItem.title = ''
+
+```
+
+## 4. Vue props with Types
+
+
+## 5. Computed & Methods with Custom Types
+
+## 6. ...
