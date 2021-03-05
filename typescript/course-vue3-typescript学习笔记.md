@@ -127,6 +127,45 @@ liveItem.title = ''
 
 ```javascript
 
+funtion createList(item: number): number[] {
+  const newList: number[] = [];
+  newList.push(item)
+  return newList
+}
+const numberList = createList(1)
+
+// 在上述方法中，方法名更具体应该为 createNumberList。但如果要支持更多类型，怎么定义呢？
+
+funtion createList<CustomType>(item: CustomType): CustomType[] {
+  const newList: CustomType[] = [];
+  newList.push(item)
+  return newList
+}
+const numberList = createList<number>(1)
+const stringList = createList<string>('1')
+
+// 更常用
+funtion createList<T>(item: CustomType): T[] {}
+
+```
+
+
+vue props：
+
+```javascript
+
+import { defineComponent } from 'vue'
+
+expore default defineComponent({
+  props: {
+    event: {
+      type: Object,
+      required: true,
+    }
+  }
+})
+
+
 // with generic...
 import { defineComponent, PropType } from 'vue'
 import { EventItem } from '../types'
@@ -134,6 +173,8 @@ import { EventItem } from '../types'
 expore default defineComponent({
   props: {
     event: {
+      //type: EventItem (x)
+      //type: Object as EventItem (x)
       type: Object as PropType<EventItem>,
       required: true,
     }
