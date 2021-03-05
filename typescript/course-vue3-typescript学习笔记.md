@@ -13,6 +13,20 @@ let stageName: string = 'a vue';
 let roomSize: number = 100;
 let isOk: boolean = false;
 
+let list: string[] = ['a', 'b', 'c'];
+
+let foo = (firstName: string, lastName: string): string => {
+  return firstName + '' + lastName
+}
+
+let person: {
+  name: string;
+  age: number;
+} = {
+  name: '',
+  age: 123,
+}
+
 ```
 
 - typescript provides additional types to javascript
