@@ -123,14 +123,22 @@ liveItem.title = ''
 
 ## 4. Vue props with Types: generic, 泛型
 
+在软件工程中，不仅要创建一致的定义良好的api，同时也要考虑可重用性，组件不仅能够支持当前扽数据类型，同时也能支持未来的数据类型。
+
 ```javascript
 
-props: {
-  id: {
-    type: Number,
-    required: true,
+// with generic...
+import { defineComponent, PropType } from 'vue'
+import { EventItem } from '../types'
+
+expore default defineComponent({
+  props: {
+    event: {
+      type: Object as PropType<EventItem>,
+      required: true,
+    }
   }
-}
+})
 
 ```
 
