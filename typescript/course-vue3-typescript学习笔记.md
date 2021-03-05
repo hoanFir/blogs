@@ -67,13 +67,35 @@ When we want to define custom types, there are two methods: **type and interface
 
 ```javascript
 
-//type
+//1. type
 
 type buttonType = 'primary' | 'success' | 'danger'
 let buttonStyles: buttonType = 'danger'
 
-//interface
+//2. interface
 //it's essentially type, but for objects.
+
+interface Hero = {
+  name: string;
+  age: number;
+}
+let person: Hero = {
+  name: '',
+  age: 123,
+}
+
+//3. combine types with interface
+type ComicUniverse = '211' | '985'
+interface Hero = {
+  name: string;
+  age: number;
+  universe: ComicUniverse;
+}
+let person: Hero = {
+  name: '',
+  age: 123,
+  universe: '985'
+}
 
 ```
 
