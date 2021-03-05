@@ -1,4 +1,6 @@
 
+# 一、
+
 ## 1. Type Fundamentals
 
 - common JavaScript types
@@ -214,4 +216,4 @@ export default defineComponent({
 
 ```
 
-## 6. ...
+# 二、...
