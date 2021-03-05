@@ -61,6 +61,22 @@ enum ArrowKeys {
 
 ## 2. Defining Custom Types
 
+当我们需要定义一个类型，并且限制它的取值。
+
+When we want to define custom types, there are two methods: **type and interface**.
+
+```javascript
+
+//type
+
+type buttonType = 'primary' | 'success' | 'danger'
+let buttonStyles: buttonType = 'danger'
+
+//interface
+//it's essentially type, but for objects.
+
+```
+
 ## 3. Props with Types
 
 ## 4. Computed & Methods with Custom Types
