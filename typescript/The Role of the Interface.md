@@ -123,7 +123,7 @@ function addForm(formInstance) {
 ```
 
 
-## Patterns That Rely on the Interface
+## Patterns that Rely on the Interface
 
 rely on an interface implementation to work: 
 
