@@ -60,6 +60,34 @@ declare module 'querystring' {
 
 ```
 
-## 二、
+## 二、Strictness
+
+a lot of users prefer to have typescript validate as much as it can straight away.
+
+typescript has serveral type-checking strictness flags that can be turned on or off, the `--strict` flag in the CLI, or `"strict": true` in a tsconfig.json.
+
+### 2.1 noImplicitAny
+
+即不要将类型定义为any。
+
+using `any` often defeats the purpose of using typescript. Because the more typed your program is, the more validation and tooling you'll get, meaning you'll run into fewer bugs as you code.
+
+turning on the `noImplicitAny` flag will issue an error on any variables whose type is implicitly inferred as any.
+
+
+```typescript
+
+let foo: any;
+
+```
+
+
+### 2.2 strictNullChecks
+
+by default, values like `null` and `undefined` are assignable to any other type.
+
+
+
+
 
 
