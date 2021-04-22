@@ -84,10 +84,36 @@ let foo: any;
 
 ### 2.2 strictNullChecks
 
+
+我们经常会遇到
+
+```typescript
+
+function printName(person) {
+  console.log(person.name.toUpperCase());
+}
+printName(undefined);
+
+Typeerror: undefined is not an object
+
+```
+
+JavaScript中最常见的bug来源之一就是忘记处理空值场景。
+
 by default, values like `null` and `undefined` are assignable to any other type.
 
+The `strictNullChecks` flag makes handling null and undefined more explicit, and spares us from worrying about whether we forgot to handle null and undefined.
+
+当开启之后，上述例子会报错
 
 
+```typescript
 
+function printName(person: Person) {
+  console.log(person.name.toUpperCase());
+}
+printName(undefined);
 
+// RUNTIME ERROR!  TypeError: undefined is not an object   
 
+```
