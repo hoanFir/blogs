@@ -117,3 +117,19 @@ printName(undefined);
 // RUNTIME ERROR!  TypeError: undefined is not an object   
 
 ```
+
+
+## 三、the most basic and common types
+
+`string`, `number`, `boolean`, `number[]`, `string[]`, `boolean[]` 
+
+## 四、generics
+
+`T<U>`, `Array<number>`
+
+
+
+
+
+
+
