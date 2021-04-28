@@ -8,3 +8,8 @@
 git blame -L8 -- ./nodejs/src/package.json
 
 ```
+
+
+- 安装git blame插件
+
+如git supercharged
