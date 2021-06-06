@@ -76,6 +76,17 @@ git branch -r
 
 ```
 
+- *关联远程仓库*
+
+```bash
+cd new-project
+git init
+git remote add origin url
+git add .
+git commit -m "init"
+git push -u origin master
+```
+
 
 - *删除分支*
 
@@ -165,18 +176,25 @@ git clone ...
 git checkout -b feature/xxx origin/feature/xxx
 git checkout master
 git merge feature/xxx 或者 git merge --no-ff feature/xxx
-# 处理冲突
-git branch -d feature/xxx #删除本地分支
-git push origin :feature/xxx #删除远程分支
 git push origin master
+# 处理冲突后，别忘了删除开发完的分支
+#删除本地分支
+git branch -d feature/xxx
+#删除远程分支
+git push origin :feature/xxx
+
 
 # B：合并本地分支到master并删除
 
 git checkout master
 git merge feature/xxx
-#处理冲突
-git branch -d feature/xxx
 git push origin master
+#处理冲突后，别忘了删除开发完的分支
+git branch -d feature/xxx
+
+# C：变基rebase合并
+git checkout feature/xxx
+git rebase master
 
 ```
 
@@ -188,12 +206,15 @@ git push origin master
 # A：创建附注标签 / annotated tag
 git tag -a v1.4 -m "my version 1.4"
 git show v1.4
+git push origin v1.4
 
 
 # B：创建轻量标签 / lightweight tag
 
 git tag v1.4-lw
 # 运行 git show，不会看到额外的标签信息，只会显示出提交信息
+git show v1.4-lw
+git push origin v1.4-lw
 
 ```
 
