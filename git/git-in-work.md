@@ -26,6 +26,38 @@ git config --local --list
 
 ```
 
+
+
+- *关联远程仓库*
+
+```bash
+
+cd new-project
+git init
+git remote add origin url
+git add .
+git commit -m "init"
+git push -u origin master
+
+```
+
+- *查看当前远程分支仓库地址*
+
+```bash
+
+git remote –v 
+
+```
+
+- *http与ssh互转*
+
+```bash
+
+git remote set-url origin https://xxxxxxx.git
+git remote set-url origin git@git.xxxxx.git
+
+```
+
 - *clone工程并切换到指定分支*
 
 ```bash
@@ -75,18 +107,6 @@ git branch -r
 # 查看远程分支列表
 
 ```
-
-- *关联远程仓库*
-
-```bash
-cd new-project
-git init
-git remote add origin url
-git add .
-git commit -m "init"
-git push -u origin master
-```
-
 
 - *删除分支*
 
