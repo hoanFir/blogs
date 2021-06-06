@@ -33,15 +33,15 @@ git config --local --list
 git clone http://gitlab.company.com/project.git
 
 # A：基于远程指定分支创建本地新分支
-git checkout -b dev_hong origin/dev_hong
+git checkout -b feature/xxx origin/feature/xxx
 
 # B：本地基于develop创建新分支并推送到远端仓库
 git checkout develop
-git checkout -b dev_hong
-git push origin dev_hong
+git checkout -b feature/xxx
+git push origin feature/xxx
 
 # C：在远程创建指定新分支
-git push origin master:dev_hong
+git push origin master:feature/xxx
 
 ```
 
@@ -57,7 +57,7 @@ git log --graph --all
 
 # 查看指定分支历史
 git log --graph master
-git log --graph dev_hong
+git log --graph feature/xxx
 
 ```
 
@@ -82,15 +82,15 @@ git branch -r
 ```bash
 
 # 删除本地分支
-git branch -d dev_hong
+git branch -d feature/xxx
 
 # 注意 如果分支的代码有更新且没有进行merge，git会智能提示无法删除
 # 强制删除
-git branch -D dev_hong
+git branch -D feature/xxx
 
 # 删除远程分支
-git push origin :dev_hong
-git push origin --delete dev_hong
+git push origin :feature/xxx
+git push origin --delete feature/xxx
 
 ```
 
@@ -115,7 +115,7 @@ git pull origin dev
 # 如果出现冲突手动解决
 
 # 从本地仓库同步到远程仓库
-git push origin dev_hong
+git push origin feature/xxx
 
 ```
 
@@ -159,23 +159,23 @@ git stash clear
 
 ```bash
 
-# A：将远程某个dev分支合并到master再提交
+# A：将远端某个dev分支合并到master再提交
 
 git clone ...
-git checkout -b dev_hong origin/dev_hong
+git checkout -b feature/xxx origin/feature/xxx
 git checkout master
-git merge dev_hong 或者 git merge --no-ff dev_hong
+git merge feature/xxx 或者 git merge --no-ff feature/xxx
 # 处理冲突
-git branch -d dev_hong #删除本地分支
-git push origin :dev_hong #删除远程分支
+git branch -d feature/xxx #删除本地分支
+git push origin :feature/xxx #删除远程分支
 git push origin master
 
 # B：合并本地分支到master并删除
 
 git checkout master
-git merge dev_hong
+git merge feature/xxx
 #处理冲突
-git branch -d dev_hong
+git branch -d feature/xxx
 git push origin master
 
 ```
