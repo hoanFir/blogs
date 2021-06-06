@@ -5,26 +5,14 @@
 
 **以下总结在工作中常用的一些git版本管理的场景和命令**
 
-
-- *git clone工程并切换到指定分支*
+- *配置user config*
 
 ```bash
 
-# 默认 `HEAD->master`
-git clone http://gitlab.company.com/project.git
-
-# A：基于远程指定分支创建本地新分支
-git checkout -b dev_hong origin/dev_hong
-
-# B：本地创建新分支并在远程创建同名新分支
-git checkout -b dev_hong #基于当前分支，如master或develop
-git push origin dev_hong
-
-# C：在远程创建指定新分支
-git push origin master:dev_hong
+git config user.name  "Administrator"
+git config user.email "root@example.com"
 
 ```
-
 
 - *查看并设置git或当前仓库配置*
 
@@ -34,14 +22,28 @@ git push origin master:dev_hong
 git config --list
 
 # 当前仓库配置
-git config --local --list 
-
-# 配置user信息
-git config user.email "hongzhenpeng@company.com"
-git config user.name "hongzhenpeng"
+git config --local --list
 
 ```
 
+- *clone工程并切换到指定分支*
+
+```bash
+
+git clone http://gitlab.company.com/project.git
+
+# A：基于远程指定分支创建本地新分支
+git checkout -b dev_hong origin/dev_hong
+
+# B：本地基于develop创建新分支并推送到远端仓库
+git checkout develop
+git checkout -b dev_hong
+git push origin dev_hong
+
+# C：在远程创建指定新分支
+git push origin master:dev_hong
+
+```
 
 - *git log查看版本历史*
 
@@ -58,6 +60,8 @@ git log --graph master
 git log --graph dev_hong
 
 ```
+
+> 在vs code可以安装git graph插件更方便
 
 
  - *查看本地和远程分支信息*
