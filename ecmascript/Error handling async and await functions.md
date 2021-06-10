@@ -9,6 +9,7 @@ async function doubleAndAdd(a, b) {
 
   try {
     [a, b] = await Promise.all([doubleAfterSec(a), doubleAfterSec(b)]);
+    return (a+b);
   } catch (e) {
     return NaN;
   }
