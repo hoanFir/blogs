@@ -76,7 +76,7 @@ In both cases, the event (of type PromiseRejectionEvent) has two propertys:
 
 - reason, provides the reason given for the promise to be rejected.
 
-综上所述：These make it possible to offer fallback error handling for promises. These handlers are global per context, so all errors will go to the same event handlers, regardless of source.
+综上所述：These make it possible to **offer fallback error handling** for promises. These handlers are global per context, so all errors will go to the same event handlers, regardless of source.
 
 
 
