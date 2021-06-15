@@ -33,6 +33,18 @@ async function sequentialStart() {
 
 ```
 
+输出
+
+```
+
+slow promise is done
+slow
+fast promise is done
+fast
+
+
+```
+
 在上述代码中，同时调用两次 await 来获取数据，但是这样需要等待两个请求的时间。
 
 In sequentialStart, the second timer is not created until the first has already fired, so the code finishes after 3 seconds.
@@ -53,6 +65,15 @@ async function concurrentStart() {
   console.log(await fast) //this runs 2 seconds after, immediately because fast is already resolved
 }
 
+```
+
+输出
+
+```
+fast promise is done
+slow promise is done
+slow
+fast
 ```
 
 In concurrentStart, both timers are created and then awaited. The timers run concurrently, which means the code finishes in 2 seconds.
