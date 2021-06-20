@@ -31,3 +31,7 @@
 
 
 ### 2.2 小程序登录具体实践
+
+先看一张小程序官方文档登录的时序图：
+
+![](https://res.wx.qq.com/wxdoc/dist/assets/img/api-login.2fcc9f35.jpg)
