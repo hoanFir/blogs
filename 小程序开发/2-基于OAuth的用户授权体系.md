@@ -53,6 +53,9 @@
 
 - 六个术语
 
+code（临时登录凭证）、appid（小程序ID）、appsecret、openid、session_key、token（）。
+
+
 code：它是在客户端（即小程序）内通过 wx.login API 获取的，然后通过 HTTP 请求发送给开发者服务器。code 的作用体现在“临时”两字上，它的有效期限仅有 5 分钟，并且仅能够使用一次（即请求一次 auth.code2Session 接口）。
 
 appid：每个微信小程序在创建之后（即在微信公众平台注册并初始化完成）便同时生成了一appid，这个 ID 标记了小程序的唯一性，等同于网站的URL（经过备案的）、App 的包名等标记应用唯一性的信息。
